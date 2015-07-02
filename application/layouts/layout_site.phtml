@@ -77,17 +77,9 @@ if ($request["controller"] == "pagina") {
         </div> <!-- .container -->
     </div> <!-- .navbar -->
     <div class="extra-central">
-        <div class="site-central">
-            <div id="CONTENT" class="site-conteudo">
-                <div class="extra-container">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <?= $this->partial('_includes/mensagem_alerta.phtml', 'adm') ?>
-                            <?= $this->layout()->content; //pega o conteudo do view?>
-                        </div>
-                    </div> <!-- .row -->
-                </div> <!-- .container -->
-            </div> <!-- .site-conteudo -->
+        <div class="site-central" id="CONTENT">
+            <?= $this->partial('_includes/mensagem_alerta.phtml', 'adm') ?>
+            <?= $this->layout()->content; //pega o conteudo do view?>
         </div> <!-- .site-central -->
     </div> <!-- .extra-central -->
     <?= $this->partial('/_includes/inc_rodape.phtml'); ?>
