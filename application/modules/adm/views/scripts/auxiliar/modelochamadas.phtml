@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>ORMNews</title>
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="language" content="pt-br" />
+            <meta http-equiv="imagetoolbar" content="no"/>
+            <!--<meta http-equiv="Pragma" content="no-cache"/>-->
+            <link rel="shortcut icon" href="/imagem/site/favicon.png" type="image/png" />
+            <link rel="alternate" type="application/rss+xml" title="Site &raquo; Feed" href="/feed/" />
+
+            <link href="/library/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
+            <link href="/css/site.css" media="screen" rel="stylesheet" type="text/css" /><script type="text/javascript" src="/library/jquery-1.10.2.js"></script>
+            <script type="text/javascript" src="/library/jquery-migrate-1.2.1.min.js"></script>
+            <script type="text/javascript" src="/library/bootstrap/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="/js/bootstrap_site.js"></script>
+    </head>
+    <body>
+        <style type="text/css">
+            .chamada ,.destaque_2x1_resumo,destaque_2x2 ,cat_noticia{overflow: hidden}
+            #NOTICIAS{
+                margin: 50px auto;
+            }
+        </style>
+
+        <? $vo = array($this->oNoticia, $this->oNoticia, $this->oNoticia) ?>
+        <div id="NOTICIAS" class="cat_noticia container">
+            <div class="row chamada">
+                <div class="col-md-8 col-sm-12">
+                    <div class="col-sm-3 col-xs-6">
+                        <?= $this->partial("_modelo/destaque_1x1.phtml","site", array("oNoticia" => $this->oNoticia)) ?>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <?= $this->partial("_modelo/destaque_2x1_foto.phtml","site", array("oNoticia" => $this->oNoticia)) ?>
+                    </div>
+
+
+                    <!--<div class="row chamada">-->
+
+                    <!--<div class="row chamada">-->
+                    <div class="clear"></div>
+                    <div class="col-md-6 col-sm-6">
+                        <?= $this->partial("_modelo/destaque_2x3_foto.phtml","site", array("oNoticia" => $this->oNoticia)) ?>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <?= $this->partial("_modelo/destaque_2x2.phtml","site", array("voNoticia" => $vo)) ?>
+                    </div>
+
+                    <div class="clear"></div>
+                    <div class="col-xs-12">
+                        <?= $this->partial("_modelo/destaque_4x2_misto.phtml","site", array("oNoticia" => $this->oNoticia)) ?>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <?= $this->partial("_modelo/destaque_2x1.phtml","site", array("oNoticia" => $this->oNoticia)) ?>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <?= $this->partial("_modelo/destaque_1x2_foto_resumo.phtml","site", array("oNoticia" => $this->oNoticia)) ?>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <?= $this->partial("_modelo/destaque_1x1_resumo.phtml","site", array("oNoticia" => $this->oNoticia)) ?>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <?= $this->partial("_modelo/destaque_1x2_foto.phtml","site", array("oNoticia" => $this->oNoticia)) ?>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </body>
+</html>

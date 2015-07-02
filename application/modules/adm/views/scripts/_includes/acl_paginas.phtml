@@ -1,0 +1,22 @@
+<? 
+$dbPagina = new Db_AclPagina();
+if (!function_exists('getFilho')):
+	function getFilho($voPagina = null){
+		$dbPagina = new Db_AclPagina();
+		if(count($voPagina)):
+			echo '<ul>';
+			foreach($voPagina as $oPagina):
+				$voPaginaFilho = $dbPagina->fetchAll(array('NOME <> ? '=>'','PAI = ?'=>$oPagina->ID,'ATIVO = ?'=>'1','BREADCRUMB = ?'=>'1'),'NOME ASC');
+				$open = (count($voPaginaFilho)) ? 'open' : '' ;
+				echo '<li id="' . $oPagina->ID . '" class="'.$open.'" rel="migalha">';
+				echo	"<a href=\"#\"><ins> </ins>{$oPagina->NOME} - ({$oPagina->CONTROLLER}/{$oPagina->ACTION})</a>";
+					getFilho($voPaginaFilho);
+				echo '</li>';
+			endforeach;
+			echo '</ul>';
+		endif;
+	}
+endif;
+
+getFilho($dbPagina->fetchAll(array('NOME <> ? '=>'','PAI IS NULL','MODULE = ?'=>$this->module,'ATIVO = ?'=>'1','BREADCRUMB = ?'=>'1'),'NOME ASC'));
+?>

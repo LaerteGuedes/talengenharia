@@ -1,0 +1,26 @@
+<?= $this->formGrupo; ?>
+<table class="padrao" >
+	<thead>
+		<tr>
+		    <th>Grupo</th>
+		    <th width="120">Ação</th> 
+		</tr> 
+	</thead>
+	<tbody>
+		<? foreach($this->voGrupos as $oGrupo): ?>
+			<tr>
+			    <td><?= $oGrupo->NOME ?></td>
+			    <td>
+			    <? //if($bAcl->verificaInline('grupo','alterar')): ?>
+			    	<a href="<?=$this->baseUrl('/adm/acl/grupo/editar/'.$oGrupo->ID)?>">Editar</a> |
+			    <? //endif;?>
+			    
+			    <? //if($bAcl->verificaInline('grupo','excluir')): ?>
+			    	<a href="<?=$this->baseUrl('/adm/acl/excluirgrupo/ID/'.$oGrupo->ID)?>">Excluir</a>
+			   	<? //endif;?>
+			    </td>
+			</tr>
+		<? endforeach; ?>
+	</tbody>
+</table>
+<?=$this->paginationControl($this->voGrupos,'Sliding','/_includes/paginacao.phtml')?>

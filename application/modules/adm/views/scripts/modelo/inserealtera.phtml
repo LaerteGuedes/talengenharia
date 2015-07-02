@@ -1,0 +1,12 @@
+<?php
+$html =trim(' 
+<script type="text/javascript">
+    function loadImagem(){
+        $("#UPLOAD_CONTEUDO").load("/adm/auxiliar/arquivo/ID_PAGINA/<?= $this->ID ?>/TABELA/<?= $this->TABELA ?>");
+    }
+    $(function(){
+        loadImagem();
+    });
+</script>
+<?= $this->form ?>
+');

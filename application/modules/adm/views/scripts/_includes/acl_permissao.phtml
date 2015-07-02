@@ -1,0 +1,71 @@
+<style>
+.paginas ul{
+	padding-left: 10px;
+	list-style: none;
+}
+.paginas input[type=text]{
+	background: none;
+	margin: 0;
+	padding: 0;
+	width: 30px;
+	border: none;
+	cursor: pointer;
+	font-size: 11px;
+}
+.paginas input[type=text]:FOCUS{
+	border: 1px solid #000;
+	width: 120px;
+	cursor: text;
+}
+.paginas li{
+	padding-left: 16px;
+}
+.paginas li[rel=module]{background: url("/imagem/icone/ico.module.gif") no-repeat;}
+.paginas li[rel=controller]{background: url("/imagem/icone/ico.controller.gif") no-repeat;}
+.paginas li[rel=action]{background: url("/imagem/icone/ico.action.gif") no-repeat;}
+</style>
+
+<script type="text/javascript">
+$(function () {
+	
+	$('.paginas .esconde').click(function(){
+		var filho = $(this).nextAll('ul');
+		if(filho.is(':hidden')){
+			filho.slideDown();
+		}else{
+			filho.slideUp();
+		}
+	});
+	//$('.paginas ul').hide();
+
+});
+</script>
+<? $dbPermissao =  new Db_AclPermissao(); ?>
+<ul class="paginas">
+	<? $i=0;foreach($this->pages as $moduleName=>$vController):?>
+		<li rel="module">
+			<a href="javascript:void(0)" class="esconde"><?= $moduleName ?></a>
+			<ul>
+				<? foreach($vController as $controllerName=>$vAction):?>
+					<li rel="controller">
+						<a href="javascript:void(0)" class="esconde"><?= $controllerName ?></a>
+						<ul>
+							<? foreach($vAction as $actionName=>$oPage):?>
+								<? $oPermissao = $dbPermissao->findPermissao($this->ID_GRUPO,$oPage->ID); ?>
+								<li rel="action">
+									<input type="hidden" name="pagina[<?= $i ?>][ID_GRUPO]" value="<?= $this->ID_GRUPO ?>" />
+									<? if($oPermissao): ?>
+										<input type="hidden" name="pagina[<?= $i ?>][ID]" value="<?= $oPermissao->ID ?>" />
+									<? endif; ?>
+									<input type="hidden" name="pagina[<?= $i ?>][ID_PAGINA]" value="<?= $oPage->ID ?>" />
+									<input type="checkbox" name="pagina[<?= $i ?>][ATIVO]" value="1" <?= ($oPermissao->ATIVO == 1) ? 'checked="checked"' : '' ?> />
+									<?= ($oPage->NOME) ? $oPage->NOME : $oPage->ACTION  ?>
+								</li>
+							<? $i++;endforeach; ?>
+						</ul>
+					</li>
+				<? endforeach; ?>
+			</ul>
+		</li>
+	<? endforeach; ?>
+</ul>

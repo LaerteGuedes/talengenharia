@@ -1,0 +1,53 @@
+<h1>Configuração do Email</h1>
+<br />
+<script type="text/javascript">
+    function loadImagem(){
+        $("#UPLOAD_CONTEUDO").load('/adm/auxiliar/arquivo/ID_PAGINA/<?= $this->ID ?>/TABELA/config_mail_topo');
+    }
+    function loadImagemRodape(){
+        $("#UPLOAD2_CONTEUDO").load('/adm/auxiliar/arquivo/ID_PAGINA/<?= $this->ID ?>/TABELA/config_mail_rodape');
+    }
+    $(function(){
+        loadImagem();
+        loadImagemRodape();
+        $("#PRE_VISUALIZAR").click(function(){
+            var form = $(this).parents('form');
+            function abre(){
+                window.open('/pagina/<?= $this->TIPO ?>detalhe/ID/<?= $this->ID ?>');
+            }
+            $.post('/adm/pagina/jSavePrevisualiza/', form.serializeArray(), function(data){
+                abre();
+            }, 'json');
+        });
+        $('.btn-default').click(function(){
+            $("#MODAL-VISUALIZAR").modal('show');
+        });
+    });
+</script>
+<style type="text/css">
+    .PREV{border: 10px solid grey;display: none;width: 700px}
+</style>
+<?= $this->form;?>
+<button class="btn btn-default btn-visualizar">PRÉ-VISUALIZAR</button>
+<div class="modal fade modal-visualizar" id="MODAL-VISUALIZAR">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding:5px;">
+                <div class="row">
+                    <div class="col-xs-11">
+                        <h2 style="margin-left:20px;">Pré-visualização</h2>
+                    </div>
+                    <div class="col-xs-1">
+                        <button type="button" class="close" style="opacity:1;" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+               <?=$this->bMail->preVisualizar();?>
+            </div> <!-- .modal-body -->
+            <div class="modal-footer">
+               
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

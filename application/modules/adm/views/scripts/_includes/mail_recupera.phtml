@@ -1,0 +1,7 @@
+<h2>Alterar Senha <?=Zend_Registry::get('oConfiguracao')->TITULO?></h2>
+<p>
+    <b>NOME:</b> <?= $this->oUsuario->NOME ?><br />
+    <b>Acesse Esse link e altere sua senha:</b><br />
+    <a target="_blank" href="http://<?=$_SERVER['SERVER_NAME']?>/adm/acl/alterasenha/ID/<?= $this->oUsuario->ID?>/PASS/<?=$this->oSenha->PASS?>">Clique Aqui</a>
+</p>
+

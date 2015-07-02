@@ -1,0 +1,62 @@
+<?
+echo $this->doctype('XHTML1_STRICT');
+header("Content-Type: text/html; charset=utf-8");
+$bHead = new Business_Head();
+$browser = $_SERVER['HTTP_USER_AGENT'];
+
+if (strpos($browser, 'Chrome')){
+    $bHead->jUploadfive();
+}
+
+$bHead->loadDefault()->loadByModule();
+//$teste = get_class_methods($bHead);
+//Business_Util::debug($teste);
+//die;
+?>
+<html>
+    <head>
+        <title>Área Administrativa</title>
+        <meta name="language" content="pt-br" />
+        <meta http-equiv="imagetoolbar" content="no"/>
+        <meta http-equiv="Pragma" content="no-cache"/>
+        <link rel="shortcut icon" href="/imagens/favicon.ico" type="image/x-icon" />
+        <?= $bHead->show(); ?>
+        <script type="text/javascript">
+            baseUrl = "<?= $this->baseUrl() ?>";
+        </script>
+    </head>
+    <body>
+
+        <div id="WRAP">
+            <div id="TOPO">
+				<div class="bg"><img src="<?= $this->baseUrl('/imagem/adm/topo_bg1.gif') ?>"/></div>
+				<div class="content">
+					<img class="logo" src="<?= $this->baseUrl('/imagem/adm/topo_logo.gif') ?>" alt="Libra" />
+					<div class="right">
+						<? if (ZC_Auth::getInstance()->hasIdentity()): ?>
+							<i>Olá <?= Zend_Registry::get('oUsuario')->NOME ?>!</i>
+							<a href="<?= $this->baseUrl('/adm/usuario/alterasenha/'); ?>">Alterar senha</a>
+							| <a href="<?= $this->baseUrl('/adm/auth/logout/') ?>">Sair</a>
+						<? endif; ?>						
+					</div>
+
+				</div>
+                <? // $this->navigation()->breadcrumbs()->setMinDepth(1)->setLinkLast(false)->setPartial(array('_includes/breadcrumb.phtml', 'adm')); ?>
+            </div>
+            <div id="CONTENT">
+				<div class="left">
+					<?= $this->partial('_includes/menu.phtml', 'adm', array()); ?>
+				</div>
+                <div class="center">
+                    <?= $this->partial('_includes/mensagem_alerta.phtml', 'adm') ?>
+                    <div style="width: 100%;display: table">
+                        <?= $this->layout()->content ?>
+                    </div>
+                </div>
+				<div class="clear"></div>
+            </div>
+
+            <div id="RODAPE"></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,59 @@
+<?
+$bAcl = new ZC_Acl();
+$controller = 'categoria';
+$pagina = $this->data['action'];
+($pagina == 'index') ? $pagina = '' : $pagina;
+?>
+<h1><?= $this->title; ?></h1>
+<form action="/adm/pagina/excluir" method="post">
+    <? if ($bAcl->verifica(false, 'adm', $controller, 'inserealtera' . $pagina)): ?>
+        <a class="button jInfo" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}"); ?>" title="Cadastrar">Cadastrar</a>
+    <? endif; ?>
+    <? if ($bAcl->verifica(false, 'adm', $controller, 'inserealtera' . $pagina)): ?>
+        <a class="button jInfo jSubmit" href="<?= $this->baseUrl("/adm/{$controller}/excluir"); ?>" title="Clique para exluir">Excluir selecionadas</a>
+    <? endif; ?>
+
+    <? if (count($this->vo)): ?>
+        <table class="padrao">
+            <thead>
+                <tr>
+                    <th width="26"><input type="checkbox" class="jCheckAll" /></th>
+                    <th width="26">ID</th>
+                    <th>NOME</th>
+                    <th width="40">ORDEM</th>
+                    <th width="40">ID_ANTIGO</th>
+                    <th width="170">AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <? foreach ($this->vo as $o): ?>
+                    <tr>
+                        <td><input name="ID[<?= $o->ID ?>]" type="checkbox" value="<?= $o->ID ?>" /><span></span></td>
+                        <td>#<?= str_pad($o->ID, 3, '0', STR_PAD_LEFT) ?></td>
+                        <td>
+                            <? if (strlen($o->ORDEM) / 3 == 1): ?>
+                                <strong><?= $o->NOME ?></strong>
+                            <? else: ?>
+                                <?= str_repeat("&emsp;&emsp;", strlen($o->ORDEM) / 3) ?>&rdsh;<?= $o->NOME ?>
+                            <? endif; ?>
+                            (<?= $o->getNumPagina(); ?>)
+                        </td>
+                        <td><?= $o->ORDEM ?></td>
+                        <td>#<?= $o->ID_ANTIGO ?></td>
+                        <td class="action">
+                            <? if (strlen($o->ORDEM) / 3 < 3): ?>
+                                <a class="bt bt_subpagina" title="adicionar subcategoria" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/ID_PAI/" . $o->ID) ?>"></a>
+                            <? endif; ?>
+                            <a class="bt bt_editar" title="editar categoria" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/ID/" . $o->ID) ?>"></a>
+                            <a class="bt bt_excluir" title="excluir categoria" href="<?= $this->baseUrl("/adm/{$controller}/excluir/move/{$pagina}/ID/" . $o->ID) ?>"></a>
+                        </td>
+                    </tr>
+                <? endforeach; ?>
+            </tbody>
+        </table>
+
+    <? else: ?>
+        <p>Nenhum registro encontrado</p>
+    <? endif ?>
+</form>
+<br/><br/><br/>

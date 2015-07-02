@@ -1,0 +1,52 @@
+<?
+if (in_array($this->o->ID_CATEGORIA, array(1, 2, 3))) {
+    $categoria = $this->o->ID_CATEGORIA;
+} else {
+    $categoria = 1;
+}
+
+?>
+<script type="text/javascript">
+    function loadImagem(){
+        $("#UPLOAD_CONTEUDO").load('/adm/auxiliar/arquivo/ID_PAGINA/<?= $this->ID ?>');
+    }
+    function mudaCampo(Valor){
+        if(Valor == 1){
+            $("#LINK").parents("tr").fadeOut();
+            $("#TITULO").parents("tr").fadeIn();
+            $("#RESUMO").parents("tr").fadeIn();
+            $("#YOUTUBE").parents("tr").fadeIn();
+            $("#TEXTO").parents("tr").fadeIn();
+            $("#AUTOR").parents("tr").fadeIn();
+        }else{
+            if(Valor == 2){
+                $("#LINK").parents("tr").fadeIn();
+                $("#TITULO").parents("tr").fadeIn();
+                $("#RESUMO").parents("tr").fadeOut();
+                $("#YOUTUBE").parents("tr").fadeOut();
+                $("#TEXTO").parents("tr").fadeOut();
+                $("#AUTOR").parents("tr").fadeOut();
+            }else{
+                if(Valor == 3){
+                    $("#LINK").parents("tr").fadeOut();
+                    $("#TITULO").parents("tr").fadeIn();
+                    $("#RESUMO").parents("tr").fadeOut();
+                    $("#YOUTUBE").parents("tr").fadeOut();
+                    $("#TEXTO").parents("tr").fadeOut();
+                    $("#AUTOR").parents("tr").fadeOut();  
+                }
+            }
+        }
+    }
+    $(function(){
+        loadImagem();
+        mudaCampo(<?= $categoria ?>);
+        $("input[type='radio']").click(function(){
+            mudaCampo($(this).attr('value'));
+        });
+    });
+</script>
+<style type="text/css">
+    .PREV{border: 10px solid grey;display: none;width: 700px}
+</style>
+<?= $this->form ?>

@@ -1,0 +1,68 @@
+<? $bAcl = new ZC_Acl(); ?>
+<?
+$vvMenu = array(
+    array(
+        'name' => 'Gerências',
+        'ativo' => 0,
+        'pages' => array(
+            array('name' => 'Páginas', 'link' => '/adm/pagina/index'),
+            array('name' => 'Categorias', 'link' => '/adm/categoria/index'),
+            array('name' => 'Banners - Home', 'link' => '/adm/institucional/banners'),
+            array('name' => 'Novidades', 'link' => '/adm/noticia/index'),
+            array('name' => 'Imprensa', 'link' => '/adm/institucional/imprensa'),
+            array('name' => 'Segredo de Família', 'link' => '/adm/institucional/segredos'),
+            array('name' => 'Produtos', 'link' => '/adm/produto/index')
+        )
+    ),
+    array(
+        'name' => 'Desenvolvimento',
+        'ativo' => 0,
+        'pages' => array(
+            array('name' => 'Usuários', 'link' => '/adm/usuario/index'),
+            array('name' => 'Configuração', 'link' => '/adm/config/index'),
+            array('name' => 'Configuração de Email', 'link' => '/adm/configmail/index'),
+            array('name' => 'Grupos de Usuários', 'link' => '/adm/acl/grupo'),
+            array('name' => 'Gerenciar Páginas', 'link' => '/adm/acl/pagina'),
+            array('name' => 'Gerenciar Permissões', 'link' => '/adm/acl/permissoes'),
+            array('name' => 'Breadcrumb', 'link' => '/adm/acl/breadcrumb'),
+            array('name' => 'Log de Transações', 'link' => '/adm/acl/log/'),
+        )
+    ),
+);
+foreach ($vvMenu as $k => $vMenu):
+    $nAtivo = 0;
+    foreach ($vMenu['pages'] as $k2 => $vPage):
+        $vLink = explode('/', $vPage['link']);
+        if ($bAcl->verifica(false, $vLink[1], $vLink[2], $vLink[3])) {
+            $nAtivo += 1;
+            $vvMenu[$k]['pages'][$k2]['ativo'] = 1;
+        } else {
+            $vvMenu[$k]['pages'][$k2]['ativo'] = 0;
+        }
+    endforeach;
+    $vvMenu[$k]['ativo'] = $nAtivo;
+endforeach;
+?>
+<div id="MENU">
+    <? if (ZC_Auth::getInstance()->hasIdentity()): ?>
+        <ul>
+            <? foreach ($vvMenu as $vMenu): ?>
+                <? if ($vMenu['ativo']): ?>
+                    <li>
+                        <strong><?= $vMenu['name']; ?></strong>
+                        <ul>
+                            <? foreach ($vMenu['pages'] as $vPage): ?>
+                                <? if ($vPage['ativo']): ?>
+                                    <li <?= ZC_Util::isActiveLink($vPage['link'], array('class="ativo"')); ?>>
+                                        <a href="<?= $this->baseUrl($vPage['link']) ?>"><?= $vPage['name'] ?></a>
+                                    </li>
+                                <? endif; ?>
+                            <? endforeach; ?>
+                        </ul>
+                    </li>
+                <? endif; ?>
+            <? endforeach; ?>
+
+        </ul>
+    <? endif; ?>
+</div>

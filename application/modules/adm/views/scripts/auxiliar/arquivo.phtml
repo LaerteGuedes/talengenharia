@@ -1,0 +1,148 @@
+<script type="text/javascript">
+    Shadowbox.setup();
+    $(function () {
+        $(".jFechar:first").stop().one("click", function () {
+            loadImagem();
+        });
+        $('.jExcluir').stop().click(function () {
+            var $this = $(this);
+            $.post($(this).attr('href'), {}, function () {
+                $this.parents('li').fadeOut('fast');
+            }, 'json');
+            return false;
+        });
+        $('.jArquivoAddDestaque').click(function () {
+            var $this = $(this);
+            $.post($(this).attr('href'), {}, function (data) {
+                if (data && data.erro) {
+                    alert('Ocorreu um erro ao marcar a foto como destaque.');
+                    return false;
+                }
+                $this.parents('.upload_images_cont').find('li').removeClass('destaque');
+                $this.parents('li').addClass('destaque');
+            }, 'json');
+            return false;
+        });
+        $('.jArquivoAddImg').click(function () {
+            var img = $(this).attr('href');
+            img = '<div><img width="100%" src="' + img + '" /></div>';
+            var texto = CKEDITOR.instances.TEXTO.getData();
+            CKEDITOR.instances.TEXTO.setData(img + texto);
+            return false;
+        });
+        $('.jArquivoNome').stop().focus(function () {
+            $(this).addClass('focus');
+        }).blur(function () {
+            $(this).removeClass('focus');
+        });
+    });
+
+
+
+    $(function () {
+
+
+        $(".jSortUi").on("mousedown", function (e) {
+            $("<div />").draggable().appendTo("body").trigger(e);
+        });
+
+        $(".upload_images_cont").sortable({
+            connectWith: ".connectedSortable",
+            update: function (event, ui) {
+                var list = $(this).sortable("toArray");
+                $.post("/adm/auxiliar/atualizaposicao/",
+                        {
+                            'section': this.id,
+                            'components': list
+                        }
+                , "", "json");
+            }
+        }).disableSelection();
+        // enable text select on inputs
+        $(".upload_images_cont").find(".disableSort")
+                .bind('mousedown.ui-disableSelection selectstart.ui-disableSelection', function (e) {
+                    e.stopImmediatePropagation();
+                });
+    });
+
+</script>
+<? if (count($this->voArquivo)): ?>
+    <h3><a href="/download/<?= $this->idPagina ?>">DOWNLOAD DOS ARQUIVOS</a></h3>
+    <ul class="upload_images_cont">
+        <? foreach ($this->voArquivo as $oArquivo): ?>
+            <? if ($oArquivo->TIPO == 'image'): ?>
+                <li id="ARQ_<?= $oArquivo->ID ?>" class="<?= $oArquivo->DESTAQUE ? 'destaque' : '' ?> ">
+                    <input type="text" class="jArquivoNome disableSort" imgid="img_<?= $oArquivo->ID ?>" name="ARQUIVO[<?= $oArquivo->ID ?>][NOME_ARQUIVO]" value="<?= $oArquivo->NOME_ARQUIVO ?>" />
+                    <a href="<?= $oArquivo->getUrl(); ?>" rel="shadowbox[galeria]" class="disableSort">
+
+                        <? //= print_r($oArquivo->DATA) ?>
+                        <?= $oArquivo->renderImagem(array(120, 80)); ?>
+                    </a>
+                    <div class="action">
+                        <a class="jArquivoAddImg disableSort" href="<?= $oArquivo->getUrl(); ?>" title="<?= $oArquivo->NOME_ARQUIVO ?>"><img src="/imagem/icone/image_add.png" title="Adicionar ao Texto" /></a>
+                        <a class="jArquivoAddDestaque disableSort" href="/adm/auxiliar/jarquivodestaque/ID/<?= $oArquivo->ID ?>">
+                            <img src="/imagem/icone/heart_add.png" title="Marcar como destaque"/>
+                        </a>
+                        <a class="jCrop disableSort" rel="shadowbox[crop<?= $oArquivo->ID ?>]" href="/adm/auxiliar/crop/ID/<?= $oArquivo->ID ?>">
+                            <img src="/imagem/icone/ico.crop.png" title="Cortar Imagem"/>
+                        </a>
+
+                        <a class="jExcluir disableSort" href="/adm/auxiliar/excluirarquivo/ajax/true/ID/<?= $oArquivo->ID ?>" >
+                            <img src="/imagem/icone/delete.png" title="Excluir Arquivo" />
+                        </a>
+                        <a class="jSortUi" href="javascript:void(0)" >
+                            <img src="/imagem/icone/move.png" title="Ordenar Arquivo" width="16" height="16" />
+                        </a>
+                    </div>
+                </li>
+
+            <? else: ?>
+                <li>
+                    <div class="downloads">
+                        <div>
+                            <a class="jExcluir" href="/adm/auxiliar/excluirarquivo/ajax/true/ID/<?= $oArquivo->ID ?>" >
+                                <img src="/imagem/icone/delete.png" title="Excluir Arquivo" />
+                            </a>
+                        </div>
+                        <input type="text" class="jArquivoNome" imgid="img_<?= $oArquivo->ID ?>" name="ARQUIVO[<?= $oArquivo->ID ?>][NOME_ARQUIVO]" value="<?= $oArquivo->NOME_ARQUIVO ?>" />
+                        <div>
+
+                            <?
+                            switch ($os->EXT) {
+                                case 'docx' :
+                                case 'xlsx' :
+                                case 'pptx' :
+                                    $arq = 'doc';
+                                    break;
+                                case 'pdf':
+                                    $arq = 'pdf';
+                                    break;
+                                case 'avi':
+                                case 'mp4':
+                                case 'mpeg':
+                                case 'mpeg2':
+                                    $arq = 'video';
+                                    break;
+                                case 'mp3':
+                                case 'wma':
+                                case 'ogg':
+                                case 'wave':
+                                    $arq = 'audio';
+                                    break;
+                                default:
+                                    $arq = 'arquivo';
+                                    break;
+                            }
+                            ?>
+
+                            <a href="/upload/arq_arquivo/<?= $oArquivo->ID . "." . $oArquivo->EXT ?>"><img src="/imagem/site/icone_<?= $arq ?>.gif"/></a>
+                        </div>
+                        <div>
+                            <p><a href="/upload/arq_arquivo/<?= $oArquivo->ID . "." . $oArquivo->EXT ?>"><?= $oArquivo->NOME_ARQUIVO ?></a></p>
+                        </div>	
+                    </div>
+                </li>		
+            <? endif; ?>
+        <? endforeach; ?>
+    </ul>
+<? endif; ?>

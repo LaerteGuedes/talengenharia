@@ -1,0 +1,103 @@
+/*
+	root element for the scrollable.
+	when scrolling occurs this element stays still.
+*/
+.scrollable {
+
+    /* required settings */
+    position:relative;
+    overflow:hidden;
+    width: 932px;
+    /*    height:180px;*/
+    height:130px;
+    margin-left: -19px;
+	float: left;
+	padding-top: 30px;
+/*	border-top: 1px dotted #B6A48D;*/
+	position: relative;
+	z-index: 1;
+
+}
+
+.scrollable .items {
+    /* this cannot be too large */
+    width:20000em;
+    position:absolute;
+    clear:both;
+}
+
+.items div {
+    float:left;
+    width:680px;
+}
+
+/* single scrollable item */
+.scrollable img {
+    float:left;
+    /*    margin:20px 5px 20px 21px;*/
+/*    background-color:#fff;*/
+    padding:2px;
+/*    border:1px solid #ccc;*/
+
+
+}
+/* active item */
+.scrollable .active {
+/*    border:2px solid #000;*/
+    position:relative;
+    cursor:default;
+}
+
+.imagensPerfil {
+/*    border: 2px solid #F68B29;*/
+    float: left;
+    width: 139px;
+}
+.scrollable.items.imagensPerfil img{
+/*    border: 2px solid #F68B29;*/
+    float: left;
+    width: 134px;
+    height: 100px;
+}
+
+/* prev, next, prevPage and nextPage buttons */
+a.browse {
+/*    background:url(image/arrow/hori_large.png) no-repeat;*/
+    display:block;
+    width:30px;
+    height:30px;
+    float:left;
+    margin:65px 10px;
+    cursor:pointer;
+    font-size:1px;
+}
+
+/* right */
+a.right 				{ background-position: 0 -30px; clear:right; margin-right: 0px;}
+a.right:hover 		{ background-position:-30px -30px; }
+a.right:active 	{ background-position:-60px -30px; } 
+
+
+/* left */
+a.left				{ margin-left: 0px; } 
+a.left:hover  		{ background-position:-30px 0; }
+a.left:active  	{ background-position:-60px 0; }
+
+/* up and down */
+a.up, a.down		{ 
+    background:url(image/arrow/vert_large.png) no-repeat; 
+    float: none;
+    margin: 10px 50px;
+}
+
+/* up */
+a.up:hover  		{ background-position:-30px 0; }
+a.up:active  		{ background-position:-60px 0; }
+
+/* down */
+a.down 				{ background-position: 0 -30px; }
+a.down:hover  		{ background-position:-30px -30px; }
+a.down:active  	{ background-position:-60px -30px; } 
+
+a.disabled {  visibility:hidden !important;} 	
+

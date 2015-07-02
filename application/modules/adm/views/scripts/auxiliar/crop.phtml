@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Crop</title>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+        <script src="/library/Jcrop-master/js/jquery.min.js"></script>
+        <script src="/library/Jcrop-master/js/jquery.Jcrop.js"></script>
+        <style type="text/css">
+            form{display: none;}
+        </style>
+        <script type="text/javascript">
+            jQuery(function($) {
+                $(document).ajaxStart(function() {
+                    $(".ajaxstart").show();
+                });
+                $(document).ajaxStop(function() {
+                    $(".ajaxstart").hide();
+                });
+                var jcrop_api,
+                        $pcnt = $('.jcrop-tracker'),
+                        xsize = $pcnt.width(),
+                        ysize = $pcnt.height();
+                $('#target').Jcrop({
+                    bgFade: true,
+                    bgOpacity: .2,
+                    onSelect: updateCoords,
+                    aspectRatio: 540 / 330
+                }, function() {
+                    jcrop_api = this;
+                });
+                $('#fadetog').change(function() {
+                    jcrop_api.setOptions({
+                        bgFade: this.checked
+                    });
+                }).attr('checked', 'checked');
+                $('#shadetog').change(function() {
+                    if (this.checked)
+                        $('#shadetxt').slideDown();
+                    else
+                        $('#shadetxt').slideUp();
+                    jcrop_api.setOptions({
+                        shade: this.checked
+                    });
+                }).attr('checked', false);
+                // Define page sections
+                var sections = {
+                    anim_buttons: 'Tipos de Corte'
+                };
+                // Define animation buttons
+                var ac = {
+                    anim1: [0, 0, 132, 75],
+                    anim2: [0, 0, 300, 230],
+                    anim3: [0, 0, 336, 194],
+                    anim4: [0, 0, 696, 336],
+                };
+                // Define bgOpacity buttons
+                var bgo = {
+                    Low: .2,
+                    Mid: .5,
+                    High: .8,
+                    Full: 1
+                };
+                // Define bgColor buttons
+                var bgc = {
+                    R: '#900',
+                    B: '#4BB6F0',
+                    Y: '#F0B207',
+                    G: '#46B81C',
+                    W: 'white',
+                    K: 'black'
+                };
+                // Create fieldset targets for buttons
+                for (i in sections)
+                    insertSection(i, sections[i]);
+                function create_btn(c) {
+                    var $o = $('<button />').addClass('btn btn-small');
+                    if (c)
+                        $o.append(c);
+                    return $o;
+                }
+
+                var a_count = 0;
+                // Create animatnion buttons
+                var dimension = new Array();
+                dimension[0] = "132x75";
+                dimension[1] = "300x230";
+                dimension[2] = "336x194";
+                dimension[3] = "696x336";
+                for (i in ac) {
+                    $('#anim_buttons .btn-group')
+                            .append(
+                                    create_btn(dimension[a_count++]).click(animHandler(ac[i])),
+                                    ' '
+                                    );
+                }
+
+                $('#anim_buttons .btn-group').append(
+                        create_btn('Livre!').click(function(e) {
+                    $(e.target).addClass('active');
+                    jcrop_api.setOptions({aspectRatio: 0});
+                    jcrop_api.animateTo(
+                            [300, 200, 300, 200],
+                            function() {
+                                this.release();
+                                $(e.target).closest('.btn-group').find('.active').removeClass('active');
+                            }
+                    );
+                    return false;
+                })
+                        );
+                // Create bgOpacity buttons
+                for (i in bgo) {
+                    $('#bgo_buttons .btn-group').append(
+                            create_btn(i).click(setoptHandler('bgOpacity', bgo[i])),
+                            ' '
+                            );
+                }
+                // Create bgColor buttons
+                for (i in bgc) {
+                    $('#bgc_buttons .btn-group').append(
+                            create_btn(i).css({
+                        background: bgc[i],
+                        color: ((i == 'K') || (i == 'R')) ? 'white' : 'black'
+                    }).click(setoptHandler('bgColor', bgc[i])), ' '
+                            );
+                }
+                // Function to insert named sections into interface
+                function insertSection(k, v) {
+                    $('#interface').prepend(
+                            $('<fieldset></fieldset>').attr('id', k).append(
+//                            $('<legend></legend>').append(v),
+                            '<div class="btn-toolbar"><div class="btn-group"></div></div>'
+                            )
+                            );
+                }
+                ;
+                // Handler for option-setting buttons
+                function setoptHandler(k, v) {
+                    return function(e) {
+                        $(e.target).closest('.btn-group').find('.active').removeClass('active');
+                        $(e.target).addClass('active');
+                        var opt = {};
+                        opt[k] = v;
+                        jcrop_api.setOptions(opt);
+                        return false;
+                    };
+                }
+                ;
+                // Handler for animation buttons
+                function animHandler(v) {
+                    return function(e) {
+                        $(e.target).addClass('active');
+                        jcrop_api.animateTo(v, function() {
+                            var width = v[2];
+                            var height = v[3];
+                            updateCoordsAni(v);
+                            jcrop_api.setOptions({aspectRatio: width / height});
+                            $(e.target).closest('.btn-group').find('.active').removeClass('active');
+                        });
+                        return false;
+                    };
+                }
+                ;
+                $('#bgo_buttons .btn:first,#bgc_buttons .btn:last').addClass('active');
+                $('#interface').show();
+            });
+            function updateCoordsAni(c)
+            {
+                $('#x').val(c[0]);
+                $('#y').val(c[1]);
+                $('#w').val(c[2]);
+                $('#h').val(c[3]);
+            }
+            function updateCoords(c)
+            {
+                $('#x').val(c.x);
+                c[1]
+                $('#y').val(c.y);
+                $('#y2').val(c.y2);
+                $('#w').val(c.w);
+                $('#h').val(c.h);
+            }
+
+            $(function() {
+                $('.enviaForm').on("click", function() {
+                    var form = $("#FRM_CROP");
+                    $.post('/adm/auxiliar/arquivocropsave', form.serializeArray(), function(data) {
+//                        loadImagem();
+                        alert(data.msg);
+                    }, 'json');
+                });
+            });</script>
+        <link rel="stylesheet" href="/library/Jcrop-master/demos/demo_files/main.css" type="text/css" />
+        <link rel="stylesheet" href="/library/Jcrop-master/demos/demo_files/demos.css" type="text/css" />
+        <link rel="stylesheet" href="/library/Jcrop-master/css/jquery.Jcrop.css" type="text/css" />
+        <link rel="stylesheet" href="/library/Jcrop-master/css/jquery.Jcrop.extras.css" type="text/css" />
+
+    </head>
+    <body>
+        <style type="text/css">
+            #interface{ 
+                float: right;
+                margin-top: -8px;
+                margin-right: 40px;
+            }
+            .enviaForm{
+                background: none repeat scroll 0 0 #F2E4D8;
+                border: 1px solid #C7B3A6;
+                border-radius: 5px;
+                color: #4A4A4A;
+                cursor: pointer;
+                display: inline-block;
+                float: right;
+                font-size: 18px;
+                margin-left: 80px;
+                margin-right: 10px;
+                padding: 0 10px;
+                text-decoration: none;
+            }
+            .enviaForm:hover{
+                color: #E6D1C1;
+            }
+            .ajaxstart{
+                background: rgba(0,0,0,0.5);
+                height: 100%;
+                width: 100%;
+                position: fixed; z-index: 9999;display: none;
+            }
+            .ajaxstart > img{display: block;vertical-align: middle;margin: 20% auto 0}
+
+
+            h1{background-color: #300D24;
+               background-repeat: repeat-x;
+               border: medium none;
+               border-radius: 0 0 4px 4px;
+               color: #EEDACB;
+               float: right;
+               margin: 0;
+               opacity: 0.3;
+               padding: 10px 12px;
+               width: 740px;}
+            h1:hover{
+                opacity: 1;
+            }
+            </style>
+            <div class="page-header" style="margin: 0; padding: 0; position: fixed; width: 100%; z-index: 9999; border: none;">
+            <h1>
+                Ajustar Imagem  
+                <a href="javascript:void(0)" class="enviaForm">Cortar</a>
+                <!--<span class="span3" id="interface">-->
+                <span id="interface" class="span3">
+
+                </span>
+                <!--</span>-->
+
+            </h1>
+        </div>
+        <div class="ajaxstart">
+            <img src="/imagem/ajax-loader.gif" alt="" />
+        </div>
+
+        <img style='display: block; position: relative; margin: 0 auto' src="<?= $this->oArquivo->getUrl(); ?>" id="target" alt="Jcrop Image" />
+
+        <div class="clearfix"></div>
+        <form id="FRM_CROP" action="" method="post" onsubmit="return checkCoords();">
+            <input type="hidden" id="x" name="x" />
+            <input type="hidden" id="x2" name="x2" />
+            <input type="hidden" id="y" name="y" />
+            <input type="hidden" id="y2" name="y2" />
+            <input type="hidden" id="w" name="w" />
+            <input type="hidden" id="h" name="h" />
+            <input type="hidden" id="imagem" name="imagem" value="<?= $this->oArquivo->getUrl(400); ?>" />
+            <input type="hidden" id="WH" name="WH" value="" />
+            <input type="hidden" id="ID" name="ID" value="<?= $this->oArquivo->ID; ?>" />
+        </form>
+
+
+    </body>
+</html>

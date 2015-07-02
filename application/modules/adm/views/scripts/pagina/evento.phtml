@@ -1,0 +1,91 @@
+<?
+$bAcl = new ZC_Acl();
+$controller = 'pagina';
+$pagina = $this->data['action'];
+($pagina == 'index') ? $pagina = '' : $pagina;
+?>
+<script type="text/javascript">
+    $(function() {
+        $(".jLock").click(function() {
+			var $this = $(this);
+            $.post($(this).attr("href"),{ajax:1},function(data){
+				if(data.success){
+					if($this.is('.bt_lock_on')){
+						$this.removeClass('bt_lock_on').addClass('bt_lock_off');
+					}else{
+						$this.removeClass('bt_lock_off').addClass('bt_lock_on');
+					}
+				}
+			},'json');
+            return false;
+        });
+    })
+</script>
+<h1><?= $this->title; ?></h1>
+<form action="/adm/pagina/excluir" method="post">
+    <? if ($bAcl->verifica(false, 'adm', $controller, 'inserealtera' . $pagina)): ?>
+        <a class="button jInfo" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}"); ?>" title="Cadastrar">Cadastrar</a>
+    <? endif; ?>
+    <? if ($bAcl->verifica(false, 'adm', $controller, 'inserealtera' . $pagina)): ?>
+        <a class="button jInfo jSubmit" href="<?= $this->baseUrl("/adm/{$controller}/excluir"); ?>" title="Clique para exluir">Excluir selecionadas</a>
+    <? endif; ?>
+
+    <? if (count($this->vo)): ?>
+        <p><?= $this->vo->getTotalItemCount() ?> registro(s) encontrados.</p>
+        <table class="padrao">
+            <thead>
+                <tr>
+                    <th width="26"><input type="checkbox" class="jCheckAll" /></th>
+                    <th>TÍTULO</th>
+                    <th>RESUMO</th>
+                    <th >AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <? foreach ($this->vo as $o): ?>
+                    <tr>
+                        <td><input name="ID[<?= $o->ID ?>]" type="checkbox" value="<?= $o->ID ?>" /><span></span></td>
+                        <td><?= $o->TITULO ?></td>
+                        <td><?= $o->RESUMO ?></td>
+                        <td class="action">
+
+                            <? if (Zend_Registry::get("oUsuario")->ID_GRUPO == 1) { ?>
+                                <a class="bt bt_lock<?=($o->FL_LOCK == 1) ? '_on' : '_off';?> jLock" title="trancar página" href="<?= $this->baseUrl("/adm/{$controller}/lockpagina/ID/" . $o->ID) ?>"></a>
+                            <? } ?>
+                            
+							<? if ($this->subpagina): ?>
+                                <a class="bt bt_subpagina" title="adicionar subpágina" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/ID_PAI/" . $o->ID) ?>"></a>
+                            <? endif; ?>
+                            
+							<a class="bt bt_editar" title="editar página" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/ID/" . $o->ID) ?>"></a>
+							
+							<? if (Zend_Registry::get("oUsuario")->ID_GRUPO == 1 || $o->FL_LOCK == 0): ?>
+								<a class="bt bt_excluir" title="excluir página" href="<?= $this->baseUrl("/adm/{$controller}/excluir/move/{$pagina}/ID/" . $o->ID) ?>"></a>
+							<? endif;?>
+                            
+                        </td>
+                    </tr>
+                    <? if ($this->subpagina): ?>
+                        <? if ($voFilho = $o->getFilho()): ?>
+                            <? foreach ($voFilho as $oFilho): ?>
+                                <tr class="subpage">
+                                    <td>&rdsh; <input name="ID[]" type="checkbox" value="<?= $oFilho->ID ?>" /></td>
+                                    <td><?= ($oFilho->IMG_DESTAQUE) ? $oFilho->getImgDestaque(array(60, 40)) : '' ?></td>
+                                    <td><?= $oFilho->TITULO ?></td>
+                                    <td><?= $oFilho->RESUMO ?></td>
+                                    <td class="action">
+                                        <a class="bt bt_editar" title="editar página" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/ID/" . $o->ID) ?>"></a>
+                                        <a class="bt bt_excluir" title="excluir página" href="<?= $this->baseUrl("/adm/{$controller}/excluir/move/{$pagina}/ID/" . $o->ID) ?>"></a>
+                                    </td>
+                                </tr>
+                            <? endforeach; ?>
+                        <? endif; ?>
+                    <? endif; ?>
+                <? endforeach; ?>
+            </tbody>
+        </table>
+        <?= $this->paginationControl($this->vo, 'Sliding', '_includes/paginacao.phtml') ?>
+    <? else: ?>
+        <p>Nenhum registro encontrado</p>
+    <? endif ?>
+</form>

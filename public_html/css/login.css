@@ -1,0 +1,78 @@
+*, html, body {margin:0px;padding:0px;}
+html{background: #260d14;height: 100%;}
+img{
+    border: none;
+}
+
+#formLogin{position: relative;z-index: 11}
+#CON_LOGIN{margin: 0 auto;position: relative;z-index: 11;width: 1024px;}
+#FORM{
+    max-width: 410px;
+}
+#FORM input{
+    width: 409px;
+    height: 31px;
+    font-family: "Arial";
+    background: #c6b2a4;
+    color: #f8eee8;
+    font-size: 22px;
+    border: none;
+
+    text-indent: 5px;
+    font-weight: bold;
+    line-height: 31px;
+}
+#FORM input[type='text']{
+    margin-top: 15px;
+}
+#FORM input[type='password']{
+    margin-top: 15px;
+}
+#FORM input[type='image']{
+    width: 409px;
+    height: 52px;
+    font-family: "Arial";
+    background: url("/imagem/login/bt_entrar.gif") no-repeat #c6b2a4;
+    color: #f8eee8;
+    font-size: 22px;
+    border: red 1px solid;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+::-webkit-input-placeholder  { color:#f8eee8; }
+input:-moz-placeholder { color:#f8eee8; }
+
+#TOPO{display: table;width: 100%;height: 390px;background: url(/imagem/login/topo_bg1.jpg) repeat-x top left;position: relative;z-index: 1;overflow: hidden}
+#TOPO > .bg2{background: url(/imagem/login/topo_bg2.gif) repeat top left;position: absolute;z-index: 10;width: 100%;height: 390px;}
+#TOPO > .centro{width: 1024px;margin: 0 auto}
+#TOPO > .centro > .logo{position: relative;z-index: 11;margin: 0}
+#TOPO > .centro > ul.rede{list-style: none;position: absolute;top: 344px;margin: 0;z-index: 11}
+#TOPO > .centro > ul.rede li{float: left;margin: 0 3px}
+#TOPO > .centro > .acesseosite{margin-left: 307px;position: absolute;top: 115px;z-index: 11;}
+#TOPO > .centro > .balao{height: 155px;margin-left: 898px;position: absolute;top: 29px;width: 97px;z-index: 9;}
+#TOPO > .centro > .nuvem{position: absolute;top:272px;margin-left:854px;z-index: 8;}
+#TOPO > .centro > .nosso_cliente{float: right;position: relative;;z-index: 11}
+#TOPO > .t1{
+    margin: 0 0 0 50px;
+}
+#TOPO > .t1{text-align: right;width: 50%;position: absolute;left:-80px;top:197px;overflow: hidden}
+/*#TOPO > .t1 > img{margin: 0 30px 5px 0}*/
+#TOPO > .t2{text-align: left;width: 50%;position: absolute;padding-right: 200px;top:304px;right:0}
+#TOPO > .t2 > img{margin-left: 20px;float: left}
+#TOPO > .t2 > .fb-like{margin: 19px 0 0 247px;position: absolute}
+
+
+
+#MENU{height: 38px}
+#MENU.absolute{position: relative}
+#MENU.fixed{position: fixed;top:0;padding-top: 17px}
+#MENU{background: #300d24;display: table;width: 100%;position: relative;z-index: 999;}
+#MENU > div{width: 1009px;margin: 0 auto;}
+#MENU ul,#MENU div > img{display: inline-block;vertical-align: text-bottom;}
+#MENU ul{margin-left: 200px;}
+#MENU ul li{float: left; list-style: none;}
+
+
+
+

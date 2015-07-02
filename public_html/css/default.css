@@ -1,0 +1,142 @@
+@charset "CP850";
+/*	RESET - HTML 5 */
+* :hover, * :focus {
+  outline: none; }
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  font-weight: normal;
+  vertical-align: baseline;
+  background: transparent;
+  outline: none; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none; }
+
+del {
+  text-decoration: line-through; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+  display: block; }
+
+textarea, input {
+  background: #fff; }
+
+input[type="text"] {
+  padding: 0;
+  border: 1px solid #333;
+  vertical-align: middle; }
+
+input[type="submit"], input[type="button"] {
+  cursor: hand;
+  outline: none;
+  cursor: pointer; }
+
+input[type="checkbox"], input[type="radio"] {
+  border: 0;
+  width: 13px;
+  padding: 0;
+  margin: 0;
+  background: none; }
+
+select {
+  border: 1px solid #ddd;
+  background: #fff; }
+
+ul, ol {
+  list-style-type: none; }
+
+b, strong {
+  font-weight: bold; }
+
+a {
+  text-decoration: none; }
+
+table caption {
+  display: none; }
+
+/* CLASSES GENÉRICAS */
+.imgrpl {
+  display: block;
+  text-indent: -9999px;
+  border: 0;
+  font-size: 0; }
+
+.show, .block {
+  display: block; }
+
+.hide {
+  display: none; }
+
+.invisible {
+  visibility: hidden; }
+
+.clear {
+  clear: both; }
+
+.clearfix:after, .inner:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0; }
+
+.clearfix, .inner {
+  display: inline-block; }
+
+html[xmlns] .clearfix, html[xmlns] .inner {
+  display: block; }
+
+* html .clearfix, * html .inner {
+  height: 1%; }
+
+.fl {
+  float: left; }
+
+.fr {
+  float: right; }
+
+/*
+@font-face {
+    font-family: 'FuturaCondensedNormalRegular';
+    src: url('../fontes/futura_2-webfont.eot');
+    src: url('../fontes/futura_2-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fontes/futura_2-webfont.woff') format('woff'),
+         url('../fontes/futura_2-webfont.ttf') format('truetype'),
+         url('../fontes/futura_2-webfont.svg#FuturaCondensedNormalRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'FuturaCondensedLight';
+    src: url('../fontes/futuracl-webfont.eot');
+    src: url('../fontes/futuracl-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fontes/futuracl-webfont.woff') format('woff'),
+         url('../fontes/futuracl-webfont.ttf') format('truetype'),
+         url('../fontes/futuracl-webfont.svg#FuturaCondensedLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+*/
+* {
+  font-family: tahoma; }

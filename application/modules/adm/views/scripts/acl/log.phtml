@@ -1,0 +1,20 @@
+<?= $this->form ?>
+<table class="padrao">
+	<thead>
+		<tr>
+			<th>Usuario</th>
+			<th>Transação</th> 
+			<th>Data</th>
+		</tr> 
+	</thead>
+	<tbody>
+		<? foreach($this->voLog as $oLog): ?>
+			<tr>
+				<td><?= $oLog->USUARIO ?></td>
+				<td><?= $oLog->TEXTO ?></td>
+				<td><?= $this->data($oLog->DATA,"dd/MM/yyyy HH:mm") ?></td>
+			</tr>
+		<? endforeach; ?>
+	</tbody>
+</table>
+<?= $this->paginationControl($this->voLog,'Sliding','_includes/paginacao.phtml')?>

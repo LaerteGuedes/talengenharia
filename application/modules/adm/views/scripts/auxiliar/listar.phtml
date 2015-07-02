@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>ORMNews</title>
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="language" content="pt-br" />
+            <meta http-equiv="imagetoolbar" content="no"/>
+            <!--<meta http-equiv="Pragma" content="no-cache"/>-->
+            <link rel="shortcut icon" href="/imagem/site/favicon.png" type="image/png" />
+            <link rel="alternate" type="application/rss+xml" title="Site &raquo; Feed" href="/feed/" />
+
+            <link href="/library/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
+            <link href="/css/site.css" media="screen" rel="stylesheet" type="text/css" /><script type="text/javascript" src="/library/jquery-1.10.2.js"></script>
+            <script type="text/javascript" src="/library/jquery-migrate-1.2.1.min.js"></script>
+            <script type="text/javascript" src="/library/bootstrap/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="/js/bootstrap_site.js"></script>
+    </head>
+    <body>
+        <style type="text/css">
+            .chamada ,.destaque_2x1_resumo,destaque_2x2 ,cat_noticia{overflow: hidden}
+            #NOTICIAS{
+                margin: 50px auto;
+            }
+        </style>
+
+        <? $vo = array($this->oNoticia, $this->oNoticia, $this->oNoticia) ?>
+        <div id="NOTICIAS" class="cat_noticia container">
+            <div class="row chamada">
+                <div class="col-md-6 col-sm-6">
+                    <h1>Mover Arquivos </h1>
+                    <form class="form-inline" role="form" method="post">
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <label class="" for="exampleInputEmail2">Nome da Tabela</label>
+                                <input type="text" class="form-control" name="TABELA" placeholder="Nome da tabela" value="<?= ($this->TABELA) ? $this->TABELA : "pag_pagina" ?>"/>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <label class="" for="exampleInputEmail2">Nome da Coluna</label>
+                                <input type="text" class="form-control" name="COLUNA" placeholder="Nome da coluna" value="<?= ($this->COLUNA) ? $this->COLUNA : "DATA_CADASTRO" ?>"/>
+                            </div><br/>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <label class="" for="exampleInputEmail2">Ano Inicial</label>
+                                <input type="text" class="form-control" name="ANO" placeholder="Ano Inicial" value="<?= ($this->ANO) ? $this->ANO : "" ?>"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <label class="" for="exampleInputEmail2">Ano Final</label>
+                                <input type="text" class="form-control" name="ANO2" placeholder="Ano Final" value="<?= ($this->ANO2) ? $this->ANO2 : "" ?>"/>
+                            </div><br/>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <label class="" for="exampleInputEmail2">Mes Inicial</label>
+                                <input type="text" class="form-control" name="MES" placeholder="Mes Inicial" value="<?= ($this->MES) ? $this->MES : "01" ?>"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <label class="" for="exampleInputEmail2">Mes Final</label>
+                                <input type="text" class="form-control" name="MES2" placeholder="Mes Final" value="<?= ($this->MES2) ? $this->MES2 : "12" ?>"/>
+                            </div><br/>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <label class="" for="exampleInputEmail2">Dia Inicial</label>
+                                <input type="text" class="form-control" name="DIA" placeholder="Dia Inicial" value="<?= ($this->DIA) ? $this->DIA : "01" ?>"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <label class="" for="exampleInputEmail2">Dia Final</label>
+                                <input type="text" class="form-control" name="DIA2" placeholder="Dia Final" value="<?= ($this->DIA2) ? $this->DIA2 : "31" ?>"/>
+                            </div><br/>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <label class="" for="exampleInputEmail2">Hora Inicial</label>
+                                <input type="text" class="form-control" name="HORA" placeholder="Hora Inicial" value="<?= ($this->HORA) ? $this->HORA : "00" ?>"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <label class="" for="exampleInputEmail2">Hora Final</label>
+                                <input type="text" class="form-control" name="HORA2" placeholder="Hora Final" value="<?= ($this->HORA2) ? $this->HORA2 : "24" ?>"/>
+                            </div>
+                        </div>
+
+                        <br/>
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <button style="margin-top: 25px" type="submit" class="btn btn-default">Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <? if ($this->msg) { ?>
+                        <div style="display: block;clear: both"></div>
+                        <h1 style="margin-top: 20px;">Resposta</h1>
+                        <? foreach ($this->msg as $oM) { ?>
+                            <p><?= $oM ?></p>
+                        <? } ?>
+                    <? } ?>
+
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </body>
+</html>

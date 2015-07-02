@@ -1,0 +1,40 @@
+<?
+$bAcl = new ZC_Acl();
+$controller = "destaque";
+$pagina = $this->data["action"];
+($pagina == "index") ? $pagina = "" : $pagina;
+?>
+
+<h1><?= $this->title; ?></h1>
+<form action="/adm/<?=$controller?>/excluir" method="post">
+    <? if ($bAcl->verifica(false, "adm", $controller, "inserealtera" . $pagina)): ?>
+        <a class="button jInfo" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}"); ?>" title="Cadastrar">Cadastrar</a>
+    <? endif; ?>
+    <? if ($bAcl->verifica(false, "adm", $controller, "inserealtera" . $pagina)): ?>
+        <a class="button jInfo jSubmit" href="<?= $this->baseUrl("/adm/{$controller}/excluir"); ?>" title="Clique para exluir">Excluir selecionadas</a>
+    <? endif; ?>
+
+    <? if (count($this->vo)): ?>
+        <p><?= $this->vo->getTotalItemCount() ?> registro(s) encontrados.</p>
+        <table class="padrao">
+            <thead>
+                <tr>
+                    <th width="26"><input type="checkbox" class="jCheckAll" /></th><th>###</th><th>NOME DO DESTAQUE</th><th>RESUMO</th><th width="160">AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <? foreach ($this->vo as $o): ?>
+                    <tr>
+                        <td><input name="ID[<?= $o->ID ?>]" type="checkbox" value="<?= $o->ID ?>" /><span></span></td><td><?= $o->getImgDestaque(array(60,40)) ?></td><td><?= $o->TITULO ?></td><td><?= $o->RESUMO ?></td><td class="action">
+                            <a class="bt bt_editar" title="editar página" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/ID/" . $o->ID) ?>"></a>
+                            <a class="bt bt_excluir" title="excluir página" href="<?= $this->baseUrl("/adm/{$controller}/excluir/move/{$pagina}/ID/" . $o->ID) ?>"></a>
+                        </td>
+                    </tr>
+                <? endforeach; ?>
+            </tbody>
+        </table>
+        <?= $this->paginationControl($this->vo, "Sliding", "_includes/paginacao.phtml") ?>
+    <? else: ?>
+        <p>Nenhum registro encontrado</p>
+    <? endif ?>
+</form>

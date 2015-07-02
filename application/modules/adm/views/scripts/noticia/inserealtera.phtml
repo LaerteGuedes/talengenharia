@@ -1,0 +1,77 @@
+<? //Business_Util::debug($_SERVER)  ?>
+<script type="text/javascript">
+    function loadImagem() {
+//        $("#UPLOAD_CONTEUDO").remove().;
+        $("#UPLOAD_CONTEUDO").stop().load('/adm/auxiliar/arquivo/ID_PAGINA/<?= $this->ID ?>');
+    }
+    Shadowbox.init({
+        skipSetup: true
+    });
+
+    $(function() {
+        $('.jDataHora').datetimepicker({lang: "pt", format:'d/m/Y H:i:s'});
+        loadImagem();
+        $(function() {
+            $(".visualizarChamadas").live('click', function() {
+                var form = $("formPagPaginaNot").serializeArray();
+
+                var TITULO = encodeURIComponent($("#TITULO").val());
+                var RESUMO = encodeURIComponent($("#RESUMO").val());
+                var ID = encodeURIComponent($("#ID").val());
+                var CHAPEU = encodeURIComponent($("#CHAPEU").val());
+                var ID_CATEGORIA = encodeURIComponent($("#ID_CATEGORIA").val());
+
+                Shadowbox.open({
+                    content: "http://<?= $_SERVER["SERVER_NAME"] ?>/adm/auxiliar/modelochamadas/TITULO/" + TITULO + "/RESUMO/" + RESUMO + "/ID/" + ID + "/CHAPEU/" + CHAPEU + "/ID_CATEGORIA/" + ID_CATEGORIA,
+                    type: "iframe",
+                    player: "iframe",
+                });
+                return false;
+            });
+        });
+    });
+</script>
+<style type="text/css">
+    SPAN.tagMatches {
+        margin-left: 10px;
+    }
+
+    #TAG{
+        display: inline-table;
+        width: 100px;
+    }
+    SPAN.tagMatches SPAN {
+        padding: 2px;
+        margin-right: 4px;
+        background-color: #0000AB;
+        color: #fff;
+        cursor: pointer;
+    }
+    #cke_TEXTO{
+        width: 460px;
+    }
+</style>
+<?= $this->form ?>
+<script type="text/javascript">
+
+    $(function() {
+        $("#sb-nav-close").attr("id");
+//        $("#sb-nav-close").on("click", function() {
+//            loadImagem();
+//        });
+    });
+<? if ($this->TAGS) { ?>
+
+        $(function() {
+            jQuery(".tm-input:eq(0)").tagsManager({
+                prefilled: <?= $this->tagSelected ?>,
+                typeahead: true,
+                typeaheadAjaxSource: null,
+                typeaheadSource: <?= $this->tags ?>,
+                blinkBGColor_1: '#FFFF9C',
+                blinkBGColor_2: '#CDE69C',
+                hiddenTagListName: 'hiddenTagListA'
+            });
+        });
+<? } ?>
+</script>

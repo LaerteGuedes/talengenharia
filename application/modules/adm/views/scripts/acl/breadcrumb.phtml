@@ -1,0 +1,36 @@
+<script type="text/javascript">
+$(function(){
+
+	$('.tree').tree({
+		rules : {
+			use_max_children : false,
+			use_max_depth : false,
+			valid_children : [ "module" ]
+		},
+		types : {
+			"migalha" : { 
+				icon : { image : baseUrl+"/imagem/icone/pao.png" }
+			}
+//			"adm" : { valid_children : ["filho_adm" ]},
+//			"corretor" : { valid_children : ["filho_corretor" ]}
+		},
+		callback : {
+			onmove : function (NODE,REF_NODE,TYPE,TREE_OBJ,RB) {
+				$.post(baseUrl+'/adm/acl/alteraordem',{NODE:NODE.id,TYPE:TYPE,REF_NODE:REF_NODE.id},function(){
+					
+				},'json');
+			}
+		}
+	});
+});
+</script>
+
+
+<? foreach($this->voModules as $oModule): ?>
+	<h3><?= $oModule->MODULE?></h3>
+	<div class="tree">
+		<?= $this->partial('/_includes/acl_paginas.phtml',array('module'=>$oModule->MODULE)); ?>
+	</div>
+	<br clear="all"/>
+<? endforeach;?>
+

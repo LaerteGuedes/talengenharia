@@ -1,0 +1,76 @@
+<style>
+.paginas ul{
+	padding-left: 10px;
+	list-style: none;
+}
+.paginas input[type=text]{
+	background: none;
+	margin: 0;
+	padding: 0;
+	width: 40px;
+	border: none;
+	cursor: pointer;
+	font-size: 11px;
+}
+.paginas input[type=text]:FOCUS{
+	border: 1px solid #000;
+	width: 120px;
+	cursor: text;
+}
+.paginas li{
+	padding-left: 16px;
+}
+.paginas li[rel=module]{background: url("/imagens/icon/ico.module.gif") no-repeat;}
+.paginas li[rel=controller]{background: url("/imagens/icon/ico.controller.gif") no-repeat;}
+.paginas li[rel=action]{background: url("/imagens/icon/ico.action.gif") no-repeat;}
+</style>
+<script type="text/javascript">
+$(function () {
+	
+	$('.paginas .esconde').click(function(){
+		var filho = $(this).nextAll('ul');
+		if(filho.is(':hidden')){
+			filho.slideDown();
+		}else{
+			filho.slideUp();
+		}
+	});
+	//$('.paginas ul').hide();
+
+});
+</script>
+
+<form method="post" action="<?= $this->baseUrl('/adm/acl/savepaginas') ?>">
+
+<ul class="paginas">
+	<? $i=0;foreach($this->vNavigation as $moduleName=>$vController):?>
+		<li rel="module">
+			<a href="javascript:void(0)" class="esconde"><?= $moduleName ?></a>
+			<ul>
+				<? foreach($vController as $controllerName=>$vAction):?>
+					<li rel="controller">
+						<a href="javascript:void(0)" class="esconde"><?= $controllerName ?></a>
+						<ul>
+							<? foreach($vAction as $actionName):?>
+							<? $oPage = Db_AclPagina::getInstance()->findPage($moduleName,$controllerName,$actionName); ?>
+								<li rel="action">
+									<? if($oPage): ?>
+										<input type="hidden" name="pagina[<?= $i ?>][ID]" value="<?= $oPage->ID?>" />
+									<? endif; ?>
+									<input type="checkbox" name="pagina[<?= $i ?>][PERMISSAO]" value="1" <?= ($oPage->PERMISSAO) ? 'checked="checked"' : '' ?> />
+									<input type="hidden" name="pagina[<?= $i ?>][MODULE]" value="<?= $moduleName ?>" />
+									<input type="hidden" name="pagina[<?= $i ?>][CONTROLLER]" value="<?= $controllerName ?>"/>
+									<input type="hidden" name="pagina[<?= $i ?>][ACTION]" value="<?= $actionName ?>" />
+									(<input type="text" name="pagina[<?= $i ?>][NOME]" value="<?= $oPage->NOME?>" />) <?= $actionName?>
+								</li>
+							<? $i++;endforeach; ?>
+						</ul>
+					</li>
+				<? endforeach; ?>
+			</ul>
+		</li>
+	<? endforeach; ?>
+</ul>
+
+<button type="submit">Eviar</button>
+</form>

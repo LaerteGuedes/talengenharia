@@ -1,0 +1,66 @@
+<?  $config = Zend_Registry::get("oConfiguracao");
+    $configMail = Zend_Registry::get("oConfiguracaoMail");?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title><?= $config->TITULO; ?> - Fale Conosco</title>
+        <script src="/library/holder/holder.js"></script>
+        <style type="text/css">
+            td.links > a{
+               display:block;
+               color:#000;
+               font-size:12px;
+            }
+            td.links{
+                text-align:center;
+            }
+        </style>
+    </head>
+    <body style="font-family:Arial">
+        <table width="642" border="0" cellpadding="0" cellspacing="0" align="center" bgcolor="<?=$configMail['COR_EMAIL_1'];?>">
+            <tr>
+                <? if ($configMail['MAIL_TOPO']) { ?>
+                    <td align="center"><img src="<?= 'http://' . $_SERVER['SERVER_NAME'] . $configMail['MAIL_TOPO']; ?>" class="" alt="Email de <?= $config->TITULO; ?>"></td>
+                <? } else { ?>
+                    <td align="center"><img data-src="holder.js/642x174" class="" alt="## NOME DO CLIENTE ##"></td>
+                <? } ?>
+            </tr>
+            <tr>
+                <td>
+                    <table width="100%" cellpadding="20" cellspacing="0" border="0">
+                        <tr>
+                            <td><font size="2" face="Arial, Helvetica, sans-serif">
+                                <h1><?= $config->TITULO; ?> - Fale Conosco</h1>
+                                
+                                <p><strong>Nome: </strong><?= $this->NOME;?></p>
+                                <p><strong>Email: </strong><?= $this->EMAIL;?></p>
+                                <p><strong>Telefone: </strong><?= $this->TELEFONE;?></p>
+                                <p><strong>Assunto: </strong><?= $this->ASSUNTO;?></p>
+                                <p><strong>Mensagem: </strong><?= $this->MENSAGEM;?></p>
+                                </font>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+			<td align="center" bgcolor="<?=$configMail['COR_EMAIL_2'];?>">
+				<table width="100%" cellpadding="20" cellspacing="0" border="0">
+					<tr>
+						<td width="20%">
+                                                        <? if ($configMail['MAIL_RODAPE']) { ?>
+                                                            <img src="<?='http://' . $_SERVER['SERVER_NAME'] .$configMail['MAIL_TOPO'];?>" width="84px" height="53px" class="" alt="Logotipo ## NOME DO CLIENTE ##">
+                                                        <? }else{ ?>
+                                                            <img data-src="holder.js/84x53" class="" alt="Logotipo ## NOME DO CLIENTE ##">
+                                                        <? } ?>    
+						</td>
+						<td width="80%">
+                                                    <font size="1" face="Arial, Helvetica, sans-serif" color="#FFFFFF"> <?=$configMail['ENDERECO'];?> <br>Telefone: <?=$configMail['TELEFONE'];?> <br> <?=$configMail['EMAIL'];?></font></td>
+						</tr>
+					</table>
+				</td>
+			</tr>   
+        </table>
+    </body>
+</html>

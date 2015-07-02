@@ -1,0 +1,26 @@
+<?
+$o = $this->o;
+?>
+<div class="comentario">
+    <h1><?=$o->TITULO?></h1><br/>
+    <p>(<?= $o->getComentarioCount(array(0, 1, 2)) ?>) Comentarios</p>
+    <? foreach ($o->getComentario(null, array(0, 1, 2)) as $oC) { ?>
+        <div class="botpost">
+            <div>
+                <h3><?= $oC->NOME ?> (<?= $oC->getDataF() ?>)</h3>
+            </div>
+            <p>
+                <?= $oC->MENSAGEM ?>
+            </p>
+            <div style="float: left ;margin: 10px">
+                STATUS &rightarrow; &nbsp; <?= $oC->getStatus() ?>
+            </div>
+            <div style="float: right ;margin: 10px 10px 10px 0;">
+                <a href="/adm/pagina/stcomentario/ST/1/ID/<?= $oC->ID ?>/ID_PAGINA/<?= $o->ID ?>">APROVAR</a> &nbsp; | &nbsp;
+                <a href="/adm/pagina/stcomentario/ST/2/ID/<?= $oC->ID ?>/ID_PAGINA/<?= $o->ID ?>">RECUSAR</a>  &nbsp; | &nbsp;
+                <a href="/adm/pagina/stcomentario/ST/3/ID/<?= $oC->ID ?>/ID_PAGINA/<?= $o->ID ?>">EXLUIR</a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    <? } ?>
+</div>

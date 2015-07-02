@@ -1,0 +1,24 @@
+<?
+echo $this->doctype();
+header("Content-Type: text/html; charset=utf-8");
+?>
+<html>
+    <head>
+        <title>Login</title>
+        <meta name="language" content="pt-br" />
+        <meta http-equiv="imagetoolbar" content="no" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <link href="/css/login.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <br clear="all"/>
+        <div id="CON_LOGIN" align="center">
+            <?= $this->partial('_includes/mensagem_alerta.phtml', 'adm') ?>
+            <div id="CON_LOGIN_AUX">
+                <div id="FORM">
+                    <?= $this->form ?>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

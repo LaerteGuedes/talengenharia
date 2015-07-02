@@ -1,0 +1,9 @@
+<div class="pagina_detalhe">
+    <span><?= $_SESSION['prev']['DATA'] ?></span>
+    <h1><?= $_SESSION['prev']['TITULO'] ?></h1>
+    <p><?= $_SESSION['prev']['TEXTO'] ?></p>
+    <?
+    unset($_SESSION['prev']);
+    ?>
+
+</div>

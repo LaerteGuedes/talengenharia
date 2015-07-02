@@ -1,0 +1,189 @@
+<?
+$data = ZC_Util::getData();
+$bAcl = new ZC_Acl();
+$controller = $data["controller"];
+$action = $data["action"] <> "index" ? $data["action"] : "";
+?>
+<script type="text/javascript">
+    $(function() {
+
+        $(".jDestaqueOrdem").keyup(function() {
+            if ($(this).val() != 0) {
+                $.post("/adm/<?= $controller ?>/adddestaqueordem/ajax/true/", {ID: $(this).attr('rel'), VALOR: $(this).val()}, function(json) {
+                    var v1 = json.valorAntigo - 1;
+                    var v2 = json.valor - 1;
+
+                    var contentAntigo = $(".padrao tbody tr td .jDestaqueOrdem[value='" + json.valorAntigo + "']");
+                    var contentNovo = $(".padrao tbody tr td .jDestaqueOrdem[value='" + json.valor + "']");
+
+                    var aux = contentAntigo;
+                    contentAntigo.attr("value", json.valor);
+                    contentNovo.attr("value", json.valorAntigo);
+                }, "json");
+            }
+
+        });
+
+        $(".jDestaque").click(function() {
+            var valor = $(this).val();
+            if ($(this).is(".ativo")) {
+                $(this).removeClass("ativo");
+                $(this).next().addClass("hide");
+                var status = 0;
+                $(this).next().val('0');
+                $.post("/adm/<?= $controller ?>/adddestaqueordem/ajax/true/", {ID: valor, VALOR: 0}, function() {
+
+                }, "json");
+            } else {
+                var status = 1;
+                $(this).addClass("ativo");
+                $(this).next().removeClass("hide");
+            }
+            $.post("/adm/<?= $controller ?>/adddestaque/ajax/true/ID/" + valor + "/S/" + status, "", function() {
+
+            }, "json");
+        });
+        $(".jSemana").click(function() {
+            var valor = $(this).val();
+            if ($(this).is(".ativo")) {
+                $(this).removeClass("ativo");
+                var status = 0;
+            } else {
+                var status = 1;
+                $(this).addClass("ativo");
+            }
+            $.post("/adm/<?= $controller ?>/addsemana/ajax/true/ID/" + valor + "/S/" + status, "", function() {
+
+            }, "json");
+        });
+        $(".jExclui").click(function() {
+            var valor = $(this).val();
+            if ($(this).is(".ativo")) {
+                $(this).removeClass("ativo");
+                var status = 0;
+            } else {
+                var status = 1;
+                $(this).addClass("ativo");
+            }
+            $.post("/adm/<?= $controller ?>/addexclui/ajax/true/ID/" + valor + "/S/" + status, "", function() {
+
+            }, "json");
+        });
+
+        $('form select#ID_CATEGORIA').change(function() {
+            window.location = "/adm/<?= $controller ?>/<?= $data["action"] ?>/ID_CATEGORIA/" + $(this).val();
+        });
+        
+        $('form select#CHAPEU').change(function() {
+            window.location = "/adm/<?= $controller ?>/<?= $data["action"] ?>/CHAPEU/" + $(this).val();
+        });
+
+        $('.jExcluirLinha').click(function() {
+            var $this = $(this);
+
+            var r = confirm("Você deseja realmente deletar esta publicação?");
+            if (r) {
+                $.post($(this).attr('href'), {ajax: true}, function() {
+                    $this.parents('tr').fadeOut('fast');
+                }, 'json');
+            }
+            return false;
+        });
+
+    });
+</script>
+<style type="text/css">
+    .jDestaque{display: inline-block;}
+    .jDestaqueOrdem{width: 20px;text-align: center;}
+    .hide{display: none;}
+    select{
+        padding: 7.3px;
+        background: none repeat scroll 0 0 #F2E4D8;
+        border: 1px solid #C7B3A6;
+        color: #4A4A4A;
+        cursor: pointer;
+        display: inline-block;
+    }
+    select:hover{
+        background: #D7C0AE;
+    }
+</style>
+<h1><?= $this->TITULO ?></h1>
+
+<form action="" method="get">
+<? if ($this->categoria) { ?>
+        <select name="ID_CATEGORIA" id="ID_CATEGORIA">
+            <option value="0">Todos</option>
+    <? foreach ($this->voCategoria as $oCategoria): ?>
+                <option value="<?= $oCategoria->ORDEM; ?>" <?= $_SESSION['admpaginanoticiafiltro']['ID_CATEGORIA'] == $oCategoria->ORDEM ? 'selected' : '' ?>>
+                <? if (strlen($oCategoria->ORDEM) / 3 == 1): ?>
+                    <strong><?= $oCategoria->NOME ?></strong>
+                    <? else: ?>
+                    <?= str_repeat("&emsp;", strlen($oCategoria->ORDEM) / 3) ?>&rdsh;<?= $oCategoria->NOME ?>
+                <? endif; ?>
+                </option>
+            <? endforeach; ?>
+        </select>
+        <? } ?>
+    <a class="button jInfo" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera$action/"); ?>" title="Cadastrar">Cadastrar</a>
+   
+<? if (count($this->vo)): ?>
+        <p><?= $this->vo->getTotalItemCount() ?> registro(s) encontrados.</p>
+        <table class="padrao">
+            <thead>
+                <tr>
+    <? if ($this->destaque) { ?>
+                        <th width="60" style="text-align: center;"><img src="/imagem/icone/star.png" alt="destaque" title="Destaque?" /></th>
+                    <? } ?>
+                    <? if ($this->removerDestaque) { ?>
+                        <th width="20"><img src="/imagem/icone/star_del.gif" alt="remove destaque" title="Remove Destaque?" /></th>
+                    <? } ?>
+                    <? if ($this->noticiaSemana) { ?>
+                        <th><img src="/imagem/icone/calendar.png" width="18" height="18" alt="Notícia da Semana" title="Notícia da Semana" /></th>
+                    <? } ?>
+                    <? if ($this->categoria) { ?>
+                        <th>CATEGORIA</th>
+                    <? } ?>
+                    <th>TITULO</th>
+                    <th>PUBLICAÇÃO</th>
+                    <th>EDITAR | EXCLUIR</th>
+                </tr>
+            </thead>
+            <tbody>
+    <? foreach ($this->vo as $o): ?>
+                    <tr>
+                    <? if ($this->destaque) { ?>
+                            <td>
+                                <input class="jDestaque <?= $o->FL_DESTAQUE == 1 ? "ativo" : "" ?>" <?= $o->FL_DESTAQUE == 1 ? "checked" : "" ?> name="ID_DESTAQUE" type="checkbox" value="<?= $o->ID ?>" />
+                                <input class="jDestaqueOrdem <?= $o->FL_DESTAQUE == 1 ? "" : "hide" ?>" rel="<?= $o->ID ?>" name="DESTAQUE_ORDEM" type="text" value="<?= $o->FL_DESTAQUE_ORDEM ?>" />
+                            </td>
+        <? } ?>
+                        <? if ($this->removerDestaque) { ?>
+                            <td><input class="jExclui <?= $o->FL_EXCLUI == 1 ? "ativo" : "" ?>" <?= $o->FL_EXCLUI == 1 ? "checked" : "" ?> name="ID_EXCLUI" type="checkbox" value="<?= $o->ID ?>" /></td>
+                        <? } ?>
+                        <? if ($this->noticiaSemana) { ?>
+                            <td><input class="jSemana <?= $o->FL_SEMANA == 1 ? "ativo" : "" ?>" <?= $o->FL_SEMANA == 1 ? "checked" : "" ?> name="ID_SEMANA" type="checkbox" value="<?= $o->ID ?>" /></td>
+                        <? } ?>
+                        <? if ($this->categoria) { ?>
+                            <td>	
+                            <?= $o->CATEGORIA_NOME ?>
+                            </td>
+                            <? } ?>
+                        <td>
+                            <div style="float:left;padding-right: 5px;"><?= $o->getImgDestaque(array(60, 40)) ?></div>
+        <?= substr($o->TITULO, 0, 60) . "..." ?>
+                        </td>
+                        <td><?= $o->getStatus() ?></td>
+                        <td>
+                            <a href="<?= $this->baseUrl("/adm/{$controller}/inserealtera$action/ID/" . $o->ID) ?>">EDITAR</a>
+                            | <a class="jExcluirLinha" href="<?= $this->baseUrl("/adm/{$controller}/excluir/move/$action/ID/" . $o->ID) ?>">EXCLUIR</a>
+                        </td>
+                    </tr>
+    <? endforeach; ?>
+            </tbody>
+        </table>
+    <?= $this->paginationControl($this->vo, 'Sliding', '_includes/paginacao.phtml') ?>
+    <? else: ?>
+        <p>Nenhum registro encontrado</p>
+    <? endif ?>
+</form>

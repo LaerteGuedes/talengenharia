@@ -1,0 +1,20 @@
+<script type="text/javascript">
+$(function(){
+	$("#ACAO").load(baseUrl+"/adm/acl/buscapaginas/ID_GRUPO/"+$('input[name=ID_GRUPO]:checked').val());
+	$('input[name=ID_GRUPO]').click(function(){
+		$("#ACAO").load(baseUrl+"/adm/acl/buscapaginas/ID_GRUPO/"+$('input[name=ID_GRUPO]:checked').val());
+	});
+
+});
+</script>
+
+<form id="formPermissao" method="post" action="<?= $this->baseUrl('/adm/acl/savepermissao/') ?>">
+		<? $i=1;foreach($this->grupos as $grupos): ?>
+			<input <?= ($i==1) ? 'checked="checked"' : '' ?> type="radio" name="ID_GRUPO" value="<?= $grupos->ID ?>" id="grupo_<?= $grupos->ID ?>" />
+			<label style="display: inline" for="grupo_<?= $grupos->ID ?>"><?= $grupos->NOME ?></label>
+		<? $i++;endforeach ?>
+		<br>
+		<div id="ACAO"></div>
+		<br>
+		<button type="submit">Alterar</button>
+</form>

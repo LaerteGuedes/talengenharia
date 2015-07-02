@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Página não encontrada - <?=  Zend_Registry::get("oConfiguracao")->TITULO?></title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/library/bootstrap/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container">
+        <? if ($this->tipoErro == 1): ?>
+        <div class="page-header">
+            <h1>Ocorreu um erro</h1>
+        </div> <!-- .page-header -->
+        <h2><?php echo $this->message ?></h2>
+
+        <h3>Informações sobre o Erro:</h3>
+        <div class="alert alert-warning">
+            <b>Mensagem:</b> <?php echo $this->exception->getMessage() ?>
+        </div>
+
+        <h3>Stack trace:</h3>
+        <pre><?php echo $this->exception->getTraceAsString() ?></pre>
+        <hr />
+        <h3>Parâmetros Enviados:</h3>
+        <pre><?php echo var_export($this->request->getParams(), true) ?></pre>
+        <br/><br/>
+    <? elseif ($this->tipoErro == 2): ?>
+
+    <div class="page-header">
+        <h1>Ocorreu um erro</h1>
+    </div> <!-- .page-header -->
+    <h2>
+        <?= $this->exception ?>
+    </h2>
+    <h3>Parâmetros Enviados:</h3>
+    <pre>
+        <?php
+        foreach ($this->request as $i => $v) {
+            echo "$i: $v <br/>";
+        }
+        ?>
+    </pre>
+    <br/><br/>
+
+<? else: ?>
+
+<br/><br/>
+<div class="page-header">
+<h1>Oops!</h1>
+</div>
+<? if ($this->error == 404): ?>
+<h2>Erro 404</h2>
+<p>Infelizmente a página não foi encontrada. Talvez a página desejada não exista mais ou confira se o endereço foi digitado corretamente.</p>
+<p><a href="/">Clique aqui</a> para voltar à página inicial.</p>
+<? else: ?>
+<p>Ocorreu um erro no site, mas não se preocupe, nosso engenheiro foi notificado por e-mail e já está cuidando disso.</p>
+<? endif; ?>
+
+<? endif; ?>
+</div> <!-- .container -->
+</body>
+</html>

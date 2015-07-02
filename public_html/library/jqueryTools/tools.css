@@ -1,0 +1,29 @@
+/*##### ACCORDION  ########################################*/
+/* root element for accordion. decorated with rounded borders and gradient background image */
+.accordion {
+	width: 137px;
+}
+/* accordion header */
+.accordion li.tab {
+	background:#ccc url(/imagens/site/blog/bot_2.gif);
+	margin:0;
+	padding:5px 10px;
+	font-size:14px;
+	font-weight:normal;
+	cursor:pointer;
+}
+/* currently active header */
+.accordion li.current {
+	cursor:default;
+}
+/* accordion pane */
+.accordion li.pane{
+	display:none;
+	color:#fff;
+	font-size:12px;
+}
+ul.bot_ativo li{
+	background:#ccc url(/imagens/site/blog/bot_1.gif);
+	padding:6px 10px;
+}
+ul.bot_ativo li a{font-size:11px;color:#fff;}

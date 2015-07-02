@@ -1,0 +1,86 @@
+<script type="text/javascript">
+    $(function() {
+        $(".jDestaque").click(function() {
+            var valor = $(this).val();
+            if ($(this).is(".ativo")) {
+                $(this).removeClass("ativo");
+                var status = 0;
+            } else {
+                var status = 1;
+                $(this).addClass("ativo");
+            }
+            $.post("/adm/pagina/adddestaque/ajax/true/ID/" + valor + "/S/" + status, "", function() {
+
+            }, "json");
+        });
+
+        $('.jExcluirLinha').click(function() {
+            var $this = $(this);
+
+            var r = confirm("Você deseja realmente deletar esta publicação?");
+            if (r) {
+                $.post($(this).attr('href'), {ajax: true}, function() {
+                    $this.parents('tr').fadeOut('fast');
+                }, 'json');
+            }
+            return false;
+        });
+
+    })
+</script>
+<? $bAcl = new ZC_Acl(); ?>
+<? $controller = 'pagina'; ?>
+<h1>Postagens</h1>
+<form action="" method="post">
+    <a class="button jInfo" href="<?= $this->baseUrl("/adm/{$controller}/inserealteranoticia"); ?>" title="Cadastrar">Cadastrar</a>
+    <a class="button jInfo jSubmit" href="<?= $this->baseUrl("/adm/{$controller}/excluir"); ?>" title="Clique para exluir">Excluir selecionadas</a>
+
+    <? if (count($this->vo)): ?>
+        <p><?= $this->vo->getTotalItemCount() ?> registro(s) encontrados.</p>
+        <table class="padrao">
+            <thead>
+                <tr>
+                    <th>IMAGEM DESTAQUE</th>
+                    <th>DESTAQUE</th>
+                    <th>CATEGORIA</th>
+                    <th>TÍTULO</th>
+                    <th>STATUS DA PUBLICAÇÃO</th>
+                    <th>COMENTÁRIOS</th>
+                    <th>EDITAR | EXCLUIR</th>
+                </tr>
+            </thead>
+            <tbody>
+                <? foreach ($this->vo as $o): ?>
+
+
+                    <?
+                    $cnt0 = $o->getComentarioCount(array(0));
+                    $cnt1 = $o->getComentarioCount(array(1));
+                    $cnt2 = $o->getComentarioCount(array(2));
+                    ?>
+                    <tr>
+                        <td><?= $o->getImgDestaque(array(60, 40)) ?></td>
+                        <td><input class="jDestaque <?= $o->FL_DESTAQUE == 1 ? "ativo" : "" ?>" <?= $o->FL_DESTAQUE == 1 ? "checked" : "" ?> name="ID_DESTAQUE" type="checkbox" value="<?= $o->ID ?>" /></td>
+                        <td><?= $o->getCategoria() ?></td>
+                        <td><?= substr($o->TITULO, 0, 60) . "..." ?></td>
+                        <td><?= $o->getStatus() ?></td>
+                        <td>
+                            <a href="<?= $this->baseUrl("/adm/{$controller}/comentario/ID/" . $o->ID) ?>" > 
+                                <span style="color: blue">AG - <?= $cnt0 ?></span> |
+                                <span style="color: green">AP - <?= $cnt1 ?></span> |
+                                <span style="color: red">RE - <?= $cnt2 ?></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="<?= $this->baseUrl("/adm/{$controller}/inserealteranoticia/ID/" . $o->ID) ?>">EDITAR</a>
+                            | <a class="jExcluirLinha" href="<?= $this->baseUrl("/adm/{$controller}/excluir/ID/" . $o->ID) ?>">EXCLUIR</a>
+                        </td>
+                    </tr>
+                <? endforeach; ?>
+            </tbody>
+        </table>
+        <?= $this->paginationControl($this->vo, 'Sliding', '_includes/paginacao.phtml') ?>
+    <? else: ?>
+        <p>Nenhum registro encontrado</p>
+    <? endif ?>
+</form>

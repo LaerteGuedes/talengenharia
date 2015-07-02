@@ -1,0 +1,22 @@
+<script type="text/javascript">
+    function loadImagem(){
+        $("#UPLOAD_CONTEUDO").load('/adm/auxiliar/arquivo/ID_PAGINA/<?= $this->ID ?>/TABELA/<?= $this->TABELA ?>');
+    }
+    $(function(){
+        loadImagem();
+        $("#PRE_VISUALIZAR").click(function(){
+            var form = $(this).parents('form');
+            function abre(){
+                window.open('/pagina/<?= $this->TIPO ?>detalhe/ID/<?= $this->ID ?>');
+            }
+            $.post('/adm/pagina/jSavePrevisualiza/', form.serializeArray(), function(data){
+                abre();
+            }, 'json');
+        });
+        
+    });
+</script>
+<style type="text/css">
+    .PREV{border: 10px solid grey;display: none;width: 700px}
+</style>
+<?= $this->form ?>

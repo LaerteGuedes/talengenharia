@@ -1,0 +1,159 @@
+<?
+$bAcl = new ZC_Acl();
+$controller = 'pagina';
+$pagina = $this->data['action'];
+($pagina == 'index') ? $pagina = '' : $pagina;
+$paginaInstitucional = $this->page;
+$form = $this->form;
+?>
+<script type="text/javascript">
+    $(function () {
+        sortItems();
+        activeInactivePage();
+        confirmDelete();
+        lockUnlockPage();
+        sortItemsInput();
+        addDestaque('pagina');
+        addDestaqueOrdem('pagina');
+    });
+</script>
+<style type="text/css">
+    .jDestaque{display: inline-block;}
+    .jDestaqueOrdem{width: 20px;text-align: center;}
+    .hide{display: none;}
+    select{
+        padding: 7.3px;
+        background: none repeat scroll 0 0 #F2E4D8;
+        border: 1px solid #C7B3A6;
+        color: #4A4A4A;
+        cursor: pointer;
+        display: inline-block;
+    }
+    select:hover{
+        background: #D7C0AE;
+    }
+</style>
+<h1><?= $this->title; ?></h1>
+<a class="button jInfo" href="<?= $this->baseUrl("/adm/inserealtera{$pagina}/{$paginaInstitucional}/{$form}"); ?>" title="Cadastrar">Cadastrar</a>
+
+<form method="GET" action="#">
+    <div class="row">
+        <div class="col-xs-9">
+            <div class="pull-left" style="width:120px;">
+                <label for="BUSCA" style="line-height:35px;">Buscar por título: </label>
+            </div>
+            <div class="pull-right" style="width:710px">
+                <div class="pull-left">
+                    <input type="text" style="width:620px" class="form-control" name="BUSCA" id="BUSCA-FILTRO"/>
+                </div>
+                <div class="pull-right">
+                    <button type="submit">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form action="/adm/pagina/excluir" method="post">
+    <? if (count($this->vo)): ?>
+        <p><?= $this->vo->getTotalItemCount() ?> registro(s) encontrados.</p>
+        <table class="padrao">
+            <thead>
+                <tr>
+                    <? if ($this->destaque) { ?>
+                        <th width="60" style="text-align: center;"><img src="/imagem/icone/star.png" alt="destaque" title="Destaque?" /></th>
+                    <? } ?>
+                    <th width="50">DESTAQUE</th>
+                    <th width="50">ORDENAR</th>
+                    <th width="50">IMAGEM</th>
+                    <?
+                    if ($this->elementosColuna) {
+                        foreach ($this->elementosColuna as $alias => $coluna) {
+                            ?>
+                            <th><?= $alias; ?></th>
+                        <? } ?>
+                        <? if ($paginaInstitucional == 'beneficios'): ?>
+                            <th>Anexos</th>
+                        <? endif; ?>
+                    <? } ?>
+                    <th width="70">ATIVO</th>
+                    <th width="160">AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody id="SORTABLE">
+                <? foreach ($this->vo as $o): ?>
+                    <tr class="row-<?= $o->ID; ?> <? echo ($o->FL_DESTAQUE == 1) ? 'destaque' : ''; ?>">
+                        <td style="text-align:center">
+                            <input class="jDestaque <?= $o->FL_DESTAQUE == 1 ? "ativo" : "" ?>" <?= $o->FL_DESTAQUE == 1 ? "checked" : "" ?> name="ID_DESTAQUE"  type="checkbox" value="<?= $o->ID ?>" />
+                        </td>
+                        <td style="text-align:center">
+                            <? if ($o->FL_DESTAQUE == 1) { ?>
+                                <a href="javascript:void(0)" class="order"><img src="/imagem/icone/move.png" style="width:18px; height:16px;"/></a>
+                                <input style="width:40px;" type="text" class="order-number jDestaqueOrdem" id="order-number-<?= $o->ID; ?>" value="<?= $o->FL_DESTAQUE_ORDEM; ?>"/>
+                            <? } ?>
+                        </td>
+                        <td><?= $o->getImgDestaque(array(60, 40), true); ?></td>
+                        <?
+                        if ($this->elementosColuna) {
+                            foreach ($this->elementosColuna as $coluna) {
+                                ?>
+                                <? if ($coluna == 'ID_CATEGORIA') { ?>
+                                    <td><?= $o->CATEGORIA_NOME; ?></td>
+                                <? } else { ?>
+                                    <td><?= $o->{$coluna}; ?></td>
+                                <? } ?>
+
+                            <? } ?>
+                            <? if ($paginaInstitucional == 'beneficios'): ?>
+                                <td><a href="/adm/pagina/listaarquivos/ID_PAI/<?= $o->ID; ?>">Ver arquivos</a></td>
+                            <? endif; ?>        
+                        <? } ?>    
+                        <td style="text-align:center" class="ativo-inativo" id="ativo-<?= $o->ID; ?>">
+                            <input type="checkbox" name="ATIVO" <? echo ($o->ATIVO == 1) ? 'checked' : ''; ?>/>
+                        </td>
+                        <td class="action">
+                            <? if (Zend_Registry::get("oUsuario")->ID_GRUPO == 1) { ?>
+                                <a class="bt bt_lock<?= ($o->FL_LOCK == 1) ? '_on' : '_off'; ?> jLock" title="trancar página" href="<?= $this->baseUrl("/adm/{$controller}/lockpagina/ID/" . $o->ID) ?>"></a>
+                            <? } ?>
+
+                            <? if ($this->subpagina): ?>
+                                <a class="bt bt_subpagina" title="adicionar subpágina" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/pagina/{$paginaInstitucional}/ID_PAI/" . $o->ID) ?>"></a>
+                            <? endif; ?>
+
+                            <a class="bt bt_editar" title="editar página" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/" . $o->TIPO . '/' . $o->PERMALINK) ?>"></a>
+
+                            <? if (Zend_Registry::get("oUsuario")->ID_GRUPO == 1 && $o->FL_LOCK == 0): ?>
+                                <a class="bt bt_excluir" title="excluir página" href="<?= $this->baseUrl("/adm/{$controller}/excluir/{$paginaInstitucional}/{$o->PERMALINK}") ?>"></a>
+                            <? endif; ?>
+                        </td>
+                    </tr>
+                    <? if ($this->subpagina): ?>
+                        <? if ($voFilho = $o->getFilho()): ?>
+                            <? foreach ($voFilho as $oFilho): ?>
+                                <tr class="subpage">
+                                    <td style="text-align:center">
+                                        &rdsh; &nbsp; &nbsp;<input class="jDestaque <?= $oFilho->FL_DESTAQUE == 1 ? "ativo" : "" ?>" <?= $oFilho->FL_DESTAQUE == 1 ? "checked" : "" ?> name="ID_DESTAQUE"  type="checkbox" value="<?= $oFilho->ID ?>" />
+                                    </td>
+                                    <td></td>
+                                    <td><?= ($oFilho->IMG_DESTAQUE) ? $oFilho->getImgDestaque(array(60, 40)) : '' ?></td>
+                                    <td><?= $oFilho->TITULO; ?></td>
+                                    <td><?= $oFilho->RESUMO; ?></td>
+                                    <td style="text-align:center" class="ativo-inativo" id="ativo-<?= $oFilho->ID; ?>">
+                                        <input type="checkbox" name="ATIVO" <? echo ($oFilho->ATIVO == 1) ? 'checked' : ''; ?>/>
+                                    </td>
+                                    <td class="action">
+                                        <a class="bt bt_editar" title="editar página" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/pagina/{$paginaInstitucional}/ID/" . $oFilho->ID) . '/ID_PAI/' . $o->ID ?>"></a>
+                                        <a class="bt bt_excluir" title="excluir página" href="<?= $this->baseUrl("/adm/{$controller}/excluir/move/{$pagina}/pagina/{$paginaInstitucional}/ID/" . $oFilho->ID) . '/ID_PAI/' . $o->ID ?>"></a>
+                                    </td>
+                                </tr>
+                            <? endforeach; ?>
+                        <? endif; ?>
+                    <? endif; ?>
+                <? endforeach; ?>
+            </tbody>
+        </table>
+        <? echo $this->paginationControl($this->vo, 'Sliding', '_includes/paginacao.phtml', array('institucional' => $paginaInstitucional)); ?>
+    <? else: ?>
+        <p>Nenhum registro encontrado</p>
+    <? endif ?>
+</form>

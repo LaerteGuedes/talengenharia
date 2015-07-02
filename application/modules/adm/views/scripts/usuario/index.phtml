@@ -1,0 +1,31 @@
+<h1>Gerência de Usuários</h1>
+<? $bAcl = new ZC_Acl(); ?>
+<? if ($bAcl->verifica(false, 'adm', 'usuario', 'inserealtera')): ?>
+    <a class="button" href="<?= $this->baseUrl("/adm/usuario/inserealtera"); ?>" title="Cadastrar" class="jInfo">Cadastrar</a>
+<? endif; ?>
+<table class="padrao">
+    <thead>
+        <tr>
+            <th>NOME</th>
+            <th>LOGIN</th>
+            <th>GRUPO</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <? foreach ($this->vo as $o): ?>
+            <tr>
+                <td><?= $o->NOME ?></td>
+                <td><?= $o->LOGIN ?></td>
+                <td><?= $o->GRUPO_NOME ?></td>
+                <td>
+                    <a href="<?= $this->baseUrl('/adm/usuario/inserealtera/ID/' . $o->ID) ?>">ALTERAR SENHA</a>
+                    | <a href="<?= $this->baseUrl('/adm/usuario/inserealtera/ID/' . $o->ID) ?>">EDITAR</a>
+                    | <a href="<?= $this->baseUrl('/adm/usuario/excluir/ID/' . $o->ID) ?>">EXCLUIR</a>
+                </td>
+            </tr>
+        <? endforeach; ?>
+    </tbody>
+</table>
+<?=
+$this->paginationControl($this->vo, 'Sliding', '_includes/paginacao.phtml')?>

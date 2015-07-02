@@ -1,0 +1,67 @@
+<style type="text/css">
+.paginas{width: 400px;}
+.paginas *{font-size: 11px;}
+.paginas ul{padding-left: 10px;list-style: none;}
+.paginas li{padding-left: 16px;}
+.paginas li[rel=module]{}
+.paginas li[rel=controller]{}
+.paginas li[rel=action]{}
+.paginaNome{background: none;padding: 1px 0;}
+</style>
+<script type="text/javascript">
+$(function () {
+	$('.paginas .esconde').click(function(){
+		var filho = $(this).nextAll('ul');
+		if(filho.is(':hidden')){
+			filho.slideDown();
+		}else{
+			filho.slideUp();
+		}
+	});
+	//$('.paginas ul').hide();
+});
+</script>
+
+<form method="post" action="">
+<ul class="paginas">
+	<? $i=0;foreach($this->vNavigation as $moduleName=>$vController):?>
+		<li rel="module">
+			<img src="/imagem/icone/ico.module.gif" /><a href="javascript:void(0)" class="esconde"><?= $moduleName ?></a>
+			<ul>
+				<? foreach($vController as $controllerName=>$vAction):?>
+					<li rel="controller">
+						<img src="/imagem/icone/ico.controller.gif" /><a href="javascript:void(0)" class="esconde"><?= $controllerName ?></a>
+						<ul>
+							<? foreach($vAction as $actionName):?>
+							<? $oPage = $this->dbPagina->findPage($moduleName,$controllerName,$actionName); ?>
+								<li rel="action">
+									<? if($oPage): ?>
+										<input type="hidden" name="pagina[<?= $i ?>][ID]" value="<?= $oPage->ID?>" />
+									<? endif; ?>
+									<input type="hidden" name="pagina[<?= $i ?>][MODULE]" value="<?= $moduleName ?>" />
+									<input type="hidden" name="pagina[<?= $i ?>][CONTROLLER]" value="<?= $controllerName ?>"/>
+									<input type="hidden" name="pagina[<?= $i ?>][ACTION]" value="<?= $actionName ?>" />
+									<table>
+										<tr>
+											<td>
+												<img src="/imagem/icone/info.gif" alt="<?= $moduleName.'/'.$controllerName.'/'.$actionName?>" title="<?= $moduleName.'/'.$controllerName.'/'.$actionName?>" />
+												<input type="text" class="paginaNome" name="pagina[<?= $i ?>][NOME]" value="<?= ($oPage->NOME) ? $oPage->NOME : $actionName?>" />
+											</td>
+											<td>
+												<input type="checkbox" name="pagina[<?= $i ?>][PERMISSAO]" value="1" <?= ($oPage->PERMISSAO) ? 'checked="checked"' : '' ?> />Restrita?
+												<input type="checkbox" name="pagina[<?= $i ?>][BREADCRUMB]" value="1" <?= ($oPage->BREADCRUMB) ? 'checked="checked"' : '' ?> />Breadcrumb?
+											</td>
+										</tr>
+									</table>
+								</li>
+							<? $i++;endforeach; ?>
+						</ul>
+					</li>
+				<? endforeach; ?>
+			</ul>
+		</li>
+	<? endforeach; ?>
+</ul>
+
+<button type="submit">Enviar</button>
+</form>

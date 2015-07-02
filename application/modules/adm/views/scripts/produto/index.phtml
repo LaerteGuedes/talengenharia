@@ -1,0 +1,133 @@
+<?
+$bAcl = new ZC_Acl();
+$controller = 'produto';
+$pagina = $this->data['action'];
+($pagina == 'index') ? $pagina = '' : $pagina;
+$paginaInstitucional = $this->page;
+$form = $this->form;
+?>
+<script type="text/javascript">
+    $(function() {
+        $(".jLock").click(function() {
+            var $this = $(this);
+            $.post($(this).attr("href"), {ajax: 1}, function(data) {
+                if (data.success) {
+                    if ($this.is('.bt_lock_on')) {
+                        $this.removeClass('bt_lock_on').addClass('bt_lock_off');
+                    } else {
+                        $this.removeClass('bt_lock_off').addClass('bt_lock_on');
+                    }
+                }
+            }, 'json');
+            return false;
+        });
+        $(".jDestaqueOrdem").keyup(function() {
+            if ($(this).val() != 0) {
+                $.post("/adm/<?= $controller ?>/adddestaqueordem/ajax/true/", {ID: $(this).attr('rel'), VALOR: $(this).val()}, function(json) {
+                    var v1 = json.valorAntigo - 1;
+                    var v2 = json.valor - 1;
+
+                    var contentAntigo = $(".padrao tbody tr td .jDestaqueOrdem[value='" + json.valorAntigo + "']");
+                    var contentNovo = $(".padrao tbody tr td .jDestaqueOrdem[value='" + json.valor + "']");
+
+                    var aux = contentAntigo;
+                    contentAntigo.attr("value", json.valor);
+                    contentNovo.attr("value", json.valorAntigo);
+                }, "json");
+            }
+
+        });
+
+        $(".jDestaque").click(function() {
+            var valor = $(this).val();
+            if ($(this).is(".ativo")) {
+                $(this).removeClass("ativo");
+                $(this).next().addClass("hide");
+                var status = 0;
+                $(this).next().val('0');
+                $.post("/adm/<?= $controller ?>/adddestaqueordem/ajax/true/", {ID: valor, VALOR: 0}, function() {
+
+                }, "json");
+            } else {
+                var status = 1;
+                $(this).addClass("ativo");
+                $(this).next().removeClass("hide");
+            }
+            $.post("/adm/<?= $controller ?>/adddestaque/ajax/true/ID/" + valor + "/S/" + status, "", function() {
+
+            }, "json");
+        });
+    })
+</script>
+<style type="text/css">
+    .jDestaque{display: inline-block;}
+    .jDestaqueOrdem{width: 20px;text-align: center;}
+    .hide{display: none;}
+    select{
+        padding: 7.3px;
+        background: none repeat scroll 0 0 #F2E4D8;
+        border: 1px solid #C7B3A6;
+        color: #4A4A4A;
+        cursor: pointer;
+        display: inline-block;
+    }
+    select:hover{
+        background: #D7C0AE;
+    }
+</style>
+<h1><?= $this->title; ?></h1>
+<form action="/adm/pagina/excluir" method="post">
+    <? if ($bAcl->verifica(false, 'adm', $controller, 'inserealtera' . $pagina. "/{$paginaInstitucional}")): ?>
+        <? if ($pagina == 'institucional'){ ?>
+            <a class="button jInfo" href="<?= $this->baseUrl("/adm/inserealtera{$pagina}/{$paginaInstitucional}/{$form}"); ?>" title="Cadastrar">Cadastrar</a>
+        <? }else{?>
+            <a class="button jInfo" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera/{$pagina}"); ?>" title="Cadastrar">Cadastrar</a>
+        <? } ?>
+    <? endif; ?>
+    <? if ($bAcl->verifica(false, 'adm', $controller, 'inserealtera' . $pagina)): ?>
+        <a class="button jInfo jSubmit" href="<?= $this->baseUrl("/adm/{$controller}/excluir"); ?>" title="Clique para exluir">Excluir selecionadas</a>
+    <? endif; ?>
+
+    <? if (count($this->voProdutos)): ?>
+        <p><?= $this->voProdutos->getTotalItemCount() ?> registro(s) encontrados.</p>
+        <table class="padrao">
+            <thead>
+            <tr>
+                <th width="60" style="text-align: center;"><img src="/imagem/icone/star.png" alt="destaque" title="Destaque?" /></th>
+                <th width="50"></th>
+                <th>TÍTULO</th>
+                <th>RESUMO</th>
+                <th width="160">AÇÕES</th>
+            </tr>
+            </thead>
+            <tbody>
+            <? foreach ($this->voProdutos as $o): ?>
+                <tr>
+                    <? if ($this->destaque) { ?>
+                        <td>
+                            <input class="jDestaque <?= $o->FL_DESTAQUE == 1 ? "ativo" : "" ?>" <?= $o->FL_DESTAQUE == 1 ? "checked" : "" ?> name="ID_DESTAQUE" type="checkbox" value="<?= $o->ID ?>" />
+                            <input class="jDestaqueOrdem <?= $o->FL_DESTAQUE == 1 ? "" : "hide" ?>" rel="<?= $o->ID ?>" name="DESTAQUE_ORDEM" type="text" value="<?= $o->FL_DESTAQUE_ORDEM ?>" />
+                        </td>
+                    <? } ?>
+                    <td><?= $o->getImgDestaque(array(60, 40), true); ?></td>
+                    <td><?= $o->NOME;?></td>
+                    <td><?= $o->TEXTO;?></td>
+                    <td class="action">
+
+                        <a class="bt bt_editar" title="editar página" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/pagina/{$paginaInstitucional}/ID/" . $o->ID) ?>"></a>
+
+                        <? if (Zend_Registry::get("oUsuario")->ID_GRUPO == 1): ?>
+                            <a class="bt bt_excluir" title="excluir página" href="<?= $this->baseUrl("/adm/{$controller}/excluir/move/{$pagina}/produto/{$paginaInstitucional}/ID/" . $o->ID) ?>"></a>
+                        <? endif; ?>
+
+                    </td>
+                </tr>
+
+            <? endforeach; ?>
+            </tbody>
+        </table>
+        <?= $this->paginationControl($this->voProdutos, 'Sliding', '_includes/paginacao.phtml') ?>
+    <? else: ?>
+        <p>Nenhum registro encontrado</p>
+    <? endif ?>
+</form>

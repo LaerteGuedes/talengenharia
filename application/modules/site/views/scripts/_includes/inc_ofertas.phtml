@@ -1,0 +1,45 @@
+<div class="page-ofertas">
+	<h2 class="text-center text-success media-heading"><span class="ycon-ornament-left"></span> Toda família da original Cachaça de Jambu <span class="ycon-ornament-right"></span></h2>
+	<ul class="lista-produto row">
+        <? foreach ($this->voProduto as $oProduto) { ?>
+            <? if ($oProduto->ID_CATEGORIA == RowProProduto::COMBINACAO || $oProduto->ID_CATEGORIA == RowProProduto::PRODUTO) { ?>
+                <li class="produto col-xs-3 extract">
+                    <div class="content">
+                        <div class="imagem">
+                            <a href="/produto/<?=$oProduto->PERMALINK;?>" title="Saiba mais">
+                                <?=$oProduto->getImgDestaque();?>
+                            </a>
+                        </div>
+                        <div class="text">
+                            <p>
+                                <?=$oProduto->ETIQUETA;?>
+                            </p>
+                        </div> <!-- .text -->
+                        <div class="button">
+                            <a href="/produto/<?=$oProduto->PERMALINK;?>" class="btn btn-primary btn-comprar" title="Saiba mais">Ver detalhes</a>
+                        </div> <!-- .button -->
+                    </div> <!-- .content -->
+                </li>
+            <? }elseif($oProduto->ID_CATEGORIA == RowProProduto::COMBINACAO_DESTAQUE) { ?>
+                <li class="produto col-xs-6 extract">
+                    <div class="content">
+                        <div class="imagem">
+                            <a href="/produto/<?=$oProduto->PERMALINK;?>" title="Saiba mais">
+                                <?=$oProduto->getImgDestaque(array(421,301));?>
+                            </a>
+                        </div>
+                        <div class="text">
+                            <p>
+                                <?=$oProduto->ETIQUETA;?>
+                            </p>
+                        </div> <!-- .text -->
+                        <div class="button">
+                            <a href="/produto/<?=$oProduto->PERMALINK;?>" class="btn btn-primary btn-comprar" title="Saiba mais">Ver detalhes</a>
+                        </div> <!-- .button -->
+                    </div> <!-- .content -->
+                </li>
+            <? } ?>
+        <? } ?>
+
+	</ul>
+</div> <!-- .page-ofertas -->

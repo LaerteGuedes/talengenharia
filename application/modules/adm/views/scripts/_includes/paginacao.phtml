@@ -1,0 +1,76 @@
+<?
+/*
+first				integer		First page number (i.e., 1)
+firstItemNumber		integer	 	Absolute number of the first item on this page
+firstPageInRange	integer	 	First page in the range returned by the scrolling style
+current				integer		Current page number
+currentItemCount	integer		Number of items on this page
+itemCountPerPage	integer		Maximum number of items available to each page
+last				integer		Last page number
+lastItemNumber		integer	 	Absolute number of the last item on this page
+lastPageInRange		integer	 	Last page in the range returned by the scrolling style
+next				integer		Next page number
+pageCount			integer		Number of pages
+pagesInRange		array	 	Array of pages returned by the scrolling style
+previous			integer		Previous page number
+totalItemCount		integer		Total number of items
+*/
+?>
+<? if($this->pageCount > 1):?>
+	<div class="paginacao">
+		Página <?= $this->current?> de <?= $this->pageCount;?>
+		<? if ($this->pageCount): ?>
+			<!-- Primeira Pagina
+			<? if ($this->current == 1): ?>
+				<button class="first"><<</button>
+			<? else: ?>
+				<a class="first" href="<?=$this->url(array('page'.$this->pagenome => $this->first)); ?>">
+					<<
+				</a>
+			<? endif; ?>
+			 -->
+
+			<!-- Previous page link -->
+			<? if (isset($this->previous)): ?>
+				<a class="prev" href="<?=$this->url(array('page'.$this->pagenome => $this->previous)); ?>">
+					Anterior
+				</a>
+			<? else: ?>
+				<span class="prev disable">Anterior</span>
+			<? endif; ?>
+
+
+
+			<!-- Paginas Numeradas links -->
+
+			<? foreach ($this->pagesInRange as $page): ?>
+				<? if ($page != $this->current): ?>
+					<a class="page_number" href="<?=$this->url(array('page'.$this->pagenome => $page)); ?>" class="Num"><?= $page; ?></a>
+				<? else: ?>
+					<a  class="page_number disable" href="<?=$this->url(array('page'.$this->pagenome => $page)); ?>"><?= $page; ?></a>
+				<? endif; ?>
+			<? endforeach; ?>
+
+
+
+			<!-- Proxima Pagina -->
+			<? if (isset($this->next)): ?>
+				<a class="next" href="<?=$this->url(array('page'.$this->pagenome => $this->next)); ?>">
+					Próxima
+				</a>
+			<? else: ?>
+				<span class="next disable">Próxima</span>
+			<? endif; ?>
+
+			<!-- Ultima Pagina 
+			<? if ($this->current == $this->last): ?>
+				<button class="last disable">>></button>
+			<? else: ?>
+				<a class="last" href="<?=$this->url(array('page'.$this->pagenome => $this->last)); ?>">
+					<img src="<?= $this->baseUrl('/imagem/adm/paginacao/ultimo.gif')?>" border="0" alt="" title="Último" />
+				</a>
+			<? endif; ?>
+			-->
+		<? endif; ?>
+	</div>
+<? endif; ?>

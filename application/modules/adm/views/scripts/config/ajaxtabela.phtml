@@ -1,0 +1,109 @@
+<? if (!$this->error) { ?>
+    <?
+    $vTipo = array(
+        "hidden" => "Hidden",
+        "text" => "Texto",
+        "date" => "Data",
+        "select" => "SelectBox",
+        "select" => "MultiCheckBox",
+        "radio" => "Radio",
+        "textarea" => "Texto Area",
+        "ckeditor" => "ckEditor",
+        "password" => "Password",
+        "upload" => "Upload",
+        "submit" => "Submit",
+    );
+    ?>    
+    <table class="padrao">
+        <thead>
+            <tr>
+                <th>
+                    Campo
+                </th>
+                <th>
+                    Tipo
+                </th>
+                <th>
+                    Label
+                </th>
+                <th>
+                    Validação
+                </th>
+                <th>
+                    Classes
+                </th>
+                <th>
+                    Valor Padrão
+                </th>
+                <th>
+                    Mostrar na listagem
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <select  class="form-control" name="COLUNA[]" id="COLUNA[]">
+                            <option value="">COLUNAS</option>
+                            <? foreach ($this->infos as $i => $v) { ?>
+                                <? if ($i) { ?>
+                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                <? } ?>
+                            <? } ?>
+                            <option value="<?= $this->tabela ?>">UPLOAD</option>
+                        </select>
+                    </div> 
+                </td>
+                <td>
+                    <div class="form-group">
+                        <select  class="form-control" name="TIPO[]" id="TIPO[]">
+                            <? foreach ($vTipo as $i => $v) { ?>
+                                <option value="<?= $i ?>"><?= $v ?></option>
+                            <? } ?>
+                        </select>
+                    </div> 
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="text" name="LABEL[]" id="LABEL[]" class="form-control" placeholder="Label">
+                    </div> 
+                </td>
+                <td width="150">
+                    <div class="form-group">
+                        <label class="radio-inline">
+                            <input type="radio"  name="VALIDACAO_1[]" id="VALIDACAO[]" class="validacao" value="1"> Sim
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" checked="" name="VALIDACAO_1[]" id="VALIDACAO[]" class="validacao" value="0"> Não
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="text" name="CLASS[]" id="CLASS[]" class="form-control" placeholder="class1 class2 class3">
+                    </div> 
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="text" name="VALOR[]" id="VALOR[]" class="form-control" placeholder="">
+                    </div> 
+                </td>
+                <td width="150" class="">
+                    <div class="form-group ">
+                        <label class="radio-inline">
+                            <input type="radio"  name="LISTAGEM_1[]" id="LISTAGEM_1[]" class="listagem" value="1"> Sim
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" checked="" name="LISTAGEM_1[]" id="LISTAGEM_1[]" class="listagem" value="0"> Não
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+<? } else { ?>
+    <?= $this->error ?>
+<? }
+?>

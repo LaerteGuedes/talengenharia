@@ -1,0 +1,17 @@
+<?
+  $img = Zend_Registry::get("oConfiguracao")->IMG_DESTAQUE_MANUTENCAO.".".Zend_Registry::get("oConfiguracao")->EXT_DESTAQUE_MANUTENCAO;
+?>
+<style>
+    html,body,div{margin: 0;padding: 0;background: #EFF1EE;}
+    div{width: 800px;height: 600px; margin: 0 auto;}
+</style>
+<html>
+    <head>
+        <title><?=  Zend_Registry::get("oConfiguracao")->TITULO?></title>
+    </head>
+    <body>
+        <div>
+            <img width="800" src="/upload/arq_arquivo/<?=$img?>">
+        </div>
+    </body>
+</html>

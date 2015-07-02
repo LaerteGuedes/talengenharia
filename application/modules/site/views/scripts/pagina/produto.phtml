@@ -1,0 +1,101 @@
+<? $url = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+   $oProduto = $this->oProduto;
+?>
+<div id="PRODUTO" class="pagina_detalhe">
+	<div class="page-header">
+		<div class="container">
+			<h1><a href="/loja/" title="Ver todos os produtos à venda">Lojinha da Cachaça</a></h1>
+			<a href="#" class="ribbon">
+				<span class="line-1">Frete grátis Brasil</span>
+				<span class="line-2">consulte condições</span>
+			</a>
+		</div> <!-- .container -->
+	</div> <!-- .page-header -->
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6 text-center">
+                <?=$oProduto->getImgDestaque();?>
+			</div>
+			<div class="col-xs-6">
+				<h2 class="text-success produto-title"><?=$oProduto->NOME;?></h2>
+				<h3 class="produto-subtitle"><?=$oProduto->SUBTITULO;?></h3>
+				<div class="box-share">
+					<!-- ################# GPLUS START ##################### -->
+					<div class="share-gplus">
+
+						<div class="g-plusone" data-size="medium" data-href="<?= $url ?>"></div>
+
+						<script type="text/javascript">
+						window.___gcfg = {lang: 'pt-BR'};
+
+						(function() {
+							var po = document.createElement('script');
+							po.type = 'text/javascript';
+							po.async = true;
+							po.src = 'https://apis.google.com/js/plusone.js';
+							var s = document.getElementsByTagName('script')[0];
+							s.parentNode.insertBefore(po, s);
+						})();
+						</script>
+					</div>
+					<!-- ################# GPLUS END ##################### -->
+					<!--################# TWITTER START ##################### -->
+					<div class="share-twitter">
+						<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt" data-url="<?= $url ?>">Tweetar</a>
+						<script>!function(d, s, id) {
+							var js, fjs = d.getElementsByTagName(s)[0];
+							if (!d.getElementById(id)) {
+								js = d.createElement(s);
+								js.id = id;
+								js.src = "//platform.twitter.com/widgets.js";
+								fjs.parentNode.insertBefore(js, fjs);
+							}
+						}(document, "script", "twitter-wjs");</script>
+					</div>
+					<!-- ################# TWITTER END ##################### -->
+					<!-- ################# FACEBOOK END ##################### -->
+					<div class="share-facebook">
+						<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+							var js, fjs = d.getElementsByTagName(s)[0];
+							if (d.getElementById(id)) return;
+							js = d.createElement(s); js.id = id;
+							js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&appId=607367415995227&version=v2.0";
+							fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));</script>
+						<div class="fb-like" data-href="<?= $url ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+					</div>
+					<!-- ################# FACEBOOK END ##################### -->
+				</div> <!-- .box-share -->
+				<div class="text_format produto-desc">
+                    <?=$oProduto->TEXTO;?>
+				</div>
+				<div class="produto-compra">
+					<div class="row">
+						<div class="col-xs-6">
+                            <?=$oProduto->DESCRICAO;?>
+							<span class="frete-gratis">FRETE GRÁTIS</span>
+						</div> <!-- .col-xs-6 -->
+						<div class="col-xs-4 col-xs-offset-2">
+							<p class="produto-preco text-center"><?=Business_String::formatShowMoney($oProduto->PRECO);?></p>
+							<div class="produto-btn">
+								<!-- Aqui você deve inserir a URL que corresponde a "init_point" -->
+								<a href="<?=$oProduto->LINK_MERCADO_PAGO;?>" name="MP-Checkout" class="red-L-Rn-Ar-BrOn" mp-mode="[tipo_de_janela_para_abrir_processo_de_pagamento]">Pagar</a>
+
+								<!-- Cole esse código antes de fechar a etiqueta </body> -->
+								<script type="text/javascript">
+								(function(){function $MPBR_load(){window.$MPBR_loaded !== true && (function(){var s = document.createElement("script");s.type = "text/javascript";s.async = true;
+									s.src = ("https:"==document.location.protocol?"https://www.mercadopago.com/org-img/jsapi/mptools/buttons/":"http://mp-tools.mlstatic.com/buttons/")+"render.js";
+									var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);window.$MPBR_loaded = true;})();}
+									window.$MPBR_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPBR_load) : window.addEventListener('load', $MPBR_load, false)) : null;})();
+									</script>
+								</div> <!-- .produto-btn -->
+							</div> <!-- .col-xs-4 -->
+						</div> <!-- .row -->
+					</div> <!-- .produto-compra -->
+
+				</div> <!-- .col-xs-6 -->
+			</div> <!-- .row -->
+			<?= $this->partial('/_includes/inc_ofertas.phtml', array('voProduto' => $this->voProduto)); ?>
+		</div> <!-- .container -->
+	</div>

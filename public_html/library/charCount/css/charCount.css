@@ -1,0 +1,9 @@
+form .counter{
+    color: #000000;
+    font-family: arial;
+    font-size: 15px;
+    margin: -24px 0 0 364px;
+    position: absolute;
+}
+form .warning{color:#600;}	
+form .exceeded{color:#e00;}

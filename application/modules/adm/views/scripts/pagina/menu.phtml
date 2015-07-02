@@ -1,0 +1,84 @@
+<?
+$bAcl = new ZC_Acl();
+$controller = 'pagina';
+$pagina = $this->data['action'];
+$action = $pagina;
+($pagina == 'index') ? $pagina = '' : $pagina;
+?>
+
+<?
+
+function subMenu($voFilho, $objClas, $controller, $pagina = 'menu') { ?>
+
+    <? foreach ($voFilho as $oF): ?>
+        <tr>
+            <td><input name="ID[]" type="checkbox" value="<?= $oF->ID ?>" /></td>
+            <td><?= ($oF->IMG_DESTAQUE) ? $oF->getImgDestaque(array(60, 40)) : '' ?></td>
+            <td>&emsp;&emsp;&rdsh;<?= $oF->TITULO ?></td>
+            <td><?= $oF->RESUMO ?></td>
+            <td>
+                <? if ($oF->ID_CATEGORIA == 3): ?>
+                    <a href="<?= $objClas->baseUrl("/adm/{$controller}/inserealtera{$pagina}/ID_PAI/" . $oF->ID) ?>">ADD SUBPAGINA</a> |
+                <? endif; ?>
+
+                <a href="<?= $objClas->baseUrl("/adm/{$controller}/inserealtera{$pagina}/ID/$oF->ID") ?>">EDITAR</a>
+                |<a href="<?= $objClas->baseUrl("/adm/{$controller}/excluir/move/{$pagina}/ID/" . $oF->ID) ?>">EXCLUIR</a>
+            </td>
+        </tr>
+        <? if ($oF->ID_CATEGORIA == 3): ?>
+            <? if ($voF = $oF->getFilho()): ?>
+                <?= subMenu($voF, $objClas, $controller) ?>
+            <? endif; ?>
+        <? endif; ?>
+    <? endforeach; ?>
+<? } ?>
+
+
+<h1><?= $this->title;?></h1>
+<form action="" method="post">
+	<? if ($bAcl->verifica(false, 'adm', $controller, 'inserealtera' . $pagina)): ?>
+		<a class="button jInfo" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}"); ?>" title="Cadastrar">Cadastrar</a>
+	<? endif; ?>
+	<? if ($bAcl->verifica(false, 'adm', $controller, 'inserealtera' . $pagina)): ?>
+		<a class="button jInfo jSubmit" href="<?= $this->baseUrl("/adm/{$controller}/excluir"); ?>" title="Clique para exluir">Excluir selecionadas</a>
+	<? endif; ?>
+    <? if (count($this->vo)): ?>
+        <p><?= $this->vo->getTotalItemCount() ?> registro(s) encontrados.</p>
+        <table class="padrao">
+            <thead>
+                <tr>
+                    <th width="20"><input type="checkbox" class="jCheckAll" /></th>
+                    <th width="50"></th>
+                    <th>TÍTULO</th>
+                    <th>TIPO</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <? foreach ($this->vo as $o): ?>
+                    <tr>
+                        <td><input name="ID[]" type="checkbox" value="<?= $o->ID ?>" /></td>
+                        <td><?= ($o->IMG_DESTAQUE) ? $o->getImgDestaque(array(60, 40)) : '' ?></td>
+                        <td><?= $o->TITULO ?></td>
+                        <td><?= $o->getTipo($action) ?></td>
+                        <td>
+                            <? if ($o->ID_CATEGORIA == 3): ?>
+                                <a href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/ID_PAI/" . $o->ID) ?>">ADD SUBPAGINA</a> |
+                            <? endif; ?>
+                            <a href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/ID/" . $o->ID) ?>">EDITAR</a>
+                            | <a href="<?= $this->baseUrl("/adm/{$controller}/excluir/move/{$pagina}/ID/" . $o->ID) ?>">EXCLUIR</a>
+                        </td>
+                    </tr>
+                    <? if ($o->ID_CATEGORIA == 3): ?>
+                        <? if ($voFilho = $o->getFilho()): ?>
+                            <?= subMenu($voFilho, $this, $controller) ?>
+                        <? endif; ?>
+                    <? endif; ?>
+                <? endforeach; ?>
+            </tbody>
+        </table>
+        <?= $this->paginationControl($this->vo, 'Sliding', '_includes/paginacao.phtml') ?>
+    <? else: ?>
+        <p>Nenhum registro encontrado</p>
+    <? endif ?>
+</form>

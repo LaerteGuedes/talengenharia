@@ -1,0 +1,315 @@
+@CHARSET "UTF-8";
+html,
+body {
+  background: #eedacb;
+  color: #4a4a4a;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+* {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+div,
+i,
+p,
+b,
+a {
+  font-size: 12px;
+}
+a {
+  color: #4c4c4c;
+  text-decoration: underline;
+}
+a:hover {
+  color: #ed2f59;
+}
+p {
+  margin: 5px 0px;
+}
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #300d24;
+  margin: 10px 0;
+}
+h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
+h3 {
+  font-size: 16px;
+  font-weight: bold;
+}
+h4 {
+  font-size: 12px;
+}
+h5 {
+  font-size: 11px;
+  font-weight: bold;
+}
+h6 {
+  font-size: 11px;
+}
+.clear {
+  clear: both;
+}
+button,
+a.button {
+  border: 1px solid #c7b3a6;
+  background: #f2e4d8;
+  text-decoration: none;
+  color: #4a4a4a;
+  padding: 7px 13px;
+  display: inline-block;
+  cursor: pointer;
+}
+button:hover,
+a.button:hover {
+  border: 1px solid #c7b3a6;
+  background: #d7c0ae;
+}
+#TOPO {
+  position: relative;
+}
+#TOPO .bg {
+  background: url("../imagem/adm/topo_bg2.gif") repeat-x -2px 0;
+  height: 47px;
+}
+#TOPO .content {
+  background: #300d24;
+  height: 50px;
+  position: relative;
+}
+#TOPO .content .logo {
+  margin: 4px 0 0 4px;
+}
+#TOPO .content .right {
+  position: absolute;
+  right: 10px;
+  top: 17px;
+  color: #eedacb;
+  font-size: 11px;
+}
+#TOPO .content .right i {
+  color: #ed2f59;
+  display: inline-block;
+  margin-right: 10px;
+  font-size: inherit;
+}
+#TOPO .content .right a {
+  color: inherit;
+  font-size: inherit;
+}
+#CONTENT {
+  padding-top: 10px;
+}
+#CONTENT > .left {
+  float: left;
+  width: 220px;
+}
+#CONTENT > .center {
+  margin: 0 10px 0 220px;
+}
+#MENU > ul > li {
+  margin: 0 0 9px 8px;
+  width: 200px;
+}
+#MENU > ul > li > strong {
+  display: block;
+  background: #300d24;
+  color: #eedacb;
+  padding: 10px 0 10px 15px;
+  border: 1px solid #300d24;
+}
+#MENU > ul > li > ul {
+  border: 1px solid #c7b3a6;
+}
+#MENU > ul > li > ul li a {
+  line-height: 25px;
+  display: block;
+  margin: 0 7px;
+  padding: 0 7px;
+  background: url("../imagem/adm/menu_line.gif") center bottom repeat-x;
+  color: #4a4a4a;
+}
+#MENU > ul > li > ul li.ativo {
+  background-color: #d7c0ae;
+}
+#MENU > ul > li > ul li.ativo a {
+  background: none;
+}
+#MENU > ul > li > ul li:hover {
+  background-color: #f2e4d8;
+}
+form.padrao legend {
+  display: none;
+}
+form.padrao input[type="text"],
+form.padrao input[type="password"] {
+  line-height: 30px;
+  height: 30px;
+  width: 350px;
+  border: 1px solid #c7b3a6;
+  padding-left: 5px;
+  display: block;
+}
+form.padrao input[type="text"].small,
+form.padrao input[type="password"].small {
+  width: 150px;
+}
+form.padrao input[type="text"].jData,
+form.padrao input[type="password"].jData {
+  width: 84px;
+}
+form.padrao table {
+  width: 770px;
+}
+form.padrao table tr th {
+  text-align: left;
+  vertical-align: middle;
+  width: 130px;
+}
+form.padrao table tr td {
+  vertical-align: middle;
+  padding-bottom: 5px;
+}
+form.padrao table tr td > input.jData {
+  display: inline-block;
+}
+form.padrao table tr td > button.ui-datepicker-trigger {
+  vertical-align: middle;
+  padding: 5px;
+}
+form.padrao .form_upload_queue {
+  margin: 0 0 10px 14px;
+}
+form.padrao .form_upload_cont {
+  position: relative;
+  margin-top: 10px;
+}
+form.padrao .form_upload_cont > p {
+  position: absolute;
+  top: 0px;
+  left: 124px;
+}
+form.padrao ul.upload_images_cont {
+  margin: 5px 0;
+}
+form.padrao ul.upload_images_cont li {
+  float: left;
+  padding: 5px;
+  border: 1px solid #aa9470;
+  margin-right: 5px;
+}
+form.padrao ul.upload_images_cont li.destaque {
+  border: 1px solid red;
+}
+form.padrao ul.upload_images_cont li a {
+  text-decoration: none;
+}
+form.padrao ul.upload_images_cont li .action {
+  background: #f0dfd4;
+  border: 1px solid #aa9470;
+  padding: 2px;
+}
+form.padrao ul.upload_images_cont li .img {
+  border-left: 1px solid #aa9470;
+  border-right: 1px solid #aa9470;
+}
+form.padrao ul.upload_images_cont li input.jArquivoNome {
+  width: 120px;
+  height: 18px;
+  line-height: 16px;
+  padding: 0px;
+  border-radius: 0px;
+  opacity: 0.8;
+  font-size: 11px;
+}
+table.padrao {
+  width: 100%;
+}
+table.padrao tr {
+  border: 1px solid #c7b3a6;
+}
+table.padrao tr:nth-child(even) {
+  background: #e6d1c1;
+}
+table.padrao tr td,
+table.padrao tr th {
+  padding: 5px 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+table.padrao thead {
+  background: #300d24;
+  color: #eedacb;
+}
+table.padrao tbody {
+  color: #4a4a4a;
+}
+table.padrao td.action {
+  text-align: right;
+}
+table.padrao input[type="checkbox"] {
+  vertical-align: middle;
+}
+.paginacao button,
+.paginacao span {
+  border: 1px solid #c7b3a6;
+  background: #e6d1c1;
+  text-decoration: none;
+  color: #4a4a4a;
+  padding: 5px 8px;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 11px;
+}
+.paginacao button:hover,
+.paginacao span:hover {
+  border: 1px solid #c7b3a6;
+  background: #d7c0ae;
+}
+a.bt {
+  height: 26px;
+  width: 31px;
+  display: inline-block;
+  background-position: -31px 0;
+  background-repeat: no-repeat;
+  margin: -3px 0;
+  vertical-align: middle;
+}
+a.bt:hover {
+  background-position: 0 0;
+}
+a.bt.bt_excluir {
+  background-image: url("../imagem/adm/bt_excluir.gif");
+}
+a.bt.bt_editar {
+  background-image: url("../imagem/adm/bt_editar.gif");
+}
+a.bt.bt_subpagina {
+  background-image: url("../imagem/adm/bt_subpagina.gif");
+}
+a.bt.bt_lock_on {
+  background-image: url("../imagem/adm/bt_lock_on.gif");
+}
+a.bt.bt_lock_off {
+  background-image: url("../imagem/adm/bt_lock_off.gif");
+}
+.radio,
+.checkbox {
+  display: inline;
+  line-height: 55px;
+  margin-bottom: 10px;
+}
+li.ui-sortable-placeholder {
+  border: 1px dashed #300D24 !important;
+  visibility: visible !important;
+}
+button.btn-visualizar {
+  margin-left: 130px;
+  margin-bottom: 20px;
+}

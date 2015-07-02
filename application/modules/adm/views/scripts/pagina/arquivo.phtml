@@ -1,0 +1,37 @@
+<? $bAcl = new ZC_Acl(); ?>
+<? $controller = 'pagina';?>
+<form action="" method="post">
+    <ul id="ACOES" class="Acoes" style="list-style: none;">
+        <? if($bAcl->verifica(false,'adm',$controller,'inserealteraarquivo')){ ?>
+            <li class="Cadastrar"> <span><a href="<?= $this->baseUrl("/adm/{$controller}/inserealteraarquivo");?>" title="Cadastrar" class="jInfo">Cadastrar</a></span> </li>
+        <?}?>
+        <li> <span class="Excluir"><a href="<?= $this->baseUrl("/adm/{$controller}/excluir");?>" title="Clique para exluir" class="jInfo jSubmit">Excluir selecionadas </a></span> </li>
+    </ul>
+    <? if(count($this->vo)):?>
+        <p><?= $this->vo->getTotalItemCount() ?> registro(s) encontrados.</p>
+        <table class="xTabela">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" class="jCheckAll" /></th>
+                    <th>NOME</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <? foreach($this->vo as $o):?>
+                    <tr>
+                        <td><input name="ID[]" type="checkbox" value="<?= $o->ID?>" /></td>
+                        <td><?=$o->NOME?></td>
+                        <td>
+                            <a href="<?=$this->baseUrl("/adm/{$controller}/inserealteraarquivo/ID/".$o->ID)?>">EDITAR</a>
+                            | <a href="<?=$this->baseUrl("/adm/{$controller}/excluir/ID/".$o->ID)?>">EXCLUIR</a>
+                        </td>
+                    </tr>
+                <? endforeach;?>
+            </tbody>
+        </table>
+        <?= $this->paginationControl($this->vo,'Sliding','_includes/paginacao.phtml')?>
+    <? else:?>
+        <p>Nenhum registro encontrado</p>
+    <? endif?>
+</form>

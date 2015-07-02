@@ -1,0 +1,95 @@
+<?
+echo $this->doctype('XHTML1_STRICT');
+header("Content-Type: text/html; charset=utf-8");
+$bHead = new Business_Head();
+$bHead->loadDefault()->loadByModule();
+$confUrlImg =  (array) Zend_Registry::get("urlImg");
+
+$request = ZC_Util::getData();
+
+$urlBase = "http://" . $_SERVER['SERVER_NAME'];
+$url = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+if ($request["controller"] == "index") {
+    if (in_array($request["action"], array("index"))) {
+        $verificaHome = "home";
+        $pagInicial = true;
+    }
+}
+if ($request["controller"] == "pagina") {
+    $pagInterna = true;
+    $verificaHome = "interna";
+    $includeLateral = true;
+    if (in_array($request["action"], array("sobre"))) {
+        $areaSobre = true;
+        $pagSobre = true;
+        if ($request["action"] == "") {
+
+        }
+    }
+}
+
+?>
+<html>
+<head>
+    <?=$bHead->getTitle();?>
+    <meta name="language" content="pt-br" />
+    <meta http-equiv="imagetoolbar" content="no"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <link rel="shortcut icon" href="<?= $this->baseUrl($confUrlImg['favicon']); ?>" type="image/<?= $confUrlImg['favicon_ext'] ?>" />
+    <link rel="alternate" type="application/rss+xml" title="Site &raquo; Feed" href="/feed/" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Libra Design + Tech" />
+    <? if ($pagInicial): ?>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+<? endif; ?>
+<meta property="og:url" content="<?= $url; ?>" />
+<?php echo $this->headMeta()->appendName('og:image', "http://" . $_SERVER['SERVER_NAME'] .$this->ogImage); ?>
+<meta property="og:site_name" content="<?= $this->translate(Zend_Registry::get("oConfiguracao")->TITULO); ?>" />
+<meta property="og:type" content="website" />
+<script src="/library/holder/holder.js"></script>
+<?= $bHead->show(); ?>
+</head>
+<body class="<?= ($pagInicial)?'home':'interna'; ?>">
+    <a class="sr-only" href="#content">Pular para conteúdo</a>
+    <div class="navbar navbar-default" style="margin-bottom: 0px;">
+        <div class="container">
+            <div id="TOPO" class="navbar-header">
+              <div class="container">
+                  <div class="row">
+                          <div class="col-xs-4">
+                            <div class="logo"></div>
+                          </div>
+                          <div class="col-xs-8">
+                            <ul class="nav navbar-nav navbar-right menu-topo">
+                              <li><a href="/">INICIAL</a></li>
+                              <li><a href="/empresa">EMPRESA</a></li>
+                              <li><a href="/servicos">SERVIÇOS</a></li>
+                              <li><a href="/obras">OBRAS</a></li>
+                              <li><a href="/clientes">CLIENTES</a></li>
+                              <li><a href="/contato">CONTATO</a></li>
+                            </ul>
+                          </div>
+                  </div>
+                </div>
+            </div>
+
+        </div> <!-- .container -->
+    </div> <!-- .navbar -->
+    <div class="extra-central">
+        <div class="site-central">
+            <div id="CONTENT" class="site-conteudo">
+                <div class="extra-container">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <?= $this->partial('_includes/mensagem_alerta.phtml', 'adm') ?>
+                            <?= $this->layout()->content; //pega o conteudo do view?>
+                        </div>
+                    </div> <!-- .row -->
+                </div> <!-- .container -->
+            </div> <!-- .site-conteudo -->
+        </div> <!-- .site-central -->
+    </div> <!-- .extra-central -->
+    <?= $this->partial('/_includes/inc_rodape.phtml'); ?>
+</body>
+</html>

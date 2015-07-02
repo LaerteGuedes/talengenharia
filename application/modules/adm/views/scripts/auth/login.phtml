@@ -1,0 +1,59 @@
+<?
+echo $this->doctype();
+header("Content-Type: text/html; charset=utf-8");
+?>
+<html>
+    <head>
+        <title>Área Restrita - Login</title>
+        <meta name="language" content="pt-br" />
+        <meta http-equiv="imagetoolbar" content="no" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <link href="/css/login.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="/library/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="/library/jquery-migrate-1.1.1.min.js"></script>
+        <script type="text/javascript" src="/library/placeHolder.js"></script>
+        <script type="text/javascript" src="/library/jqueryTools/jquery.tools.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('input[placeholder], textarea[placeholder]').placeholder();
+            });
+        </script>
+    </head>
+    <body>
+       <?= $this->partial('_includes/mensagem_alerta.phtml','adm') ?>
+        <div id="TOPO">
+            <div class="bg2"></div>
+            <div class="centro">
+                <img class="balao" src="/imagem/login/topo_balao.gif" />
+                <img class="acesseosite" src="/imagem/login/login_acesse.png"/>
+                <img class="nuvem" src="/imagem/login/topo_nuvem.gif" />
+                <a href="/" class="logo">
+                    <img src="/imagem/login/topo_logo.png" alt="Libra Design + Tech" />
+                </a>
+                <div id="CON_LOGIN" align="center">
+                 
+                    <div id="FORM">
+                        <form id="formLogin" enctype="multipart/form-data" method="post" action="" >
+                            <input type="text" name="LOGIN" id="LOGIN" value="" maxlength="50" size="20" class="validate[required]" placeholder="LOGIN">
+                            <input type="password" name="SENHA" id="SENHA" value="" maxlength="50" size="20" class="validate[required]" placeholder="SENHA">
+                            <input type="image" src="/imagem/login/bt_entrar.gif" name="ENVIAR" id="ENVIAR" value=""/>
+                        </form>
+                        <a style="color:#ED1651;margin-top: 10px;display: block;" href="/adm/acl/recuperasenha/">Esqueci minha senha</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="MENU" class="absolute">
+            <div>
+                <img src="/imagem/login/menu_telefone.gif" alt="Telefone: (91) 3225-3753"/>
+                <ul>
+                    <li><a href="#OLIBRA"><img src="/imagem/login/menu_link1.gif"/></a></li>
+                    <li><a href="#SERVICO" rel="-60"><img src="/imagem/login/menu_link2.gif"/></a></li>
+                    <li><a href="#PORTIFOLIO"><img src="/imagem/login/menu_link3.gif"/></a></li>
+                    <li><a href="#CONTATO" rel="250"><img src="/imagem/login/menu_link4.gif"/></a></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

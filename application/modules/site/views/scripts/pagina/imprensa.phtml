@@ -1,0 +1,23 @@
+<div id="IMPRENSA" class="pagina_detalhe">
+	<div class="page-header">
+		<div class="container">
+			<h1><?= $this->oPagina->TITULO ?></h1>
+		</div> <!-- .container -->
+	</div> <!-- .page-header -->
+	<div class="container">
+		<div class="text_format"><?= $this->oPagina->TEXTO ?></div>
+		<ul class="media-list lista-imprensa">
+            <? foreach ($this->voPagina as $oPagina) { ?>
+                <li class="media">
+                    <span class="pull-left box-imagem"><span class="imagem"><img src="<?=$oPagina->linkImagemDestaque();?>" alt=""></span></span>
+                    <div class="media-body">
+                        <h2 class="media-heading"><a href="/nota/<?=$oPagina->PERMALINK;?>" class="text-success"><?=$oPagina->TITULO;?></a></h2>
+                        <div class="imprensa-texto">
+                            <?=$oPagina->RESUMO;?>
+                        </div>
+                    </div>
+                </li>
+            <? } ?>
+		</ul>
+	</div> <!-- .container -->
+</div>

@@ -1,0 +1,49 @@
+<h1>Criar nova Gerência.</h1>
+<script type="text/javascript">
+    function loadForm(obj) {
+        $(".load").load("/adm/config/ajaxtabela/TABELA/" + obj);
+    }
+    $(function () {
+        loadForm("pag_pagina");
+        $("#TABELA").change(function () {
+            var obj = $(this).val();
+            loadForm(obj);
+        });
+        $(function () {
+            $(".clone").live("click", function () {
+                var n = $("tbody tr").length + 1;
+                $("tbody tr:last-of-type").clone().insertAfter("tbody tr:last-of-type").
+                        find("input[type='radio']").attr("name", "VALIDACAO_" + n).attr("id", "VAIDACAO_" + n).
+                        parents("tr").find(".listagem").attr("name", "LISTAGEM_" + n).attr("id", "LISTAGEM_" + n);
+
+            });
+        });
+    });
+</script>
+<style type="text/css">
+    radio{width: 20px;}
+</style>
+<div class="row col-lg-11">
+    <form action="" method="post">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Nome da Gerencia</label>
+            <input type="text" name="GERENCIA" id="GERENCIA" class="form-control" placeholder="GerenciaExemplo">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Tabela</label>
+            <select class="form-control" name="TABELA" id="TABELA">
+                <? foreach ($this->infos as $i => $v) { ?>
+                    <option <?= ("pag_pagina" == $i) ? "selected" : "" ?> value="<?= $i ?>"><?= $i ?></option>
+                <? } ?>
+            </select>
+        </div>
+
+        <div class="load">
+
+        </div>
+        <a href="javascript:void(0)" class="clone btn btn-default pull-right">+</a>
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </form>   
+</div>
