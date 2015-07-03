@@ -25,8 +25,14 @@ FUNÇÕES PADRÕES START
   src: url('/../css/fonts/roboto/Roboto-Black.ttf');
 }
 
+@font-face {
+  font-family: RobotoThin;
+  src: url('/../css/fonts/roboto/Roboto-Thin.ttf');
+}
+
 body{
   font-family: "RobotoRegular";
+  background-color:#e7edf0;
 }
 
 .clear, .first{
@@ -147,7 +153,7 @@ JQUERY UI END
   min-height: 300px;
   .extra-central{
      width:100%;
-     background-image: url('/imagem/site/bg-central.jpg');
+     background-image: url('/imagem/site/bg-topo.jpg');
      background-repeat: no-repeat;
      background-position: top center;
      height:600px;
@@ -172,6 +178,14 @@ JQUERY UI END
     p{
       color:#FFFFFF;
     }
+    .nossas-obras{
+      padding-top:100px;
+      p{
+        color:#333333;
+        font-family:'RobotoThin';
+        font-size:28px;
+      }
+    }
     .media-heading{
       font-size: 50px;
       line-height: 52px;
@@ -184,6 +198,31 @@ JQUERY UI END
       border-radius: 8px;
       color:#ffffff;
     }
+  }
+
+  .informacoes-contato{
+      padding-top:360px;
+      padding-left:95px;
+      strong{
+        font-family:'RobotoBlack';
+      }
+      p{
+        font-family:'RobotoThin';
+        font-size:22px;
+
+      }
+      .telefone{
+        p,strong{
+          color:#FFFFFF;
+        }
+      }
+      .onde-fica{
+        padding-top:40px;
+        padding-left:35px;
+        strong{
+          font-size:28px;
+        }
+      }
   }
 }
 

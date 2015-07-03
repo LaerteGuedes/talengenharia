@@ -6,8 +6,13 @@
   font-family: RobotoBlack;
   src: url('/../css/fonts/roboto/Roboto-Black.ttf');
 }
+@font-face {
+  font-family: RobotoThin;
+  src: url('/../css/fonts/roboto/Roboto-Thin.ttf');
+}
 body {
   font-family: "RobotoRegular";
+  background-color: #e7edf0;
 }
 .clear,
 .first {
@@ -231,7 +236,7 @@ a {
 }
 #CONTENT .extra-central {
   width: 100%;
-  background-image: url('/imagem/site/bg-central.jpg');
+  background-image: url('/imagem/site/bg-topo.jpg');
   background-repeat: no-repeat;
   background-position: top center;
   height: 600px;
@@ -253,6 +258,14 @@ a {
 #CONTENT .bloco-solucoes p {
   color: #FFFFFF;
 }
+#CONTENT .bloco-solucoes .nossas-obras {
+  padding-top: 100px;
+}
+#CONTENT .bloco-solucoes .nossas-obras p {
+  color: #333333;
+  font-family: 'RobotoThin';
+  font-size: 28px;
+}
 #CONTENT .bloco-solucoes .media-heading {
   font-size: 50px;
   line-height: 52px;
@@ -264,6 +277,28 @@ a {
   background-color: #ce2d40;
   border-radius: 8px;
   color: #ffffff;
+}
+#CONTENT .informacoes-contato {
+  padding-top: 360px;
+  padding-left: 95px;
+}
+#CONTENT .informacoes-contato strong {
+  font-family: 'RobotoBlack';
+}
+#CONTENT .informacoes-contato p {
+  font-family: 'RobotoThin';
+  font-size: 22px;
+}
+#CONTENT .informacoes-contato .telefone p,
+#CONTENT .informacoes-contato .telefone strong {
+  color: #FFFFFF;
+}
+#CONTENT .informacoes-contato .onde-fica {
+  padding-top: 40px;
+  padding-left: 35px;
+}
+#CONTENT .informacoes-contato .onde-fica strong {
+  font-size: 28px;
 }
 ul li {
   list-style: none;
