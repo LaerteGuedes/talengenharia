@@ -15,6 +15,10 @@ FUNÇÕES PADRÕES START
     .box-shadow(@style, rgba(0, 0, 0, @alpha));
 }
 
+.clear{
+  clear:both;
+}
+
 @font-face {
   font-family: RobotoRegular;
   src: url('/../css/fonts/roboto/Roboto-Regular.ttf');
@@ -156,7 +160,7 @@ JQUERY UI END
      background-image: url('/imagem/site/bg-topo.jpg');
      background-repeat: no-repeat;
      background-position: top center;
-     height:600px;
+     min-height:600px;
   }
   .marker{
     li{
@@ -168,6 +172,31 @@ JQUERY UI END
         width:10px;
         height:10px;
         border-radius: 50%;
+
+      }
+    }
+  }
+
+  #slideshow-galeria{
+    margin-left:60px;
+    margin-right:60px;
+    padding-top:3px;
+    a.prev{
+      float:left;
+    }
+    a.next{
+      float:right;
+    }
+    #cycle-2{
+      width:100%;
+
+      >div{
+        width:230px;
+        float:left;
+
+      }
+      >div:nth-child(2){
+        padding-top:40px;
 
       }
     }
