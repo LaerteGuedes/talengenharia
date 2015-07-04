@@ -34,23 +34,7 @@
                         <p>ONDE<br/><strong>FICA?</strong></p>
                     </div>
              </div>
-            <div class="col-xs-12">
-                <div id="slideshow-galeria">
-
-                    <div id="cycle-2" class="cycle-slideshow" data-cycle-fx="carousel" data-cycle-timeout="6000" data-cycle-speed="1800" data-cycle-slides="> div" data-cycle-next="#slideshow-galeria .next" data-cycle-prev="#slideshow-galeria .prev" data-cycle-easing="easeInOutExpo" data-cycle-carousel-visible="3" data-cycle-log="false">
-                        <div><a href=""><img src="/imagem/site/galeria-imagem-1.jpg"/></a></div>
-                        <div><a href=""><img src="/imagem/site/galeria-imagem-2.jpg"/></a></div>
-                        <div><a href=""><img src="/imagem/site/galeria-imagem-3.jpg"/></a></div>
-                        <div><a href=""><img src="/imagem/site/galeria-imagem-2.jpg"/></a></div>
-                        <div><a href=""><img src="/imagem/site/galeria-imagem-3.jpg"/></a></div>
-                    </div>
-                    <a class="prev" href="#"><img src="/imagem/site/paginator-left.jpg"/></a>
-                    <a class="next" href="#"><img src="/imagem/site/paginator-right.jpg"/></a>
-                </div>
-            </div>
-            <div class="col-xs-12">
-
-            </div>
+            <?=$this->partial('/_includes/obras.phtml');?>
         </div>
     </div>
     <?=$this->partial('/_includes/dicas.phtml');?>

@@ -56,28 +56,8 @@ class PaginaController extends ZC_Controller_Action {
    }
 
 
-    function imprensaAction() {
-        $dbPagina = new Db_PagPagina();
-        $this->view->oPagina = $dbPagina->fetchRow(array('pag_pagina.PERMALINK = ?' => 'imprensa'));
-        $this->view->voPagina = $dbPagina->fetchAll(array('pag_pagina.TIPO = ?' => "imprensa"));
-        $this->_head->setTitle($this->view->oPagina->TITULO);
-    }
-    function imprensadetalheAction() {
-        $dbPagina = new Db_PagPagina();
-
-        $this->view->oPagina = $dbPagina->fetchRow(array('pag_pagina.PERMALINK = ?' => $this->_data['permalink']));
-        $this->_head->setTitle($this->view->oPagina->TITULO);
-    }
-
-    function lojaAction() {
-        $dbPagina = new Db_PagPagina;
-        $dbProduto = new Db_ProProduto;
-
-        $this->view->oPagina = $dbPagina->fetchRow(array('pag_pagina.PERMALINK = ?' => 'loja'));
-        $this->view->voProduto = $dbProduto->fetchAll(array('ID_CATEGORIA = ? OR ID_CATEGORIA = '.RowProProduto::PRODUTO_DESTAQUE.'' => RowProProduto::PRODUTO));
-        $this->view->voProdutoCombinacao = $dbProduto->fetchAll(array('ID_CATEGORIA = ? OR ID_CATEGORIA = '.RowProProduto::COMBINACAO_DESTAQUE.'' => RowProProduto::COMBINACAO), 'ID_CATEGORIA DESC');
-
-        $this->_head->setTitle($this->view->oPagina->TITULO);
+    function empresaAction() {
+        
     }
 
     function produtoAction() {
@@ -123,10 +103,5 @@ class PaginaController extends ZC_Controller_Action {
         $this->openGraph(array("image" => $o->linkImagemDestaque(), "title" => $o->TITULO, "description" => $o->RESUMO));
     }
 
-    function savecomentarioAction() {
-        $db = new Db_PagComentario();
-        $db->save($this->_data);
-        $this->_redirect($this->_data['REDIRECT']);
-    }
 
 }

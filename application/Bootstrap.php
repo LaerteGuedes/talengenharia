@@ -103,7 +103,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             'action' => 'busca'
                 )
         ));
-        
+        $router->addRoute(
+            'language', new Zend_Controller_Router_Route(
+            '/empresa/*', array(
+                'module' => 'site',
+                'controller' => 'pagina',
+                'action' => 'empresa'
+            )
+        ));
         $router->addRoute(
                 'institucional_detalhe', new Zend_Controller_Router_Route(
                 '/adm/institucional/:pagina', array(
