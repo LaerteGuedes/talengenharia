@@ -2,22 +2,24 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-5 bloco-solucoes">
-                <p class="media-heading">Soluções Integradas de Engenharia</p>
-                <div class="col-xs-5">
-                    <button class="btn">SAIBA MAIS</button>
-                </div>
-                <div class="col-xs-7">
-                    <ul class="marker">
+
+                <div class="col-xs-7 box-chamada">
+                   <ul class="cycle-slideshow" data-cycle-fx="" data-cycle-timeout="5000" data-cycle-speed="1800" data-cycle-slides="> li" data-cycle-easing="easeInOutExpo" data-cycle-log="false">
                         <li>
-                            <a href=""></a>
+                            <p class="media-heading">Soluções Integradas de Engenharia</p>
+                            <div class="col-xs-5">
+                                <button class="btn">SAIBA MAIS</button>
+                            </div>
                         </li>
-                        <li>
-                            <a href=""></a>
-                        </li>
-                        <li>
-                            <a href=""></a>
-                        </li>
+                       <li>
+                           <p class="media-heading">Soluções Integradas de Engenharia</p>
+                           <div class="col-xs-5">
+                               <button class="btn">SAIBA MAIS</button>
+                           </div>
+                       </li>
+                       <div class="cycle-pager"></div>
                     </ul>
+
                 </div>
                 <div class="col-xs-12 nossas-obras">
                     <p>NOSSAS OBRAS</p>
@@ -34,17 +36,22 @@
              </div>
             <div class="col-xs-12">
                 <div id="slideshow-galeria">
-                    <a class="prev" href="#"><img src="/imagem/site/paginator-left.jpg"></img></a>
-                    <div id="cycle-2">
-                        <div><img src="/imagem/site/galeria-imagem-1.jpg"></div>
-                        <div><img src="/imagem/site/galeria-imagem-2.jpg"></div>
-                        <div><img src="/imagem/site/galeria-imagem-3.jpg"></div>
+
+                    <div id="cycle-2" class="cycle-slideshow" data-cycle-fx="carousel" data-cycle-timeout="6000" data-cycle-speed="1800" data-cycle-slides="> div" data-cycle-next="#slideshow-galeria .next" data-cycle-prev="#slideshow-galeria .prev" data-cycle-easing="easeInOutExpo" data-cycle-carousel-visible="3" data-cycle-log="false">
+                        <div><a href=""><img src="/imagem/site/galeria-imagem-1.jpg"/></a></div>
+                        <div><a href=""><img src="/imagem/site/galeria-imagem-2.jpg"/></a></div>
+                        <div><a href=""><img src="/imagem/site/galeria-imagem-3.jpg"/></a></div>
+                        <div><a href=""><img src="/imagem/site/galeria-imagem-2.jpg"/></a></div>
+                        <div><a href=""><img src="/imagem/site/galeria-imagem-3.jpg"/></a></div>
                     </div>
-                    <a class="next" href="#"><img src="/imagem/site/paginator-right.jpg"></img></a>
-                    <div class="clear"></div>
+                    <a class="prev" href="#"><img src="/imagem/site/paginator-left.jpg"/></a>
+                    <a class="next" href="#"><img src="/imagem/site/paginator-right.jpg"/></a>
                 </div>
-                <div class="clear"></div>
+            </div>
+            <div class="col-xs-12">
+
             </div>
         </div>
     </div>
+    <?=$this->partial('/_includes/dicas.phtml');?>
 </div>

@@ -177,21 +177,58 @@ JQUERY UI END
     }
   }
 
+  .extra-bg-dicas{
+    width:100%;
+    background-image: url('/imagem/site/bg-dicas.jpg');
+    background-repeat: no-repeat;
+    background-position: top center;
+    height:283px;
+    .box-dicas{
+      padding-top:30px;
+      .cycle-prev , .cycle-next{
+        padding-top:100px;
+        display:inline-block;
+      }
+      .dicas-principal{
+
+      }
+      .point-title{
+        font-family:"RobotoThin";
+        font-size:20px;
+        border-bottom: dotted 1px;
+      }
+      .dica-resumo{
+        font-family:"RobotoBlack";
+        font-size:24px;
+        line-height:24px;
+      }
+      .dica-texto{
+        font-family:"RobotoThin";
+        font-size:14px;
+      }
+    }
+  }
+
   #slideshow-galeria{
-    margin-left:60px;
-    margin-right:60px;
+    padding-left:125px;
+    padding-right:125px;
     padding-top:3px;
+    height:255px;
     a.prev{
-      float:left;
+      position:absolute;
+      margin-left:-60px;
+      margin-top:-201px;
     }
     a.next{
-      float:right;
+      position:absolute;
+      margin-left:693px;
+      margin-top:-101px;
     }
     #cycle-2{
       width:100%;
 
       >div{
-        width:230px;
+        width:210px;
         float:left;
 
       }
@@ -215,6 +252,18 @@ JQUERY UI END
         font-size:28px;
       }
     }
+    .box-chamada{
+      .cycle-pager {
+        text-align: center; width: 100%; z-index: 500; position: absolute; top: 190px; left:130px; overflow: hidden;
+      }
+      .cycle-pager span {
+        font-family: arial; font-size: 50px; width: 16px; height: 16px; margin-left:5px;
+        display: inline-block; color: #ddd; cursor: pointer;
+      }
+      .cycle-pager span.cycle-pager-active { color: #D69746;}
+      .cycle-pager > * { cursor: pointer;}
+    }
+
     .media-heading{
       font-size: 50px;
       line-height: 52px;
@@ -222,6 +271,8 @@ JQUERY UI END
     }
     button{
       width:157px;
+      margin-left:0px;
+      margin-right:140px;
       height:48px;
       background-color: #ce2d40;
       border-radius: 8px;

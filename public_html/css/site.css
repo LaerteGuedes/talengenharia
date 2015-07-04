@@ -255,22 +255,56 @@ a {
   height: 10px;
   border-radius: 50%;
 }
+#CONTENT .extra-bg-dicas {
+  width: 100%;
+  background-image: url('/imagem/site/bg-dicas.jpg');
+  background-repeat: no-repeat;
+  background-position: top center;
+  height: 283px;
+}
+#CONTENT .extra-bg-dicas .box-dicas {
+  padding-top: 30px;
+}
+#CONTENT .extra-bg-dicas .box-dicas .cycle-prev,
+#CONTENT .extra-bg-dicas .box-dicas .cycle-next {
+  padding-top: 100px;
+  display: inline-block;
+}
+#CONTENT .extra-bg-dicas .box-dicas .point-title {
+  font-family: "RobotoThin";
+  font-size: 20px;
+  border-bottom: dotted 1px;
+}
+#CONTENT .extra-bg-dicas .box-dicas .dica-resumo {
+  font-family: "RobotoBlack";
+  font-size: 24px;
+  line-height: 24px;
+}
+#CONTENT .extra-bg-dicas .box-dicas .dica-texto {
+  font-family: "RobotoThin";
+  font-size: 14px;
+}
 #CONTENT #slideshow-galeria {
-  margin-left: 60px;
-  margin-right: 60px;
+  padding-left: 125px;
+  padding-right: 125px;
   padding-top: 3px;
+  height: 255px;
 }
 #CONTENT #slideshow-galeria a.prev {
-  float: left;
+  position: absolute;
+  margin-left: -60px;
+  margin-top: -201px;
 }
 #CONTENT #slideshow-galeria a.next {
-  float: right;
+  position: absolute;
+  margin-left: 693px;
+  margin-top: -101px;
 }
 #CONTENT #slideshow-galeria #cycle-2 {
   width: 100%;
 }
 #CONTENT #slideshow-galeria #cycle-2 >div {
-  width: 230px;
+  width: 210px;
   float: left;
 }
 #CONTENT #slideshow-galeria #cycle-2 >div:nth-child(2) {
@@ -290,6 +324,31 @@ a {
   font-family: 'RobotoThin';
   font-size: 28px;
 }
+#CONTENT .bloco-solucoes .box-chamada .cycle-pager {
+  text-align: center;
+  width: 100%;
+  z-index: 500;
+  position: absolute;
+  top: 190px;
+  left: 130px;
+  overflow: hidden;
+}
+#CONTENT .bloco-solucoes .box-chamada .cycle-pager span {
+  font-family: arial;
+  font-size: 50px;
+  width: 16px;
+  height: 16px;
+  margin-left: 5px;
+  display: inline-block;
+  color: #ddd;
+  cursor: pointer;
+}
+#CONTENT .bloco-solucoes .box-chamada .cycle-pager span.cycle-pager-active {
+  color: #D69746;
+}
+#CONTENT .bloco-solucoes .box-chamada .cycle-pager > * {
+  cursor: pointer;
+}
 #CONTENT .bloco-solucoes .media-heading {
   font-size: 50px;
   line-height: 52px;
@@ -297,6 +356,8 @@ a {
 }
 #CONTENT .bloco-solucoes button {
   width: 157px;
+  margin-left: 0px;
+  margin-right: 140px;
   height: 48px;
   background-color: #ce2d40;
   border-radius: 8px;
