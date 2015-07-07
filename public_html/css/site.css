@@ -244,6 +244,62 @@ a {
   background-position: top center;
   min-height: 600px;
 }
+#CONTENT #OBRAS .titulo-obras {
+  padding-top: 50px;
+  margin-bottom: 50px;
+  font-family: 'RobotoThin';
+  margin-left: 100px;
+  margin-right: 80px;
+  font-size: 30px;
+}
+#CONTENT #OBRAS .empreendimentos .obra {
+  width: 466px;
+  height: 320px;
+  margin-bottom: 8px;
+}
+#CONTENT #CONTATO .chamada,
+#CONTENT #CONTATO .chamada-central {
+  padding-top: 50px;
+  font-family: RobotoThin;
+}
+#CONTENT #CONTATO .chamada {
+  font-size: 30px;
+  line-height: 30px;
+}
+#CONTENT #CONTATO .obs {
+  font-family: RobotoThin;
+}
+#CONTENT #CONTATO .bloco-central .black {
+  font-family: RobotoBlack;
+  font-size: 20px;
+  padding-top: 10px;
+}
+#CONTENT #CONTATO .bloco-central .light {
+  font-family: RobotoThin;
+  font-size: 20px;
+}
+#CONTENT #CONTATO button {
+  width: 157px;
+  margin-left: 0px;
+  margin-right: 140px;
+  height: 48px;
+  background-color: #ce2d40;
+  border-radius: 8px;
+  color: #ffffff;
+}
+#CONTENT #CONTATO form input,
+#CONTENT #CONTATO textarea {
+  width: 100%;
+  background-color: #243138;
+  color: #FFFFFF;
+  border: none;
+  height: 35px;
+  padding-left: 20px;
+}
+#CONTENT #CONTATO textarea {
+  height: 150px;
+  padding-top: 20px;
+}
 #CONTENT .marker li {
   display: inline-block;
   margin-right: 10px;

@@ -1,70 +1,44 @@
-<?php 
-// METATAGS OPEN GRAPH START
-$this->headMeta()->appendName('og:image', "http://" . $_SERVER['SERVER_NAME'] .$this->oPagina->linkImagemDestaque()); 
-$this->headMeta()->appendName('og:title',strip_tags($this->oPagina->TITULO.' - '.Zend_Registry::get("oConfiguracao")->TITULO)); 
-if ($this->oPagina->RESUMO) {
-	$this->headMeta()->appendName('og:description',strip_tags($this->oPagina->RESUMO)); 
-} else {
-	$this->headMeta()->appendName('og:description',strip_tags($this->oPagina->TEXTO)); 
-} //if ($this->oPagina->RESUMO) {
-// METATAGS OPEN GRAPH END
-	?>
-	<!-- GMAPS START -->
-	<style type="text/css">
-	html { height: 100%; }
-	body { height: 100%; margin: 0px; padding: 0px; }
-	#map_canvas { height: 100%; }
-	#map_canvas2 { height: 100%; }
-	</style>
-	<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
-	<script type="text/javascript">
-// Pegar latitude http://itouchmap.com/latlong.html
-function initialize(Lat, Lon, obj) {
-	var myLatlng = new google.maps.LatLng(Lat, Lon);
-	var myOptions = {
-		zoom: 16,
-		center: myLatlng,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-	}
-	var map = new google.maps.Map(document.getElementById(obj), myOptions);
+<div id="CONTATO" class="container">
+    <div class="row">
+        <div class="col-xs-7">
+            <p class="chamada">Envie sua mensagem. <br/>Será um prazer lhe atender</p>
+            <form action="#" method="post" id="FRM-CONTATO">
+                <div class="form-group">
+                    <input type="text" class="validate[required]" name="NOME" id="NOME" placeholder="Nome">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="validate[required]" name="EMAIL" id="EMAIL" placeholder="E-mail">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="validate[required]" name="ASSUNTO" id="ASSUNTO" placeholder="Assunto">
+                </div>
+                <div class="form-group">
+                    <textarea name="MENSAGEM" id="MENSAGEM" placeholder="Deixe seu comentário aqui"></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-8">
+                        <p class="obs">Nosso serviço de atendimento funciona das 9 às 17 horas, de segunda a sexta, exceto feriados.</p>
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-default">Enviar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-5">
+            <p class="chamada-central">CENTRAL DE ATENDIMENTO</p>
 
-	var image = '/_assets/images/site/marker.png';
-	var beachMarker = new google.maps.Marker({
-		position: myLatlng,
-		map: map/*,
-		icon: image*/
-	});
-
-	google.maps.event.addListener(beachMarker, 'click', function() {
-		infowindow.open(map, beachMarker);
-	});
-}
-
-$(function() {
-	initialize($("#map_canvas").data("lat"), $("#map_canvas").data("lon"), $("#map_canvas").attr("id"));
-});
-</script>
-<!-- GMAPS END -->
-<div id="CONTATO" class="pagina_detalhe">
-	<div class="page-header">
-		<div class="container">
-			<h1>Contato</h1>
-		</div> <!-- .container -->
-	</div> <!-- .page-header -->
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-7">
-				<br>
-				<div class="box-mapa">
-					<div id="map_canvas" class="" style="width:100%; height:270px" data-lat="-1.449632" data-lon="-48.496172"></div>
-				</div> <!-- .box-mapa -->
-			</div>
-			<div class="col-xs-4 col-xs-offset-1">
-				<h2 class="text-success">Onde estamos?</h2>
-				<?= $this->oPagina->RESUMO?>
-				<br>
-				<div class="text_format"><?= $this->oPagina->TEXTO?></div>
-			</div> <!-- .col-xs-4 -->
-		</div> <!-- .row -->
-	</div> <!-- .container -->
+            <div class="bloco-central">
+                <img src="/imagem/site/icon-telefone.jpg" class="pull-left"/><p class="black">TELEFONE</p>
+                <p class="light">91.3223-0322</p>
+            </div>
+            <div class="bloco-central">
+                <img src="/imagem/site/icon-mensagem.jpg" class="pull-left"/><p class="black">EMAIL</p>
+                <p class="light">talengenhara@gmail.com</p>
+            </div>
+            <img src="/imagem/site/atendente-contato.jpg"/>
+        </div>
+        <?=$this->partial('/_includes/obras.phtml');?>
+    </div>
 </div>
+<?=$this->partial('/_includes/parceiros.phtml');?>

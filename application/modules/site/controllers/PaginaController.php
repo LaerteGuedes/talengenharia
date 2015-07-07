@@ -30,6 +30,10 @@ class PaginaController extends ZC_Controller_Action {
         $this->openGraph(array("image" => $o->linkImagemDestaque(), "title" => $o->TITULO, "description" => $o->RESUMO));
     }
 
+    function obrasAction(){
+
+    }
+
     function contatoAction() {
         $dbPagina = new Db_PagPagina();
         $this->_head->jqueryMask();
