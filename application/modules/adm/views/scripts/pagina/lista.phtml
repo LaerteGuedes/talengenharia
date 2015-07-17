@@ -98,8 +98,14 @@ $form = $this->form;
                         <th width="60" style="text-align: center;"><img src="/imagem/icone/star.png" alt="destaque" title="Destaque?" /></th>
                     <? } ?>
                     <th width="50"></th>
-                    <th>TÍTULO</th>
-                    <th>RESUMO</th>
+                    <? if ($this->elementosColuna) { ?>
+                        <? foreach ($this->elementosColuna as $title => $name) { ?>
+                            <th><?=$title;?></th>
+                        <? } ?>
+                    <? }else{ ?>
+                        <th>TÍTULO</th>
+                        <th>RESUMO</th>
+                    <? } ?>
                     <th width="160">AÇÕES</th>
                 </tr>
             </thead>
@@ -113,8 +119,14 @@ $form = $this->form;
                             </td>
                         <? } ?>
                         <td><?= $o->getImgDestaque(array(60, 40), true); ?></td>
-                        <td><?= $o->TITULO ?></td>
-                        <td><?= $o->RESUMO ?></td>
+                        <? if ($this->elementosColuna) { ?>
+                            <? foreach ($this->elementosColuna as $title => $name) { ?>
+                                <td><?=$o->$name;?></td>
+                            <? } ?>
+                        <? }else{ ?>
+                            <td><?=$o->TITULO;?></td>
+                            <td><?=$o->RESUMO;?></td>
+                        <? } ?>
                         <td class="action">
 
                             <? if (Zend_Registry::get("oUsuario")->ID_GRUPO == 1) { ?>

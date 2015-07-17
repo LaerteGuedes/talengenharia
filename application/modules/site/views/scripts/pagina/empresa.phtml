@@ -4,10 +4,10 @@
         <div class="col-xs-10">
             <div class="texto">
                 <div class="texto-principal">
-                    <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis </p>
+                    <p><?=$this->oPagina->RESUMO;?></p>
                 </div>
                 <div class="texto-secundario">
-                    <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim.</p>
+                    <p><?=$this->oPagina->TEXTO;?></p>
                 </div>
             </div>
         </div>
@@ -15,9 +15,9 @@
         <div class="col-xs-12 nossas-obras">
             <p style="text-align:center;">NOSSAS OBRAS</p>
         </div>
-        <?=$this->partial('/_includes/obras.phtml');?>
+        <?=$this->partial('/_includes/obras.phtml', array('voObra' => $this->voObra));?>
         <div class='clear'></div>
 
     </div>
 </div>
-<?=$this->partial('/_includes/parceiros.phtml');?>
+<?=$this->partial('/_includes/parceiros.phtml', array('voParceiro' => $this->voParceiro));?>

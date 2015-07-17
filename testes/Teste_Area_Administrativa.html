@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://modelo2-1.libra/" />
+<title>Teste_Area_Administrativa</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Teste_Area_Administrativa</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/adm/auth/login/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=LOGIN</td>
+	<td>libra</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=SENHA</td>
+	<td>adlibra200165</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=ENVIAR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Páginas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h1</td>
+	<td>Gerência de Páginas Institucionais</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cadastrar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Categorias</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h1</td>
+	<td>Gerência de Categorias</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Notícias</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h1</td>
+	<td>Gerência de Notícias</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Videos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h1</td>
+	<td>Gerência de Video</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Galerias</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h1</td>
+	<td>Gerência de Galeria</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Informativos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h1</td>
+	<td>Gerência de Informativo</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Usuários</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cadastrar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=NOME</td>
+	<td>teste</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=LOGIN</td>
+	<td>teste</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=EMAIL</td>
+	<td>teste@gmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=SENHA</td>
+	<td>teste</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=SENHA2</td>
+	<td>teste</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=ID_GRUPO</td>
+	<td>label=Administrador</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=ENVIAR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p</td>
+	<td>Cadastro realizado com sucesso!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Fechar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='CONTENT']/div[2]/div[2]/table/tbody/tr[3]/td[3]</td>
+	<td>Administrador</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='CONTENT']/div[2]/div[2]/table/tbody/tr[3]/td</td>
+	<td>teste</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//a[contains(text(),'EXCLUIR')])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=p</td>
+	<td>1 registros(s) excluí­do(s) com sucesso!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Fechar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sair</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Esqueci minha senha</td>
+	<td>Esqueci minha senha</td>
+</tr>
+</tbody></table>
+</body>
+</html>

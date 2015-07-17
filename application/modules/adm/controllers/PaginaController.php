@@ -30,8 +30,14 @@ class Adm_PaginaController extends ZC_Controller_Action {
          
     public function institucionalAction(){
         $this->view->vo = $this->_dbPagina->fetchAll(array("pag_pagina.TIPO = ?" => $this->_data['pagina'], "pag_pagina.ID_PAI IS NULL" => ''))->paginator();
+
         $this->view->subpagina = true;
         $this->view->title = 'Gerência de '.ucfirst($this->_data['pagina']);
+
+        if ($this->_data['pagina'] == 'destaquehome'){
+            $this->view->title = 'Gerência de destaque da home';
+        }
+
         $this->view->destaque = true;
         $this->view->page = $this->_data['pagina'];
         $this->view->elementosColuna = $this->customColumnElements($this->_data['pagina']);
@@ -39,9 +45,10 @@ class Adm_PaginaController extends ZC_Controller_Action {
     }
     
     public function inserealterainstitucionalAction(){
-        $form = $this->instanceFormClasses($this->_data['pagina']); 
+        $form = $this->instanceFormClasses($this->_data['pagina']);
               
         $form->removeElements(array('YOUTUBE'));
+
         $this->inserealterapagina($form, $this->_dbPagina, '/adm/institucional/'.$this->_data['pagina'], false, ''.$this->_data['pagina']);
     }
 
@@ -286,17 +293,11 @@ class Adm_PaginaController extends ZC_Controller_Action {
     }
     
     private function customColumnElements($page){
-        if ($page == 'portifolio'){
-            return $elementosColuna = array('Titulo da Atividade' => 'TITULO', 'Resumo da Atividade' => 'RESUMO');
+        if ($page == 'destaquehome'){
+            return $elementosColuna = array('Titulo do Destaque' => 'TITULO', 'Link' => 'LINK');
         }
-        if ($page == 'produtos'){
-            return $elementosColuna = array('Nome do Produto' => 'TITULO', 'Resumo' => 'RESUMO');
-        }
-        if ($page == 'equipe'){
-            return $elementosColuna = array('Nome do Membro' => 'TITULO','Cargo' => 'RESUMO');
-        }
-        if ($page == 'historico'){
-            return $elementosColuna = array('Acontecimento' => 'TITULO', 'Data' => 'DATA_INI');
+        if ($page == 'parceiros'){
+            return $elementosColuna = array('Nome do Parceiro' => 'TITULO', 'Link' => 'LINK');
         }
         return $elementosColuna = array('Título' => 'TITULO', 'Resumo' => 'RESUMO');
     }

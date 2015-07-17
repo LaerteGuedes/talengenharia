@@ -5,19 +5,16 @@
 
                 <div class="col-xs-7 box-chamada">
                    <ul class="cycle-slideshow" data-cycle-fx="" data-cycle-timeout="5000" data-cycle-speed="1800" data-cycle-slides="> li" data-cycle-easing="easeInOutExpo" data-cycle-log="false">
-                        <li>
-                            <p class="media-heading">Soluções Integradas de Engenharia</p>
-                            <div class="col-xs-5">
-                                <button class="btn">SAIBA MAIS</button>
-                            </div>
-                        </li>
-                       <li>
-                           <p class="media-heading">Soluções Integradas de Engenharia</p>
-                           <div class="col-xs-5">
-                               <button class="btn">SAIBA MAIS</button>
-                           </div>
-                       </li>
-                       <div class="cycle-pager"></div>
+                        <? foreach ($this->voDestaque as $oDestaque) { ?>
+                            <li>
+                                <p class="media-heading"><?=$oDestaque->TITULO;?></p>
+                                <div class="col-xs-5">
+                                    <!-- TODO mudar para link -->
+                                    <button class="btn">SAIBA MAIS</button>
+                                </div>
+                            </li>
+                        <? } ?>
+                        <div class="cycle-pager"></div>
                     </ul>
 
                 </div>
@@ -34,8 +31,8 @@
                         <p>ONDE<br/><strong>FICA?</strong></p>
                     </div>
              </div>
-            <?=$this->partial('/_includes/obras.phtml');?>
+            <?=$this->partial('/_includes/obras.phtml', array('voObra' => $this->voObra));?>
         </div>
     </div>
-    <?=$this->partial('/_includes/dicas.phtml');?>
+    <?=$this->partial('/_includes/dicas.phtml', array('voDica' => $this->voDica));?>
 </div>

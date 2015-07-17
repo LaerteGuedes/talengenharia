@@ -9,36 +9,13 @@
                 </div>
                 <div class="col-xs-10 dicas-principal">
                     <ul class="cycle-slideshow cycle-parceiros" data-cycle-fx="carousel" data-cycle-timeout="5000" data-cycle-speed="1800" data-cycle-slides="> li" data-cycle-pager=".box-noticias .cycle-nav" data-cycle-carousel-visible="4" data-cycle-next=".row .cycle-next" data-cycle-prev=".row .cycle-prev" data-cycle-easing="easeInOutExpo" data-cycle-log="false">
-                        <li>
-                            <a href="">
-                                <img src="/imagem/site/parceiro.jpg"/>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="/imagem/site/parceiro.jpg"/>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="/imagem/site/parceiro.jpg"/>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="/imagem/site/parceiro.jpg"/>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="/imagem/site/parceiro.jpg"/>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="/imagem/site/parceiro.jpg"/>
-                            </a>
-                        </li>
+                        <? foreach ($this->voParceiro as $oParceiro) { ?>
+                            <li>
+                                <a href="<?=$oParceiro->LINK;?>" target="_blank">
+                                    <?=$oParceiro->getImgDestaque(array(179,75));?>
+                                </a>
+                            </li>
+                        <? } ?>
                     </ul>
                 </div>
                 <div class="col-xs-1 pager-parceiros">
