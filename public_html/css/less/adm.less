@@ -1,9 +1,9 @@
 @CHARSET "UTF-8";
 
-@cor1: #eedacb; 
+@cor1: #eedacb;
 @cor2: #300d24;
 
-html,body{background:@cor1;color: #4a4a4a;}
+html,body{color: #4a4a4a;}
 ul{list-style:none;margin:0;padding:0;}
 *{font-family: Verdana,Arial,Helvetica,sans-serif;}
 div,i,p,b,a,{font-size:12px}
@@ -20,16 +20,16 @@ h5{font-size:11px;font-weight:bold}
 h6{font-size:11px;}
 .clear{clear:both}
 button, a.button{
-	border: 1px solid #c7b3a6;background:#f2e4d8;@include arredondado(3px);text-decoration:none;color:#4a4a4a;
+	border: 1px solid #c7b3a6;@include arredondado(3px);text-decoration:none;color:#4a4a4a;
 	padding:7px 13px;display:inline-block;cursor:pointer;
-	&:hover{border: 1px solid #c7b3a6;background:#d7c0ae;}
+	&:hover{border: 1px solid #BBBBBB;background:#BBBBBB;}
 }
 /*############# LAYOUT #######################*/
 #TOPO{
 	position:relative;
-	.bg{background:url("../imagem/adm/topo_bg2.gif") repeat-x -2px 0;height: 47px}
+	.bg{height: 47px;}
 	.content{
-		background:@cor2;height:50px;position:relative;
+		background:#660000;height:50px;position:relative;
 		.logo{margin: 4px 0 0 4px}
 		.right{
 			position: absolute;right:10px;top:17px;color:#eedacb;font-size:11px;
@@ -47,16 +47,16 @@ button, a.button{
 #MENU{
 	> ul > li{
 		margin:0 0 9px 8px;width:200px;
-		> strong{display:block;background: @cor2;color:@cor1;padding:10px 0 10px 15px;@include arredondado(3px 3px 0 0);border:1px solid @cor2;}
+		> strong{display:block;background: #660000;color:@cor1;padding:10px 0 10px 15px;@include arredondado(3px 3px 0 0);border:1px solid @cor2;}
 		> ul{
 			@include arredondado(0 0 10px 10px);border:1px solid #c7b3a6;
 			li{
 				a{line-height:25px;display:block;margin:0 7px;padding:0 7px;background:url("../imagem/adm/menu_line.gif") center bottom repeat-x;color:#4a4a4a;}
 				&.ativo{
-					background-color:#d7c0ae;
+					background-color:#BBBBBB;
 					a{background:none;}
 				}
-				&:hover{background-color:#f2e4d8;}
+				&:hover{background-color:#BBBBBB;}
 			}
 		}
 	}
@@ -111,13 +111,12 @@ table.padrao{
 	width: 100%;
 	tr{
 		border: 1px solid #c7b3a6;
-		&:nth-child(even){background:#e6d1c1}
 	}
 	tr td,tr th{
 		padding: 5px 10px;text-align:left; vertical-align: middle;
 	}
 	thead{
-		background:@cor2;color:@cor1;@include arredondado(3px);
+		background:#660000;color:@cor1;@include arredondado(3px);
 		> tr{
 			
 		}

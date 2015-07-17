@@ -84,20 +84,16 @@ $form = $this->form;
             <a class="button jInfo" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera/{$pagina}"); ?>" title="Cadastrar">Cadastrar</a>
         <? } ?>
     <? endif; ?>
-    <? if ($bAcl->verifica(false, 'adm', $controller, 'inserealtera' . $pagina)): ?>
-        <a class="button jInfo jSubmit" href="<?= $this->baseUrl("/adm/{$controller}/excluir"); ?>" title="Clique para exluir">Excluir selecionadas</a>
-    <? endif; ?>
 
     <? if (count($this->vo)): ?>
 
         <p><?= $this->vo->getTotalItemCount() ?> registro(s) encontrados.</p>
-        <table class="padrao">
+        <table class="padrao table table-bordered">
             <thead>
                 <tr>
                     <? if ($this->destaque) { ?>
                         <th width="60" style="text-align: center;"><img src="/imagem/icone/star.png" alt="destaque" title="Destaque?" /></th>
                     <? } ?>
-                    <th width="50"></th>
                     <? if ($this->elementosColuna) { ?>
                         <? foreach ($this->elementosColuna as $title => $name) { ?>
                             <th><?=$title;?></th>
@@ -118,7 +114,7 @@ $form = $this->form;
                                 <input class="jDestaqueOrdem <?= $o->FL_DESTAQUE == 1 ? "" : "hide" ?>" rel="<?= $o->ID ?>" name="DESTAQUE_ORDEM" type="text" value="<?= $o->FL_DESTAQUE_ORDEM ?>" />
                             </td>
                         <? } ?>
-                        <td><?= $o->getImgDestaque(array(60, 40), true); ?></td>
+
                         <? if ($this->elementosColuna) { ?>
                             <? foreach ($this->elementosColuna as $title => $name) { ?>
                                 <td><?=$o->$name;?></td>
@@ -128,21 +124,17 @@ $form = $this->form;
                             <td><?=$o->RESUMO;?></td>
                         <? } ?>
                         <td class="action">
+                            <div style="text-align:left">
+                                <? if ($this->subpagina): ?>
+                                    <a title="adicionar subpágina" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/pagina/{$paginaInstitucional}/ID_PAI/" . $o->ID) ?>"><span class="glyphicon glyphicon-plus"></span></a>
+                                <? endif; ?>
 
-                            <? if (Zend_Registry::get("oUsuario")->ID_GRUPO == 1) { ?>
-                                <a class="bt bt_lock<?= ($o->FL_LOCK == 1) ? '_on' : '_off'; ?> jLock" title="trancar página" href="<?= $this->baseUrl("/adm/{$controller}/lockpagina/ID/" . $o->ID) ?>"></a>
-                            <? } ?>
+                                <a title="editar página" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/pagina/{$paginaInstitucional}/ID/" . $o->ID) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
 
-                            <? if ($this->subpagina): ?>
-                                <a class="bt bt_subpagina" title="adicionar subpágina" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/pagina/{$paginaInstitucional}/ID_PAI/" . $o->ID) ?>"></a>
-                            <? endif; ?>
-
-                            <a class="bt bt_editar" title="editar página" href="<?= $this->baseUrl("/adm/{$controller}/inserealtera{$pagina}/pagina/{$paginaInstitucional}/ID/" . $o->ID) ?>"></a>
-
-                            <? if (Zend_Registry::get("oUsuario")->ID_GRUPO == 1 || $o->FL_LOCK == 0): ?>
-                                <a class="bt bt_excluir" title="excluir página" href="<?= $this->baseUrl("/adm/{$controller}/excluir/move/{$pagina}/pagina/{$paginaInstitucional}/ID/" . $o->ID) ?>"></a>
-                            <? endif; ?>
-
+                                <? if (Zend_Registry::get("oUsuario")->ID_GRUPO == 1 || $o->FL_LOCK == 0): ?>
+                                    <a title="excluir página" href="<?= $this->baseUrl("/adm/{$controller}/excluir/move/{$pagina}/pagina/{$paginaInstitucional}/ID/" . $o->ID) ?>"><span class="glyphicon glyphicon-trash"></span></a>
+                                <? endif; ?>
+                            </div>
                         </td>
                     </tr>
                     <? if ($this->subpagina): ?>

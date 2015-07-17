@@ -44,3 +44,11 @@ function showPopup() {
         return false;
     });
 }
+
+function openModal(){
+    var vLocation = window.location.href.split('/');
+    if (vLocation.length > 6){
+        var idModal = vLocation[6];
+        $('#'+idModal).modal('show');
+    }
+}

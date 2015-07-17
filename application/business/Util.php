@@ -99,6 +99,10 @@ class Business_Util {
         }
         return $arq;
     }
+
+    public static function showAlerta($message){
+        echo "<script>alert(".$message.")</script>";
+    }
     
      public static function showClassMethods($object, $exit = true){
         $methods = get_class_methods($object);

@@ -1,50 +1,20 @@
 *, html, body {margin:0px;padding:0px;}
-html{background: #260d14;height: 100%;}
+html{height: 100%;}
 img{
     border: none;
 }
 
 #formLogin{position: relative;z-index: 11}
-#CON_LOGIN{margin: 0 auto;position: relative;z-index: 11;width: 1024px;}
+#CON_LOGIN{margin: 0 auto;position: relative;z-index: 11;width: 1024px; top:80px;}
 #FORM{
     max-width: 410px;
-}
-#FORM input{
-    width: 409px;
-    height: 31px;
-    font-family: "Arial";
-    background: #c6b2a4;
-    color: #f8eee8;
-    font-size: 22px;
-    border: none;
-
-    text-indent: 5px;
-    font-weight: bold;
-    line-height: 31px;
-}
-#FORM input[type='text']{
-    margin-top: 15px;
-}
-#FORM input[type='password']{
-    margin-top: 15px;
-}
-#FORM input[type='image']{
-    width: 409px;
-    height: 52px;
-    font-family: "Arial";
-    background: url("/imagem/login/bt_entrar.gif") no-repeat #c6b2a4;
-    color: #f8eee8;
-    font-size: 22px;
-    border: red 1px solid;
-    cursor: pointer;
-    margin-top: 15px;
 }
 
 ::-webkit-input-placeholder  { color:#f8eee8; }
 input:-moz-placeholder { color:#f8eee8; }
 
-#TOPO{display: table;width: 100%;height: 390px;background: url(/imagem/login/topo_bg1.jpg) repeat-x top left;position: relative;z-index: 1;overflow: hidden}
-#TOPO > .bg2{background: url(/imagem/login/topo_bg2.gif) repeat top left;position: absolute;z-index: 10;width: 100%;height: 390px;}
+#TOPO{display: table;width: 100%;height: 390px;position: relative;z-index: 1;overflow: hidden}
+#TOPO > .bg2{position: absolute;z-index: 10;width: 100%;height: 390px;}
 #TOPO > .centro{width: 1024px;margin: 0 auto}
 #TOPO > .centro > .logo{position: relative;z-index: 11;margin: 0}
 #TOPO > .centro > ul.rede{list-style: none;position: absolute;top: 344px;margin: 0;z-index: 11}

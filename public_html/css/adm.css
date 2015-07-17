@@ -1,7 +1,6 @@
 @CHARSET "UTF-8";
 html,
 body {
-  background: #eedacb;
   color: #4a4a4a;
 }
 ul {
@@ -59,7 +58,6 @@ h6 {
 button,
 a.button {
   border: 1px solid #c7b3a6;
-  background: #f2e4d8;
   text-decoration: none;
   color: #4a4a4a;
   padding: 7px 13px;
@@ -68,18 +66,17 @@ a.button {
 }
 button:hover,
 a.button:hover {
-  border: 1px solid #c7b3a6;
-  background: #d7c0ae;
+  border: 1px solid #BBBBBB;
+  background: #BBBBBB;
 }
 #TOPO {
   position: relative;
 }
 #TOPO .bg {
-  background: url("../imagem/adm/topo_bg2.gif") repeat-x -2px 0;
   height: 47px;
 }
 #TOPO .content {
-  background: #300d24;
+  background: #660000;
   height: 50px;
   position: relative;
 }
@@ -119,7 +116,7 @@ a.button:hover {
 }
 #MENU > ul > li > strong {
   display: block;
-  background: #300d24;
+  background: #660000;
   color: #eedacb;
   padding: 10px 0 10px 15px;
   border: 1px solid #300d24;
@@ -136,13 +133,13 @@ a.button:hover {
   color: #4a4a4a;
 }
 #MENU > ul > li > ul li.ativo {
-  background-color: #d7c0ae;
+  background-color: #BBBBBB;
 }
 #MENU > ul > li > ul li.ativo a {
   background: none;
 }
 #MENU > ul > li > ul li:hover {
-  background-color: #f2e4d8;
+  background-color: #BBBBBB;
 }
 form.padrao legend {
   display: none;
@@ -234,9 +231,6 @@ table.padrao {
 table.padrao tr {
   border: 1px solid #c7b3a6;
 }
-table.padrao tr:nth-child(even) {
-  background: #e6d1c1;
-}
 table.padrao tr td,
 table.padrao tr th {
   padding: 5px 10px;
@@ -244,7 +238,7 @@ table.padrao tr th {
   vertical-align: middle;
 }
 table.padrao thead {
-  background: #300d24;
+  background: #660000;
   color: #eedacb;
 }
 table.padrao tbody {

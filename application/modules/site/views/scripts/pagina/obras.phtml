@@ -1,31 +1,65 @@
+<script>
+    $(function(){
+        $('.obras-mask').on('mouseover', function(){
+           $(this).find('.mascara').stop().fadeIn();
+        });
+
+        $('.obras-mask').on('mouseout', function(){
+            $(this).find('.mascara').stop().fadeOut();
+        });
+
+        openModal();
+    });
+</script>
 <div id="OBRAS" class="container">
     <p class="titulo-obras">This is Photoshop version of lorem ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudir, lorem quis.</p>
     <div class="empreendimentos">
         <div class="row">
             <div class="col-xs-6">
                 <div class="obra">
-                    <a href="">
+
+                    <a href="#modal1" class="obras-mask" data-toggle="modal">
+                        <span class="mascara">
+                            <p class="tipo">Projetos Corporativos</p>
+                            <p class="title">Projetos Comerciais</p>
+                            <img class="visualizar" src="/imagem/site/lupa.png"></img>
+                        </span>
                         <img src="/imagem/site/obra-1.jpg"/>
                     </a>
                 </div>
             </div>
             <div class="col-xs-6">
                 <div class="obra">
-                    <a href="">
+                    <a href="" class="obras-mask">
+                        <span class="mascara">
+                            <p class="tipo">Projetos Corporativos</p>
+                            <p class="title">Projetos Comerciais</p>
+                            <img class="visualizar" src="/imagem/site/lupa.png"></img>
+                        </span>
                         <img src="/imagem/site/obra-2.jpg"/>
                     </a>
                 </div>
             </div>
             <div class="col-xs-6">
                 <div class="obra">
-                    <a href="">
+                    <a href="" class="obras-mask">
+                        <span class="mascara">
+                            <p class="tipo">Projetos Corporativos</p>
+                            <p class="title">Projetos Comerciais</p>
+                            <img class="visualizar" src="/imagem/site/lupa.png"></img>
+                        </span>
                         <img src="/imagem/site/obra-1.jpg"/>
                     </a>
                 </div>
             </div>
             <div class="col-xs-6">
                 <div class="obra">
-                    <a href="">
+                    <a href="" class="obras-mask">
+                        <span class="mascara">
+                            <p class="tipo">Projetos Corporativos</p>
+                            <p class="title">Projetos Comerciais</p>
+                            <img class="visualizar" src="/imagem/site/lupa.png"></img>
+                        </span>
                         <img src="/imagem/site/obra-2.jpg"/>
                     </a>
                 </div>
@@ -34,3 +68,68 @@
     </div>
 </div>
 <?=$this->partial('/_includes/parceiros.phtml');?>
+
+    <div class="modal fade modal-projetos" id="modal1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <span class="tipo">Tipo comum</span>
+                    <h2 class="modal-title">Titulo</h2>
+
+                    <div class="text-left">
+                        <meta name="og:title" content="teste" />
+                        <div class="fb-like" data-href="" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+                    </div>
+                    <!-- .text-left -->
+                    <p>Groselha</p>
+                </div> <!-- .modal-header -->
+                <div class="modal-body">
+                    <div class="page-projeto">
+
+                        <div id="slideshow-1">
+                            <ul id="cycle-1" class="cycle-slideshow" data-cycle-slides="> li" data-cycle-timeout="0" data-cycle-prev="#<?= $oPagina->PERMALINK; ?> #slideshow-1 .cycle-prev" data-cycle-next="#<?= $oPagina->PERMALINK; ?> #slideshow-1 .cycle-next" data-cycle-caption="#<?= $oPagina->PERMALINK; ?> #slideshow-1 .custom-caption" data-cycle-caption-template="Slide {{slideNum}} of {{slideCount}}" data-cycle-fx="tileBlind">
+<!--                                --><?// foreach ($voArquivo as $oArquivo) { ?>
+<!--                                    <li>-->
+<!--                                        <div class="content">-->
+<!--                                            --><?//= $oArquivo->renderImagem(array(900, 590)); ?>
+<!--                                            <div class="text">-->
+<!--                                                <div class="desc">-->
+<!--                                                    --><?//= $oArquivo->NOME_ARQUIVO; ?>
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </li>-->
+<!--                                --><?// } ?>
+                            </ul> <!-- #cycle-1 -->
+                        </div> <!-- #<?= $oPagina->PERMALINK; ?> #slideshow-1 -->
+                        <div id="slideshow-2">
+                            <ul id="cycle-2" class="cycle-slideshow" data-cycle-slides="> li" data-cycle-timeout="0" data-cycle-prev="#<?= $oPagina->PERMALINK; ?> #slideshow-2 .cycle-prev" data-cycle-next="#<?= $oPagina->PERMALINK; ?> #slideshow-2 .cycle-next" data-cycle-caption="#<?= $oPagina->PERMALINK; ?> #slideshow-2 .custom-caption" data-cycle-fx="carousel" data-cycle-carousel-visible="5" data-allow-wrap="false">
+<!--                                --><?// foreach ($voArquivo as $oArquivo) { ?>
+<!--                                    <li><a href="javascript:void(0);" class="link-imagem">--><?//=$oArquivo->renderImagem(array(314, 150), 'center', null, $oArquivo->NOME_ARQUIVO);?><!--</a></li>-->
+<!--                                --><?// } ?>
+                            </ul> <!-- #cycle-2 -->
+
+                            <a href="javascript:void(0);" class="cycle-prev"><span class="icon-arrow-left-white"></span></a> <a href="javascript:void(0);" class="cycle-next"><span class="icon-arrow-right-white"></span></a>
+                        </div> <!-- # #slideshow-2 -->
+                    </div> <!-- .page-projeto -->
+                </div> <!-- .modal-body -->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script>
+        jQuery(document).ready(function($) {
+
+            var slideshows = $('#modal1 .cycle-slideshow').on('cycle-next cycle-prev', function(e, opts) {
+                // advance the other slideshow
+                slideshows.not(this).cycle('goto', opts.currSlide);
+            });
+
+            $('#modal1 #cycle-2 .cycle-slide').click(function() {
+                var index = $('#modal1 #cycle-2').data('cycle.API').getSlideIndex(this);
+                slideshows.cycle('goto', index);
+            });
+
+        });
+    </script>

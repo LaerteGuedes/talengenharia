@@ -29,9 +29,7 @@ $bHead->loadDefault()->loadByModule();
 
         <div id="WRAP">
             <div id="TOPO">
-				<div class="bg"><img src="<?= $this->baseUrl('/imagem/adm/topo_bg1.gif') ?>"/></div>
 				<div class="content">
-					<img class="logo" src="<?= $this->baseUrl('/imagem/adm/topo_logo.gif') ?>" alt="Libra" />
 					<div class="right">
 						<? if (ZC_Auth::getInstance()->hasIdentity()): ?>
 							<i>Olá <?= Zend_Registry::get('oUsuario')->NOME ?>!</i>
