@@ -244,6 +244,13 @@ a {
   background-position: top center;
   min-height: 600px;
 }
+#CONTENT .modal-projetos .modal-dialog {
+  width: 941px !important;
+}
+#CONTENT .modal-projetos .modal-body {
+  padding: 0px !important;
+  width: 900px;
+}
 #CONTENT #OBRAS .titulo-obras {
   padding-top: 50px;
   margin-bottom: 50px;
