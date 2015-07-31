@@ -39,6 +39,8 @@ body{
   background-color:#e7edf0;
 }
 
+
+
 .clear, .first{
     clear:both;
 }
@@ -134,8 +136,17 @@ JQUERY UI END
   height:105px;
   ul li a{
     line-height: 70px;
+    color:#243138;
+
   }
-  a:active, a:focus, a:visited, a:hover{
+  li.active{
+    background: none;
+    a{
+      color: #ce2d40;
+      background: none;
+    }
+  }
+  a:hover, a:active{
     color: #ce2d40;
   }
   .navbar{
@@ -163,13 +174,160 @@ JQUERY UI END
      min-height:600px;
   }
 
+  .page-projeto #slideshow-2{
+    height:123px;
+  }
+
+  .page-projeto .cycle-slideshow,
+  .page-projeto .cycle-slideshow li {
+    width: 100%;
+    height: 590px;
+    overflow: hidden;
+  }
+  .page-projeto .cycle-slideshow .legenda,
+  .page-projeto .cycle-slideshow li .legenda {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 900px;
+    height: 590px;
+    display: block;
+    text-align: center;
+    color: #FFF;
+    font-size: 24px;
+  }
+  .page-projeto #slideshow-1 .content {
+    position: relative;
+  }
+  .page-projeto #slideshow-1 .content .text {
+    position: absolute;
+    left: 0;
+    bottom: 20px;
+    right: 300px;
+    text-align: left;
+    color: #FFF;
+  }
+  .page-projeto #slideshow-1 .content .text .desc {
+    padding: 15px 30px;
+    background: #ffbe36;
+    display: inline-block;
+    font-size: 1.1em;
+    line-height: 1.2;
+  }
+  .page-projeto .cycle-nav,
+  .page-projeto #slideshow-2 {
+    height: 115px;
+    padding: 0 40px;
+    background: #000;
+    width: 100%;
+    position: relative;
+  }
+  .page-projeto .cycle-nav #cycle-2,
+  .page-projeto #slideshow-2 #cycle-2 {
+    height: 150px;
+    width: 100% !important;
+  }
+  .page-projeto .cycle-nav li,
+  .page-projeto #slideshow-2 li {
+    width: 170px;
+    height: 170px;
+    -webkit-opacity: .3 !important;
+    -moz-opacity: .3 !important;
+    -ms-opacity: .3 !important;
+    -o-opacity: .3 !important;
+    opacity: .3 !important;
+    filter: alpha(opacity=30);
+    transition: all 0.25s ease 0s;
+  }
+  .page-projeto .cycle-nav li:hover,
+  .page-projeto .cycle-nav li.cycle-pager-active,
+  .page-projeto .cycle-nav li.cycle-slide-active,
+  .page-projeto #slideshow-2 li:hover,
+  .page-projeto #slideshow-2 li.cycle-pager-active,
+  .page-projeto #slideshow-2 li.cycle-slide-active {
+    -webkit-opacity: 1 !important;
+    -moz-opacity: 1 !important;
+    -ms-opacity: 1 !important;
+    -o-opacity: 1 !important;
+    opacity: 1 !important;
+    filter: alpha(opacity=100);
+  }
+  .page-projeto .cycle-nav a,
+  .page-projeto #slideshow-2 a {
+    width: 180px;
+  }
+  .page-projeto .cycle-nav a img,
+  .page-projeto #slideshow-2 a img {
+    max-width: 100%;
+  }
+  .page-projeto .cycle-nav .cycle-prev,
+  .page-projeto .cycle-nav .cycle-next,
+  .page-projeto #slideshow-2 .cycle-prev,
+  .page-projeto #slideshow-2 .cycle-next {
+    position: absolute;
+    top: 50%;
+    margin-top: -19px;
+    width: 22px;
+    height: 38px;
+  }
+  .page-projeto .cycle-nav .cycle-prev,
+  .page-projeto #slideshow-2 .cycle-prev {
+    left: 10px;
+  }
+  .page-projeto .cycle-nav .cycle-next,
+  .page-projeto #slideshow-2 .cycle-next {
+    right: 10px;
+  }
+
   .modal-projetos{
     .modal-dialog{
       width:941px !important;
+      border:0 none !important;
+    }
+    .modal-content{
+       background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+       border:0 none !important;
+      border-radius: 0;
+      box-shadow: none;
+      margin-top: -30px;
+    }
+    .cycle-obras{
+      li{
+        width:188px;
+        float:left;
+      }
+      li.cycle-slide{
+        opacity: 0.6;
+      }
+      li.cycle-slide-active{
+        opacity:1;
+      }
+
+    }
+    .modal-header{
+      border:0 none !important;
+      color:#ffffff;
+      .texto{
+        font-family: 'RobotoRegular';
+        .tipo{
+          text-align: right;
+        }
+      }
+      .paginator{
+        border: solid 1px #ffffff;
+        border-radius: 35px;
+        width:170px;
+        height:80px;
+        margin-left:20px;
+      }
     }
     .modal-body{
       padding: 0px !important;
-      width:900px;
+      width:940px;
+      border:0 none !important;
+
     }
   }
 

@@ -62,12 +62,21 @@ if ($request["controller"] == "pagina") {
                           </div>
                           <div class="col-xs-8">
                             <ul class="nav navbar-nav navbar-right menu-topo">
-                              <li><a href="/">INICIAL</a></li>
-                              <li><a href="/empresa">EMPRESA</a></li>
-                              <li><a href="/servicos">SERVIÇOS</a></li>
-                              <li><a href="/obras">OBRAS</a></li>
-                              <li><a href="/clientes">CLIENTES</a></li>
-                              <li><a href="/contato">CONTATO</a></li>
+                                <li class="<?= ZC_Util::isActiveLink('/index/index', array('active')); ?>">
+                                    <a href="<?= $this->baseUrl('/') ?>">INICIAL</a>
+                                </li>
+                                <li class="<?= ZC_Util::isActiveRoute('empresa', array('active')); ?>">
+                                    <a href="<?= $this->baseUrl('/empresa') ?>">EMPRESA</a>
+                                </li>
+                                <li class="<?= ZC_Util::isActiveRoute('servicos', array('active')); ?>">
+                                    <a href="<?= $this->baseUrl('/servicos') ?>">SERVIÇOS</a>
+                                </li>
+                                <li class="<?= ZC_Util::isActiveRoute('obras', array('active')); ?>">
+                                    <a href="<?= $this->baseUrl('/obras') ?>">OBRAS</a>
+                                </li>
+                                <li class="<?= ZC_Util::isActiveRoute('contato', array('active')); ?>">
+                                    <a href="<?= $this->baseUrl('/contato') ?>">CONTATO</a>
+                                </li>
                             </ul>
                           </div>
                   </div>

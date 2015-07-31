@@ -61,7 +61,7 @@ class Business_Head {
     }
 
     public function bootstrap() {
-        $this->view->headLink()->prependStylesheet($this->view->baseUrl('/library/bootstrap/css/bootstrap.min.css'));
+        $this->view->headLink()->prependStylesheet($this->view->baseUrl('/library/bootstrap/css/bootstrap.css'));
         $this->view->headScript()->appendFile($this->view->baseUrl('/library/bootstrap/js/bootstrap.min.js'));
     }
 

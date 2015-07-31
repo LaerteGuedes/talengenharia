@@ -104,7 +104,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 )
         ));
         $router->addRoute(
-            'language', new Zend_Controller_Router_Route(
+            'empresa', new Zend_Controller_Router_Route(
             '/empresa/*', array(
                 'module' => 'site',
                 'controller' => 'pagina',
