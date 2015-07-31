@@ -692,8 +692,9 @@ ul li {
   font-family: "RobotoBlack";
 }
 #RODAPE ul li a:active,
-#RODAPE ul li a:focus,
-#RODAPE ul li a:visited,
 #RODAPE ul li a:hover {
+  color: #ce2d40;
+}
+#RODAPE li.active a {
   color: #ce2d40;
 }

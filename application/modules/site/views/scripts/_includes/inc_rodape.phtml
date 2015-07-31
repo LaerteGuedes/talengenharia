@@ -9,27 +9,28 @@
             <div class="col-xs-4">
                 <div class="col-xs-6">
                     <ul class="navbar">
-                        <li>
-                            <a href="/">INICIAL</a>
+                        <li class="<?= ZC_Util::isActiveLink('/index/index', array('active')); ?>">
+                            <a href="<?= $this->baseUrl('/') ?>">INICIAL</a>
                         </li>
-                        <li>
-                            <a href="/empresa">EMPRESA</a>
+                        <li class="<?= ZC_Util::isActiveRoute('empresa', array('active')); ?>">
+                            <a href="<?= $this->baseUrl('/empresa') ?>">EMPRESA</a>
                         </li>
-                        <li>
-                            <a href="/servicos">SERVIÇOS</a>
+                        <li class="<?= ZC_Util::isActiveRoute('servicos', array('active')); ?>">
+                            <a href="<?= $this->baseUrl('/servicos') ?>">SERVIÇOS</a>
                         </li>
+
                     </ul>
                 </div>
                 <div class="col-xs-6">
                     <ul class="navbar">
-                        <li>
-                            <a href="/obras">OBRAS</a>
+                        <li class="<?= ZC_Util::isActiveRoute('obras', array('active')); ?>">
+                            <a href="<?= $this->baseUrl('/obras') ?>">OBRAS</a>
                         </li>
-                        <li>
-                            <a href="/cliente">CLIENTES</a>
+                        <li class="<?= ZC_Util::isActiveRoute('clientes', array('active')); ?>">
+                            <a href="<?= $this->baseUrl('/clientes') ?>">CLIENTES</a>
                         </li>
-                        <li>
-                            <a href="/contato">CONTATO</a>
+                        <li class="<?= ZC_Util::isActiveRoute('contato', array('active')); ?>">
+                            <a href="<?= $this->baseUrl('/contato') ?>">CONTATO</a>
                         </li>
                     </ul>
                 </div>
