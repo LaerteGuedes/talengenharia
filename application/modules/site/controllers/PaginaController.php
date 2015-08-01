@@ -31,12 +31,20 @@ class PaginaController extends ZC_Controller_Action {
     }
 
     function obrasAction(){
+        $dbPagina = new Db_PagPagina();
+        $this->_head->setTitle('Obras');
 
+        $this->view->oPagina = $dbPagina->fetchRow(array('pag_pagina.PERMALINK = ?' => 'obras'));
+        $this->view->voObra = $dbPagina->fetchAll(array('pag_pagina.TIPO = ?' => 'obras'));
+        $this->view->voParceiro = $dbPagina->fetchAll(array('pag_pagina.TIPO = ?' => 'parceiros'));
     }
 
     function contatoAction() {
         $dbPagina = new Db_PagPagina();
         $this->_head->jqueryMask();
+
+        $this->view->voObra = $dbPagina->fetchAll(array('pag_pagina.TIPO = ?' => 'obras'));
+        $this->view->voParceiro = $dbPagina->fetchAll(array('pag_pagina.TIPO = ?' => 'parceiros'));
 
         $this->view->oPagina = $dbPagina->fetchRow(array('pag_pagina.PERMALINK = ?' => 'contato'));
         if ($this->_request->isPost()) {
@@ -66,6 +74,16 @@ class PaginaController extends ZC_Controller_Action {
         $dbPagina = new Db_PagPagina();
 
         $this->view->oPagina = $dbPagina->fetchRow(array('pag_pagina.PERMALINK = ?' => 'empresa'));
+        $this->view->voObra = $dbPagina->fetchAll(array('pag_pagina.TIPO = ?' => 'obras'));
+        $this->view->voParceiro = $dbPagina->fetchAll(array('pag_pagina.TIPO = ?' => 'parceiros'));
+    }
+
+    function servicosAction() {
+        $this->_head->setTitle('Serviços');
+
+        $dbPagina = new Db_PagPagina();
+
+        $this->view->oPagina = $dbPagina->fetchRow(array('pag_pagina.PERMALINK = ?' => 'servicos'));
         $this->view->voObra = $dbPagina->fetchAll(array('pag_pagina.TIPO = ?' => 'obras'));
         $this->view->voParceiro = $dbPagina->fetchAll(array('pag_pagina.TIPO = ?' => 'parceiros'));
     }

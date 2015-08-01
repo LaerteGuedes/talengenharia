@@ -38,7 +38,7 @@
             </div>
             <img src="/imagem/site/atendente-contato.jpg"/>
         </div>
-        <?=$this->partial('/_includes/obras.phtml');?>
+        <?=$this->partial('/_includes/obras.phtml', array('voObra' => $this->voObra));?>
     </div>
 </div>
-<?=$this->partial('/_includes/parceiros.phtml');?>
+<?=$this->partial('/_includes/parceiros.phtml', array('voParceiro' => $this->voParceiro));?>

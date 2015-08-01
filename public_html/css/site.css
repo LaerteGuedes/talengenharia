@@ -368,6 +368,7 @@ a {
 }
 #CONTENT .modal-projetos .cycle-obras li {
   width: 188px;
+  height: 120px;
   float: left;
 }
 #CONTENT .modal-projetos .cycle-obras li.cycle-slide {
@@ -494,11 +495,14 @@ a {
   font-family: "RobotoThin";
   font-size: 14px;
 }
+#CONTENT .margin-obras {
+  margin-bottom: 30px;
+}
 #CONTENT #slideshow-galeria {
   padding-left: 125px;
   padding-right: 125px;
   padding-top: 3px;
-  height: 255px;
+  height: 215px;
 }
 #CONTENT #slideshow-galeria a.prev {
   position: absolute;
@@ -595,6 +599,9 @@ a {
 #CONTENT .informacoes-contato .onde-fica strong {
   font-size: 28px;
 }
+#CONTENT .informacoes-contato .onde-fica a {
+  color: inherit;
+}
 #CONTENT #EMPRESA .texto {
   padding-top: 144px;
   min-height: 546px;
@@ -667,6 +674,9 @@ ul li {
 }
 #RODAPE .col-xs-4 {
   padding-top: 47px;
+}
+#RODAPE .link-mensagem p {
+  color: #ffffff;
 }
 #RODAPE .contato-bg {
   width: 281px;

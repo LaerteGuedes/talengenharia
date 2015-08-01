@@ -68,6 +68,11 @@ class RowPagPagina extends Zend_Db_Table_Row_Abstract {
         return $dbArqImagem->fetchByPagina($this->ID, 'pag_pagina');
     }
 
+    public function getArquivoDestaque() {
+        $dbArqArquivo = new Db_ArqArquivo();
+        return $dbArqArquivo->fetchRow(array('DESTAQUE = ?' => 1, 'arq_arquivo.ID_PAGINA = ?' => $this->ID));
+    }
+
     public function getDestaque() {
         $dbArqImagem = new Db_ArqArquivo();
         $o = $dbArqImagem->fetchRow(array('ID_PAGINA = ?' => $this->ID, 'TABELA = ?' => 'pag_pagina', 'DESTAQUE = ?' => 1));

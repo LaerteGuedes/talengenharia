@@ -145,6 +145,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 'module' => 'site', 'controller' => 'pagina', 'action' => 'obras'
             )
         ));
+        $router->addRoute('servicos', new Zend_Controller_Router_Route(
+            'servicos', array(
+                'module' => 'site', 'controller' => 'pagina', 'action' => 'servicos'
+            )
+        ));
         $router->addRoute('contato', new Zend_Controller_Router_Route(
                 'contato', array(
             'module' => 'site', 'controller' => 'pagina', 'action' => 'contato'
