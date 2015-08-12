@@ -52,3 +52,9 @@ function openModal(){
         $('#'+idModal).modal('show');
     }
 }
+
+function leftRightObras(){
+    $(".obras-paginator a").on('click', function(){
+       $(this).parents('modal')
+    });
+}

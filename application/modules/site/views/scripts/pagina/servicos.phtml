@@ -1,0 +1,23 @@
+<div id="EMPRESA" class="container">
+    <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10">
+            <div class="texto">
+                <div class="texto-principal">
+                    <p><?=$this->oPagina->RESUMO;?></p>
+                </div>
+                <div class="texto-secundario">
+                    <p><?=$this->oPagina->TEXTO;?></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-1"></div>
+        <div class="col-xs-12 nossas-obras">
+            <p style="text-align:center;">NOSSAS OBRAS</p>
+        </div>
+        <?=$this->partial('/_includes/obras.phtml', array('voObra' => $this->voObra));?>
+        <div class='clear'></div>
+
+    </div>
+</div>
+<?=$this->partial('/_includes/parceiros.phtml', array('voParceiro' => $this->voParceiro));?>
