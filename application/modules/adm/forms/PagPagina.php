@@ -13,7 +13,7 @@ class Adm_Form_PagPagina extends ZC_Form {
         $this->addAttribs(array('id' => 'formPagPagina'));
         $this->eHidden('ID');
         $this->eText('TITULO', 'Título:', true, 100, 80);
-        $this->eText('RESUMO', 'Resumo:', false, 300, 80);
+        $this->eText('RESUMO', 'Resumo:', false, 500, 80);
         $this->eText('YOUTUBE', 'Vídeo:', false, 100, 80)->setDescription('ex.: www.youtube.com/watch?v=dx0yreHVju4');
         $this->eTextarea('TEXTO', 'Texto:', false);
         $this->eData('DATA_INI', 'Data:', false);

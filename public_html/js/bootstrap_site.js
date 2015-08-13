@@ -55,6 +55,6 @@ function openModal(){
 
 function leftRightObras(){
     $(".obras-paginator a").on('click', function(){
-       $(this).parents('modal')
+       $(this).parents('modal');
     });
 }

@@ -88,6 +88,16 @@ class PaginaController extends ZC_Controller_Action {
         $this->view->voParceiro = $dbPagina->fetchAll(array('pag_pagina.TIPO = ?' => 'parceiros'));
     }
 
+    function clientesAction() {
+        $this->_head->setTitle('Clientes');
+
+        $dbPagina = new Db_PagPagina();
+
+        $this->view->oPagina = $dbPagina->fetchRow(array('pag_pagina.PERMALINK = ?' => 'clientes'));
+        $this->view->voObra = $dbPagina->fetchAll(array('pag_pagina.TIPO = ?' => 'obras'));
+        $this->view->voParceiro = $dbPagina->fetchAll(array('pag_pagina.TIPO = ?' => 'parceiros'));
+    }
+
     function produtoAction() {
         $dbProduto = new Db_ProProduto();
 
