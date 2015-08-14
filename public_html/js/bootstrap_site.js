@@ -54,7 +54,19 @@ function openModal(){
 }
 
 function leftRightObras(){
-    $(".obras-paginator a").on('click', function(){
-       $(this).parents('modal');
+    $(".obras-paginator a.left").on('click', function(){
+       $(this).parents('.modal-projetos').find('.close').trigger('click');
+        //console.log($(this).parents('.modal-projetos').next().next().html());
+       if ($(this).parents('.modal-projetos').prev().prev().html()){
+           $(this).parents('.modal-projetos').prev().prev().modal('show');
+       }else{
+           $(this).parents('.modal-projetos').parent().find('.modal-projetos:last-child').modal('show');
+       }
+    });
+
+    $(".obras-paginator a.right").on('click', function(){
+        $(this).parents('.modal-projetos').find('.close').trigger('click');
+        //console.log($(this).parents('.modal-projetos').next().next().html());
+        $(this).parents('.modal-projetos').next().next().modal('show');
     });
 }
